@@ -11,7 +11,7 @@ public class MysqlDBConexion8 {
 		Connection con = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-			String url = "jdbc:mysql://localhost:3306/BD_BIBLIOTECA?useSSL=false&useTimezone=true&serverTimezone=UTC";
+			String url = "jdbc:mysql://localhost:3306/bd_biblioteca?useSSL=false&useTimezone=true&serverTimezone=UTC";
 			String usr = "root";
 			String psw = "mysql";
 			con = DriverManager.getConnection(url, usr, psw);
