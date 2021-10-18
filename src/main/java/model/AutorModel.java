@@ -1,8 +1,7 @@
 package model;
 
-public class LibroModel {
-	
+public class AutorModel {
+
 	/*@marco antonio*/
 	
-
 }
