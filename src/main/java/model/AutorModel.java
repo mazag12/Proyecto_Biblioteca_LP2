@@ -12,7 +12,7 @@ import entities.Autor;
 public class AutorModel {
 
 	/*@marco antonio*/
-public List<Autor> getListProyecto() {
+public List<Autor> getListAutor() {
 		
 		List<Autor> listAutor = new ArrayList<Autor>();
 		
@@ -31,11 +31,13 @@ public List<Autor> getListProyecto() {
 			
 			while (rs.next()) {
 				Autor au = new Autor();
-				au.setCodautor(rs.getString(0));
-				au.setNomautor(rs.getString(1));
+				au.setCodautor(rs.getString("Codautor"));
+				au.setNomautor(rs.getString("Nomautor"));
 				
 				listAutor.add(au);
 			}
+			
+			System.out.println("Lista completada ");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
