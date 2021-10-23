@@ -38,9 +38,9 @@ public class AutorServlet extends HttpServlet {
     	if (type.equals("list")) {
     		listAutor(request, response);
     	} else if (type.equals("register")) {
-    		String idSubject = request.getParameter("idSubject");
-    		if(idSubject.isEmpty()) {
-    			///registerAutor(request, response);
+    		String codAutor = request.getParameter("codAutor");
+    		if(codAutor.isEmpty()) {
+    			registerAutor(request, response);
     		} else {
     			///editAutor(request, response);
     		}
@@ -63,6 +63,26 @@ public class AutorServlet extends HttpServlet {
     	request.getRequestDispatcher("Autor.jsp").forward(request, response);
     }
     
+    protected void registerAutor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	// TODO Auto-generated method stub
+    	
+    	String code = request.getParameter("txtCode");
+    	String name = request.getParameter("txtName");
+    	
+    	Autor au = new Autor();
+    	au.setCodautor(code);
+    	au.setNomautor(name);
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	AutorInterface dao = daoFactory.getAutor();
+    	
+    	int value = dao.createAutor(au); // subjectModel.createSubject(subject);
+    	if (value == 1) {
+    		listAutor(request, response);
+    	} else {
+    		// error 
+    	}
+    }
     
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

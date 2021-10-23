@@ -26,7 +26,7 @@
 	<div class="col-lg-8">
 		<h3>Lista Autores</h3>
 		
-		<table class="table">
+		<table class="table table-sm">
 			<thead>
 				<tr>
 					<th>Código</th>
