@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Autor;
+import dao.DAOFactory;
+import interfaces.AutorInterface;
 import model.AutorModel;
 
 /**
@@ -19,7 +21,6 @@ import model.AutorModel;
 public class AutorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	AutorModel autorModel = new AutorModel();
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -52,7 +53,12 @@ public class AutorServlet extends HttpServlet {
     
     protected void listAutor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// TODO Auto-generated method stub
-    	List<Autor> data = autorModel.getListAutor();
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	AutorInterface dao = daoFactory.getAutor();
+  
+    	List<Autor> data = dao.getListAutor();
+    	
     	request.setAttribute("data", data);
     	request.getRequestDispatcher("Autor.jsp").forward(request, response);
     }
