@@ -1,4 +1,4 @@
-package entities;
+package beans;
 /*@marco antonio*/
 public class Autor {
 

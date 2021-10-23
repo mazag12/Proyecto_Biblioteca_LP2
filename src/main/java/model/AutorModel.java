@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.Autor;
 import db.MysqlDBConexion8;
-import entities.Autor;
 
 public class AutorModel {
 
