@@ -6,15 +6,15 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import db.MySqlDBConexion8;
-import entities.Proyecto;
+import db.MysqlDBConexion8;
+import entities.Autor;
 
 public class AutorModel {
 
 	/*@marco antonio*/
-public List<Proyecto> getListProyecto() {
+public List<Autor> getListProyecto() {
 		
-		List<Proyecto> listProyecto = new ArrayList<Proyecto>();
+		List<Autor> listAutor = new ArrayList<Autor>();
 		
 		Connection con =  null;
 		PreparedStatement pstm = null;
@@ -22,25 +22,19 @@ public List<Proyecto> getListProyecto() {
 		
 		try {
 			
-			con = MySqlDBConexion8.getConexion();
+			con = MysqlDBConexion8.getConexion();
 			
-			String sql = "call sp_listar_proyecto()";
-			pstm = con.prepareCall(sql);
+			String sql = "Select * From autor";
 			
+			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			
 			while (rs.next()) {
+				Autor au = new Autor();
+				au.setCodautor(rs.getString(0));
+				au.setNomautor(rs.getString(1));
 				
-				Proyecto pro = new Proyecto();
-				pro.setId_Proyecto(rs.getInt("Id_Proyecto"));
-				pro.setNom_Proyecto(rs.getString("Nom_Proyecto"));
-				pro.setDescrip_Proyecto(rs.getNString("Descrip_Proyecto"));
-				pro.setFec_ini_Proyecto(rs.getDate("Fec_ini_Proyecto"));
-				pro.setFec_Culmi_Proyecto(rs.getDate("Fec_Culmi_Proyecto"));
-				pro.setAsesor_Tecn_Proyecto(rs.getString("Asesor_Tecn_Proyecto"));
-				pro.setPresu_Asignado(rs.getDouble("Presu_Asignado"));
-				
-				listProyecto.add(pro);
+				listAutor.add(au);
 			}
 			
 		} catch (Exception e) {
@@ -56,6 +50,6 @@ public List<Proyecto> getListProyecto() {
 				e.printStackTrace();
 			}
 		}
-		return listProyecto;
+		return listAutor;
 	}
 }
