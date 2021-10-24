@@ -18,7 +18,7 @@
 	<%@ include file="snippet/Nav_main.jsp" %>
 	
 	<br>
-	<div class="col-lg-6 jumbotron">
+	<div class="col-lg-6">
 		<h2>AUTOR!</h2>
 		
 	</div>
