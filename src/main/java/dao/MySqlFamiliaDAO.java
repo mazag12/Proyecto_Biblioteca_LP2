@@ -25,7 +25,7 @@ public class MySqlFamiliaDAO implements FamiliaInterfaceDAO{
 			
 			cn =  MysqlDBConexion.getConexion();
 			
-			String sql = "select * from estudios";
+			String sql = "select * from familia";
 			
 			psm = cn.prepareStatement(sql);
 			rs = psm.executeQuery();
