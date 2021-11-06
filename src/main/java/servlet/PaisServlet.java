@@ -33,7 +33,7 @@ public class PaisServlet extends HttpServlet {
     	// TODO Auto-generated method stub
     	String type = request.getParameter("type");
     	
-    	if (type.equals("list")) {
+    	if (type.equals("lista")) {
     		listPais(request, response);
     	} else if (type.equals("register")) {
     		String codpais = request.getParameter("codpais");
@@ -55,8 +55,12 @@ public class PaisServlet extends HttpServlet {
     	
     	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
     	PaisInterface dao = daoFactory.getPais();
-  
+    	
+    	System.out.println("Lista");
+    	
     	List<Pais> data = dao.getListPais();
+    	
+    	System.out.println("Salio de Lista");
     	
     	request.setAttribute("data", data);
     	request.getRequestDispatcher("Pais.jsp").forward(request, response);

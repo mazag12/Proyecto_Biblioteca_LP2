@@ -32,7 +32,7 @@ public class FormatoServlet extends HttpServlet {
     	// TODO Auto-generated method stub
     	String type = request.getParameter("type");
     	
-    	if (type.equals("list")) {
+    	if (type.equals("lista")) {
     		listFormato(request, response);
     	} else if (type.equals("register")) {
     		String codformato = request.getParameter("codformato");

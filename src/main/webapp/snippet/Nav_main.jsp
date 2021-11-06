@@ -9,6 +9,8 @@
       <ul class="nav navbar-nav">
         <li><a href="AuthServlet?type=lista">LIBRERIA</a></li>
         <li><a href="AutorServlet?type=lista">AUTOR</a></li>
+        <li><a href="PaisServlet?type=lista">Pais</a></li>
+        <li><a href="FormatoServlet?type=lista">Formato</a></li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
