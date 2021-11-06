@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import db.MysqlDBConexion;
+import db.MysqlDBConexion; 
 
 import beans.Familia;
 import interfaces.FamiliaInterfaceDAO;
@@ -23,7 +23,7 @@ public class MySqlFamiliaDAO implements FamiliaInterfaceDAO{
 		
 		try {
 			
-			cn = MysqlDBConexion.getConexion();
+			cn =  MysqlDBConexion.getConexion();
 			
 			String sql = "select * from estudios";
 			
