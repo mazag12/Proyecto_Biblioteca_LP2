@@ -1,6 +1,7 @@
 package dao;
 
 import interfaces.AutorInterface;
+import interfaces.EstudiosInterfaceDAO;
 
 public class MySqlDAOFactory extends DAOFactory{
 
@@ -10,6 +11,10 @@ public class MySqlDAOFactory extends DAOFactory{
 		return new MySqlAutorDAO();
 	}
 	
+	public  EstudiosInterfaceDAO getEstudios() {
+		// TODO Auto-generated method stub
+		return new MySqlEstudiosDAO();
+	}
 	
 	
 }
