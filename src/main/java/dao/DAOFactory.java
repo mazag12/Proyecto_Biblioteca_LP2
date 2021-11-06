@@ -1,5 +1,6 @@
 package dao;
 import interfaces.AutorInterface;
+import interfaces.EstudiosInterfaceDAO;
 
 public abstract class DAOFactory {
 	
@@ -8,6 +9,7 @@ public abstract class DAOFactory {
 	public static final int SQL_SERVER = 3;
 	
 	public abstract AutorInterface getAutor();
+	public abstract EstudiosInterfaceDAO getEstudios();
 	
 	public static DAOFactory getFactory(int tipo) {
 		switch (tipo) {
