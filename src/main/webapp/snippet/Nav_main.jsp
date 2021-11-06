@@ -8,6 +8,7 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li><a href="AuthServlet?type=lista">LIBRERIA</a></li>
+        <li><a href="AutorServlet?type=lista">AUTOR</a></li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">

@@ -1,6 +1,7 @@
 package dao;
 
 import interfaces.AutorInterface;
+import interfaces.ClienteInterface;
 import interfaces.EstudiosInterfaceDAO;
 import interfaces.FamiliaInterfaceDAO;
 
@@ -20,6 +21,12 @@ public class MySqlDAOFactory extends DAOFactory{
 	public FamiliaInterfaceDAO getFamilia() {
 		// TODO Auto-generated method stub
 		return new MySqlFamiliaDAO();
+	}
+
+	@Override
+	public ClienteInterface getCliente() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

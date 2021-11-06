@@ -1,11 +1,8 @@
 package dao;
 import interfaces.AutorInterface;
-<<<<<<< HEAD
 import interfaces.ClienteInterface;
-=======
 import interfaces.EstudiosInterfaceDAO;
 import interfaces.FamiliaInterfaceDAO;
->>>>>>> branch 'main' of https://github.com/mazag12/Proyecto_Biblioteca_LP2
 
 public abstract class DAOFactory {
 	
@@ -13,11 +10,14 @@ public abstract class DAOFactory {
 	public static final int AZURECosmos = 2;
 	public static final int SQL_SERVER = 3;
 	
+	
+	// Metodos Abstractos 
 	public abstract AutorInterface getAutor();
 	public abstract EstudiosInterfaceDAO getEstudios();
 	public abstract FamiliaInterfaceDAO getFamilia();
-	
 	public abstract ClienteInterface getCliente();
+	
+	
 	
 	public static DAOFactory getFactory(int tipo) {
 		switch (tipo) {

@@ -36,8 +36,6 @@ public class MySqlAutorDAO implements AutorInterface{
 				listAutor.add(au);
 			}
 			
-			System.out.println("Lista completada ");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,10 +63,9 @@ public class MySqlAutorDAO implements AutorInterface{
 			
 			cn = MysqlDBConexion8.getConexion();
 			
-			String sql = "INSERT INTO autor VALUES(?, ?)";
+			String sql = "INSERT INTO autor VALUES(null, ?)";
 			psm = cn.prepareStatement(sql);
-			psm.setString(1, au.getCodautor());
-			psm.setString(2, au.getNomautor());
+			psm.setString(1, au.getNomautor());
 			
 			value = psm.executeUpdate();
 			
@@ -92,8 +89,43 @@ public class MySqlAutorDAO implements AutorInterface{
 
 	@Override
 	public beans.Autor Autor(String cod) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Autor au = null;
+		
+		Connection con =  null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = MysqlDBConexion8.getConexion();
+			
+			String sql = "Select * From autor Where CODAUTOR = ?;";
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, cod);
+			
+			rs = pstm.executeQuery();
+			
+			if (rs.next()) {
+				au = new Autor();
+				au.setCodautor(rs.getString("Codautor"));
+				au.setNomautor(rs.getString("Nomautor"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstm != null) pstm.close();
+				if(con != null) con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return au;
 	}
 
 	@Override

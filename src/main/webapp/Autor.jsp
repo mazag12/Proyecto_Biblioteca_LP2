@@ -18,6 +18,34 @@
 	<%@ include file="snippet/Nav_main.jsp" %>
 	
 	<br>
+	
+	<%
+	
+	Autor autorForm = (Autor) request.getAttribute("autortData");
+	
+	%>
+	
+	<div class="col-lg-4">
+	
+		<h3>Registrar Autor</h3>
+		
+		<form action="AutorServlet" method="post">
+		
+			<input type="hidden" name="type" value="register">
+			<input type="hidden" name="idSubject" value="<%=(autorForm!=null)? autorForm.getCodautor():""%>">
+		
+			<div class="form-group">
+			<label>Nombre</label>
+			<input class="form-control" type="text" name="txtNombre" value="<%=(autorForm!=null)? autorForm.getNomautor():""%>">
+			</div>
+			
+			<input type="submit" class="btn btn-primary" value="Enviar Datos">
+			
+		</form>
+		
+	</div>
+	
+	
 	<div class="col-lg-6">
 		<h2>AUTOR!</h2>
 		

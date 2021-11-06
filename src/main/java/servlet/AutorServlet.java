@@ -35,7 +35,7 @@ public class AutorServlet extends HttpServlet {
     	// TODO Auto-generated method stub
     	String type = request.getParameter("type");
     	
-    	if (type.equals("list")) {
+    	if (type.equals("lista")) {
     		listAutor(request, response);
     	} else if (type.equals("register")) {
     		String codAutor = request.getParameter("codAutor");
@@ -45,7 +45,7 @@ public class AutorServlet extends HttpServlet {
     			///editAutor(request, response);
     		}
     	} else if (type.equals("info")) {
-    		//getSubject(request, response);
+    		getAutor(request, response);
     	} else if (type.equals("delete")) {
     		//deleteAutor(request, response);
     	} 
@@ -56,7 +56,7 @@ public class AutorServlet extends HttpServlet {
     	
     	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
     	AutorInterface dao = daoFactory.getAutor();
-  
+    	
     	List<Autor> data = dao.getListAutor();
     	
     	request.setAttribute("data", data);
@@ -66,11 +66,9 @@ public class AutorServlet extends HttpServlet {
     protected void registerAutor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// TODO Auto-generated method stub
     	
-    	String code = request.getParameter("txtCode");
     	String name = request.getParameter("txtName");
     	
     	Autor au = new Autor();
-    	au.setCodautor(code);
     	au.setNomautor(name);
     	
     	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
@@ -83,6 +81,22 @@ public class AutorServlet extends HttpServlet {
     		// error 
     	}
     }
+    
+    protected void getAutor(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException  {
+    	
+    	String codAutor = request.getParameter("id");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	AutorInterface dao = daoFactory.getAutor();
+    	
+    	Autor autor = dao.Autor(codAutor); 
+    	List<Autor> listUsuario = dao.getListAutor(); 
+    	request.setAttribute("usuarioData", autor);
+    	request.setAttribute("data", listUsuario);
+    	request.getRequestDispatcher("usuario.jsp").forward(request, response);
+    }
+    
     
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
