@@ -1,6 +1,10 @@
 package dao;
 import interfaces.AutorInterface;
+<<<<<<< HEAD
+import interfaces.ClienteInterface;
+=======
 import interfaces.EstudiosInterfaceDAO;
+>>>>>>> branch 'main' of https://github.com/mazag12/Proyecto_Biblioteca_LP2
 
 public abstract class DAOFactory {
 	
@@ -10,6 +14,8 @@ public abstract class DAOFactory {
 	
 	public abstract AutorInterface getAutor();
 	public abstract EstudiosInterfaceDAO getEstudios();
+	
+	public abstract ClienteInterface getCliente();
 	
 	public static DAOFactory getFactory(int tipo) {
 		switch (tipo) {
