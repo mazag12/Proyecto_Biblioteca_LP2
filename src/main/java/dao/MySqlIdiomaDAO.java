@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import db.MySqlConexion;
+import db.MysqlDBConexion;
 import beans.Idioma;
 import interfaces.IdiomaInterfaceDAO;
 
@@ -23,7 +23,7 @@ public class MySqlIdiomaDAO implements IdiomaInterfaceDAO{
 		
 		try {
 			
-			cn = MySqlConexion.getConexion();
+			cn = MysqlDBConexion.getConexion();
 			
 			String sql = "select * from idioma";
 			
