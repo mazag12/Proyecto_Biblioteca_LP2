@@ -4,6 +4,7 @@ import interfaces.AutorInterface;
 import interfaces.ClienteInterface;
 import interfaces.EstudiosInterfaceDAO;
 import interfaces.FamiliaInterfaceDAO;
+import interfaces.IdiomaInterfaceDAO;
 
 public class MySqlDAOFactory extends DAOFactory{
 
@@ -21,6 +22,11 @@ public class MySqlDAOFactory extends DAOFactory{
 	public FamiliaInterfaceDAO getFamilia() {
 		// TODO Auto-generated method stub
 		return new MySqlFamiliaDAO();
+	}
+	
+	public IdiomaInterfaceDAO getIdioma() {
+		// TODO Auto-generated method stub
+		return new MySqlIdiomaDAO();
 	}
 
 	@Override
