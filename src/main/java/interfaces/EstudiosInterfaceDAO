@@ -1,0 +1,11 @@
+package interfaces;
+
+import java.util.List;
+
+import entities.Estudios;
+
+public interface EstudiosInterfaceDAO {
+
+	public List<Estudios> getListEstudios();
+	
+}
