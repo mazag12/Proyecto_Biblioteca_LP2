@@ -24,7 +24,7 @@ public class MySqlEstudiosDAO implements EstudiosInterfaceDAO {
 		
 		try {
 			
-			cn = MySqlConexion.getConexion();
+			cn = MysqlDBConexion.getConexion();
 			
 			String sql = "select * from estudios";
 			
