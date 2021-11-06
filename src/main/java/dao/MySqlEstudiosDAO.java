@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import db.MySqlConexion;
+import db.MysqlDBConexion;
 
-import entities.Estudios;
+import beans.Estudios;
 import interfaces.EstudiosInterfaceDAO;
 
 
