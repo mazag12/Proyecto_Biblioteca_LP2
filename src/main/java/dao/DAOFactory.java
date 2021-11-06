@@ -3,6 +3,8 @@ import interfaces.AutorInterface;
 import interfaces.ClienteInterface;
 import interfaces.EstudiosInterfaceDAO;
 import interfaces.FamiliaInterfaceDAO;
+import interfaces.FormatoInterface;
+import interfaces.PaisInterface;
 
 public abstract class DAOFactory {
 	
@@ -16,8 +18,8 @@ public abstract class DAOFactory {
 	public abstract EstudiosInterfaceDAO getEstudios();
 	public abstract FamiliaInterfaceDAO getFamilia();
 	public abstract ClienteInterface getCliente();
-	
-	
+	public abstract PaisInterface getPais();
+	public abstract FormatoInterface getFormato();
 	
 	public static DAOFactory getFactory(int tipo) {
 		switch (tipo) {

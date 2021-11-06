@@ -4,6 +4,8 @@ import interfaces.AutorInterface;
 import interfaces.ClienteInterface;
 import interfaces.EstudiosInterfaceDAO;
 import interfaces.FamiliaInterfaceDAO;
+import interfaces.FormatoInterface;
+import interfaces.PaisInterface;
 
 public class MySqlDAOFactory extends DAOFactory{
 
@@ -25,6 +27,18 @@ public class MySqlDAOFactory extends DAOFactory{
 
 	@Override
 	public ClienteInterface getCliente() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PaisInterface getPais() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FormatoInterface getFormato() {
 		// TODO Auto-generated method stub
 		return null;
 	}
