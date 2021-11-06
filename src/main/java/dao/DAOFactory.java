@@ -4,6 +4,7 @@ import interfaces.AutorInterface;
 import interfaces.ClienteInterface;
 =======
 import interfaces.EstudiosInterfaceDAO;
+import interfaces.FamiliaInterfaceDAO;
 >>>>>>> branch 'main' of https://github.com/mazag12/Proyecto_Biblioteca_LP2
 
 public abstract class DAOFactory {
@@ -14,6 +15,7 @@ public abstract class DAOFactory {
 	
 	public abstract AutorInterface getAutor();
 	public abstract EstudiosInterfaceDAO getEstudios();
+	public abstract FamiliaInterfaceDAO getFamilia();
 	
 	public abstract ClienteInterface getCliente();
 	
