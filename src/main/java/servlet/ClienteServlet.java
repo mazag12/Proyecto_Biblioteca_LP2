@@ -32,7 +32,7 @@ public class ClienteServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	String type = request.getParameter("type");
     	
-    	if (type.equals("lisat")) {
+    	if (type.equals("lista")) {
     		listCliente(request, response);
     	} else if (type.equals("register")) {
     		String codAutor = request.getParameter("codcliente");

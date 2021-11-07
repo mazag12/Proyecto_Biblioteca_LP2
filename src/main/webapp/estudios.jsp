@@ -1,4 +1,4 @@
-<%@page import="entities.Estudios"%>
+<%@page import="beans.Estudios"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -39,7 +39,6 @@
 			</thead>
 			
 			<tbody>
-			
 			<%
 			
 			List<Estudios> listEstudios = (List<Estudios>) request.getAttribute("data");
@@ -48,7 +47,6 @@
 				for(Estudios item : listEstudios) {
 					
 			%>
-			
 				<tr class="grilla_campo">
 					<td><%= item.getCodEstudiante() %></td>
 					<td><%= item.getNomEstudio() %></td>

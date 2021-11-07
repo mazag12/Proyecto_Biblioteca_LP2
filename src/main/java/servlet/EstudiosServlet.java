@@ -47,7 +47,7 @@ public class EstudiosServlet extends HttpServlet {
     	
     	// List<Subject> data = subjectModel.getListSubject();
     	
-    	DAOFactory daoFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
     	EstudiosInterfaceDAO dao = daoFactory.getEstudios();
     	List<Estudios> data = dao.getListEstudios();
     	

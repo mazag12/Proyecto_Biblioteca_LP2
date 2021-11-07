@@ -41,8 +41,6 @@ List<Cliente> listCliente = new ArrayList<Cliente>();
 				listCliente.add(clint);
 			}
 			
-			System.out.println("Lista completada ");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
