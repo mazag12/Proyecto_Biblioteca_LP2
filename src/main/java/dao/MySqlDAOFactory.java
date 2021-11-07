@@ -37,7 +37,7 @@ public class MySqlDAOFactory extends DAOFactory{
 	@Override
 	public ClienteInterface getCliente() {
 		// TODO Auto-generated method stub
-		return null;
+		return new MySqlClienteDAO();
 	}
 
 	@Override

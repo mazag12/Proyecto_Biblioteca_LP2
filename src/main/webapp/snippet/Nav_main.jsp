@@ -11,6 +11,7 @@
         <li><a href="AutorServlet?type=lista">AUTOR</a></li>
         <li><a href="PaisServlet?type=lista">Pais</a></li>
         <li><a href="FormatoServlet?type=lista">Formato</a></li>
+        <li><a href="ClienteServlet?type=lista">Cliente</a></li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
