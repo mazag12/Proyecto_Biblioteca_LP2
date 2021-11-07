@@ -8,6 +8,9 @@ import interfaces.IdiomaInterfaceDAO;
 import interfaces.PersonaInterfaceDAO;
 import interfaces.FormatoInterface;
 import interfaces.PaisInterface;
+import interfaces.DepartamentoInterface;
+import interfaces.DistritoInterface;
+import interfaces.ProvinciaInterface;
 
 public class MySqlDAOFactory extends DAOFactory{
 
@@ -50,6 +53,21 @@ public class MySqlDAOFactory extends DAOFactory{
 	public FormatoInterface getFormato() {
 		// TODO Auto-generated method stub
 		return new MySqlFormatoDAO();
+	}
+	
+	public DistritoInterface getDistrito() {
+		// TODO Auto-generated method stub
+		return new MySqlDistritoDAO();
+	}
+	
+	public DepartamentoInterface getDepartamento() {
+		// TODO Auto-generated method stub
+		return new MySqlDepartamentoDAO();
+	}
+	
+	public ProvinciaInterface getProvincia() {
+		// TODO Auto-generated method stub
+		return new MySqlProvinciaDAO();
 	}
 	
 }

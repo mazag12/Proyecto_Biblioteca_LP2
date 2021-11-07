@@ -7,7 +7,9 @@ import interfaces.IdiomaInterfaceDAO;
 import interfaces.PersonaInterfaceDAO;
 import interfaces.FormatoInterface;
 import interfaces.PaisInterface;
-
+import interfaces.DistritoInterface;
+import interfaces.ProvinciaInterface;
+import interfaces.DepartamentoInterface;
 public abstract class DAOFactory {
 	
 	public static final int MYSQL = 1;
@@ -24,6 +26,9 @@ public abstract class DAOFactory {
 	public abstract ClienteInterface getCliente();
 	public abstract PaisInterface getPais();
 	public abstract FormatoInterface getFormato();
+	public abstract DistritoInterface getDistrito();
+	public abstract ProvinciaInterface getProvincia();
+	public abstract DepartamentoInterface getDepartamento();
 	
 	public static DAOFactory getFactory(int tipo) {
 		switch (tipo) {
