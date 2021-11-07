@@ -4,6 +4,7 @@ import interfaces.ClienteInterface;
 import interfaces.EstudiosInterfaceDAO;
 import interfaces.FamiliaInterfaceDAO;
 import interfaces.IdiomaInterfaceDAO;
+import interfaces.PersonaInterfaceDAO;
 import interfaces.FormatoInterface;
 import interfaces.PaisInterface;
 
@@ -19,6 +20,7 @@ public abstract class DAOFactory {
 	public abstract EstudiosInterfaceDAO getEstudios();
 	public abstract FamiliaInterfaceDAO getFamilia();
 	public abstract IdiomaInterfaceDAO getIdioma();
+	public abstract PersonaInterfaceDAO getPersona();
 	public abstract ClienteInterface getCliente();
 	public abstract PaisInterface getPais();
 	public abstract FormatoInterface getFormato();
