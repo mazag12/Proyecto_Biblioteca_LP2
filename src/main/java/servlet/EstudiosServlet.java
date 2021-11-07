@@ -1,80 +1,73 @@
-<%@page import="entities.Estudios"%>
-<%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Estudios</title>
+package servlet;
 
-<%@ include file="snippet/Header.jsp" %>
-</head>
-<body>
+import java.io.IOException;
+import java.util.List;
 
-<div class="container">
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-	<%@ include file="snippet/Nav_main.jsp" %>
-	<br>
-	
-	<div class="col-lg-2">
-	
+import dao.DAOFactory;
+import beans.Estudios;
+import interfaces.EstudiosInterfaceDAO;
 
-	</div>
 
-	<div class="col-lg-10">
-		<h3>Estudios</h3>
+/**
+ * Servlet implementation class EstudiosServlet
+ */
+@WebServlet("/EstudiosServlet")
+public class EstudiosServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public EstudiosServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Codigo Estudiante</th>
-					<th>Universidad</th>
-					<th>Carrera</th>
-					<th>Telefono</th>
-					<th>Celular</th>
-					<th>Direccion</th>
-					<th>CodPais</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-			
-			<%
-			
-			List<Estudios> listEstudios = (List<Estudios>) request.getAttribute("data");
-			if (listEstudios != null) {
-				
-				for(Estudios item : listEstudios) {
-					
-			%>
-			
-				<tr class="grilla_campo">
-					<td><%= item.getCodEstudiante() %></td>
-					<td><%= item.getNomEstudio() %></td>
-					<td><%= item.getCarrera() %></td>
-					<td><%= item.getTelefono() %></td>
-					<td><%= item.getCelular() %></td>
-					<td><%= item.getDireccion() %></td>
-					<td><%= item.getCodPais() %></td>
-				</tr>
-			
-			<%
-					
-				}
-				
-			}
-			
-			%>
-			
-			</tbody>
-		</table>
-		
-	</div>
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	  
+    	String type = request.getParameter("type");
+    	if (type.equals("lista")) {
+    		listEstudios(request, response);
+    	}
 
-</div>
+    	    	
+    	
+    }
+    
+    protected void listEstudios(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+    	
+    	// List<Subject> data = subjectModel.getListSubject();
+    	
+    	DAOFactory daoFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+    	EstudiosInterfaceDAO dao = daoFactory.getEstudios();
+    	List<Estudios> data = dao.getListEstudios();
+    	
+    	request.setAttribute("data", data);
+    	request.getRequestDispatcher("estudios.jsp").forward(request, response);
+    	
+    }
+    
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
 
-</body>
-<%@ include file="snippet/Footer.jsp" %>
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
 
-</html>
+}
+
