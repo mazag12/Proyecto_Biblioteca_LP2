@@ -4,6 +4,7 @@ import interfaces.AutorInterface;
 import interfaces.ClienteInterface;
 import interfaces.EstudiosInterfaceDAO;
 import interfaces.FamiliaInterfaceDAO;
+import interfaces.IdiomaInterfaceDAO;
 import interfaces.FormatoInterface;
 import interfaces.PaisInterface;
 
@@ -24,7 +25,12 @@ public class MySqlDAOFactory extends DAOFactory{
 		// TODO Auto-generated method stub
 		return new MySqlFamiliaDAO();
 	}
-
+	
+	public PersonaInterfaceDAO getPersona() {
+		// TODO Auto-generated method stub
+		return new MySqlPersonaDAO();
+	}
+	
 	@Override
 	public ClienteInterface getCliente() {
 		// TODO Auto-generated method stub
