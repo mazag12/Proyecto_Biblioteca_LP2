@@ -43,13 +43,13 @@ public class MySqlDAOFactory extends DAOFactory{
 	@Override
 	public PaisInterface getPais() {
 		// TODO Auto-generated method stub
-		return null;
+		return new MySqlPaisDAO();
 	}
 
 	@Override
 	public FormatoInterface getFormato() {
 		// TODO Auto-generated method stub
-		return null;
+		return new MySqlFormatoDAO();
 	}
 	
 }

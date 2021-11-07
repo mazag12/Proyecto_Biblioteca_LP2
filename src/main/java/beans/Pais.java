@@ -2,7 +2,6 @@ package beans;
 
 public class Pais {
   
-	
 	public String codpais;
 	public String nompais;
 	

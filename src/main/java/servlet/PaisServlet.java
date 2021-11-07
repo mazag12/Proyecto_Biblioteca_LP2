@@ -55,12 +55,8 @@ public class PaisServlet extends HttpServlet {
     	
     	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
     	PaisInterface dao = daoFactory.getPais();
-    	
-    	System.out.println("Lista");
-    	
+    	    	
     	List<Pais> data = dao.getListPais();
-    	
-    	System.out.println("Salio de Lista");
     	
     	request.setAttribute("data", data);
     	request.getRequestDispatcher("Pais.jsp").forward(request, response);

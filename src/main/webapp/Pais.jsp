@@ -64,12 +64,6 @@
 
 
 
-
-
-
-
-
-
 </body>
 <%@ include file="snippet/Footer.jsp" %>
 </html>

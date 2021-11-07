@@ -20,8 +20,6 @@ public class MySqlPaisDAO implements PaisInterface{
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		
-		System.out.println("Lista completada 1");
-		
 		try {
 			
 			con = MysqlDBConexion8.getConexion();
@@ -38,8 +36,6 @@ public class MySqlPaisDAO implements PaisInterface{
 				
 				listPais.add(pa);
 			}
-			
-			System.out.println("Lista completada 2");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
