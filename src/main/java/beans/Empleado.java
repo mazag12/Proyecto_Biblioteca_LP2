@@ -5,6 +5,14 @@ public class Empleado {
 	String codigoemple;
 	String codperson;
 	String codcargo;
+	
+	public Empleado(String codigoemple, String codperson, String codcargo) {
+		super();
+		this.codigoemple = codigoemple;
+		this.codperson = codperson;
+		this.codcargo = codcargo;
+	}
+	
 	public String getCodigoemple() {
 		return codigoemple;
 	}

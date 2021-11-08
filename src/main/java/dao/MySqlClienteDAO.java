@@ -14,7 +14,7 @@ public class MySqlClienteDAO implements ClienteInterface {
 
 	@Override
 	public List<beans.Cliente> getListCliente() {
-List<Cliente> listCliente = new ArrayList<Cliente>();
+		List<Cliente> listCliente = new ArrayList<Cliente>();
 		
 		Connection con =  null;
 		PreparedStatement pstm = null;

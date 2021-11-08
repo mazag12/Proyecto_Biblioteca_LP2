@@ -9,6 +9,7 @@ import interfaces.PersonaInterfaceDAO;
 import interfaces.FormatoInterface;
 import interfaces.PaisInterface;
 import interfaces.DistritoInterface;
+import interfaces.EmpleadoInterface;
 import interfaces.ProvinciaInterface;
 import interfaces.DepartamentoInterface;
 public abstract class DAOFactory {
@@ -31,6 +32,8 @@ public abstract class DAOFactory {
 	public abstract ProvinciaInterface getProvincia();
 	public abstract DepartamentoInterface getDepartamento();
 	public abstract LibroInterface getLibro();
+	public abstract EmpleadoInterface getEmpleado();
+	
 	
 	public static DAOFactory getFactory(int tipo) {
 		switch (tipo) {

@@ -17,15 +17,19 @@
 	<%@ include file="snippet/Nav_main.jsp" %>
 	<br>
 	
-	<div class="col-lg-2">
+	<div class="text-center">
+			<h3>ESTUDIOS</h3>
+	</div>
 	
-
+	<div class="col-1">
+			<a href="" class="btn btn-success">
+				AGREGAR
+			</a>		
 	</div>
 
-	<div class="col-lg-10">
-		<h3>Estudios</h3>
+	<div class="col">
 
-		<table class="table">
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>Codigo Estudiante</th>
@@ -35,6 +39,8 @@
 					<th>Celular</th>
 					<th>Direccion</th>
 					<th>CodPais</th>
+					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			
@@ -55,6 +61,12 @@
 					<td><%= item.getCelular() %></td>
 					<td><%= item.getDireccion() %></td>
 					<td><%= item.getCodPais() %></td>
+					<td>
+						<a href="" class="btn btn-warning">MODIFICAR</a>
+					</td>
+					<td>
+						<a href="" class="btn btn-danger">ELIMINAR</a>
+					</td>
 				</tr>
 			
 			<%

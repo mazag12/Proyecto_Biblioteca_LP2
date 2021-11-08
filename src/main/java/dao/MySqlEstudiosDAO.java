@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import db.MysqlDBConexion;
+import db.MysqlDBConexion8;
 
 import beans.Estudios;
 import interfaces.EstudiosInterfaceDAO;
@@ -24,7 +24,7 @@ public class MySqlEstudiosDAO implements EstudiosInterfaceDAO {
 		
 		try {
 			
-			cn = MysqlDBConexion.getConexion();
+			cn = MysqlDBConexion8.getConexion();
 			
 			String sql = "select * from estudios";
 			

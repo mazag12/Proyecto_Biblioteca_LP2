@@ -7,12 +7,13 @@
 
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="AuthServlet?type=lista">LIBRO</a></li>
+        <li><a href="LibroServlet?type=lista">LIBRO</a></li>
         <li><a href="AutorServlet?type=lista">AUTOR</a></li>
         <li><a href="PaisServlet?type=lista">Pais</a></li>
         <li><a href="FormatoServlet?type=lista">Formato</a></li>
         <li><a href="ClienteServlet?type=lista">Cliente</a></li>
         <li><a href="EstudiosServlet?type=lista">Estudios</a></li>
+        <li><a href="EmpleadoServlet?type=lista">Empleados</a></li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
