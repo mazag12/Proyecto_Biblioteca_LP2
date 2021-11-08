@@ -17,19 +17,25 @@
 	<%@ include file="snippet/Nav_main.jsp" %>
 	
 	<br>
-	<div class="col-lg-6">
-		<h2>FORMATO </h2>
-		
+	<div class="text-center">
+			<h3>FORMATO</h3>
 	</div>
 	
-	<div class="col-lg-8">
-		<h3>Lista Formato </h3>
+	<div class="col-1">
+			<a href="" class="btn btn-success">
+				AGREGAR
+			</a>		
+	</div>
+	
+	<div class="col">
 		
-		<table class="table table-sm">
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>Código</th>
 					<th>Nombre</th>
+					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			
@@ -46,7 +52,12 @@
 				<tr class="grilla_campo">
 					<td><%=item.getCodformato() %></td>
 					<td><%=item.getNomformato () %></td>
-					
+					<td>
+						<a href="" class="btn btn-warning">MODIFICAR</a>
+					</td>
+					<td>
+						<a href="" class="btn btn-danger">ELIMINAR</a>
+					</td>
 				</tr>
 			<%
 					

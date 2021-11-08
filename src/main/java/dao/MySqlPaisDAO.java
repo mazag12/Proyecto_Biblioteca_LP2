@@ -24,15 +24,28 @@ public class MySqlPaisDAO implements PaisInterface{
 			
 			con = MysqlDBConexion8.getConexion();
 			
-			String sql = "Select * From pais";
+			String sql = "Select dis.coddistrito, dis.nomdistrito, pro.codprovincia, pro.nomprovincia, de.coddepartamento, de.nomdepartamento, pa.codpais, pa.nompais "
+					+ "from Pais as pa Inner Join Departamento as de "
+					+ "On pa.codpais = de.codpais "
+					+ "Inner Join Provincia as pro "
+					+ "on de.coddepartamento = pro.coddepartamento "
+					+ "Inner Join Distrito as dis\r\n"
+					+ "on dis.codprovincia = pro.codprovincia;";
 			
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			
 			while (rs.next()) {
-				Pais pa = new Pais();
-				pa.setCodpais(rs.getString("codpais"));
-		        pa.setNompais(rs.getString("nompais"));
+				Pais pa = new Pais(
+				rs.getString("coddistrito"),
+				rs.getString("nomdistrito"),
+				rs.getString("codprovincia"),
+				rs.getString("nomprovincia"),
+				rs.getString("coddepartamento"),
+				rs.getString("nomdepartamento"),
+				rs.getString("codpais"),
+				rs.getString("nompais")
+				);
 				
 				listPais.add(pa);
 			}

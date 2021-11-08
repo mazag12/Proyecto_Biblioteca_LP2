@@ -24,41 +24,25 @@
 	Autor autorForm = (Autor) request.getAttribute("autortData");
 	
 	%>
-	
-	<div class="col-lg-4">
-	
-		<h3>Registrar Autor</h3>
-		
-		<form action="AutorServlet" method="post">
-		
-			<input type="hidden" name="type" value="register">
-			<input type="hidden" name="idSubject" value="<%=(autorForm!=null)? autorForm.getCodautor():""%>">
-		
-			<div class="form-group">
-			<label>Nombre</label>
-			<input class="form-control" type="text" name="txtNombre" value="<%=(autorForm!=null)? autorForm.getNomautor():""%>">
-			</div>
-			
-			<input type="submit" class="btn btn-primary" value="Enviar Datos">
-			
-		</form>
-		
+	<div class="text-center">
+			<h3>AUTORES</h3>
 	</div>
 	
-	
-	<div class="col-lg-6">
-		<h2>AUTOR!</h2>
-		
+	<div class="col-1">
+			<a href="" class="btn btn-success">
+				AGREGAR
+			</a>		
 	</div>
 	
-	<div class="col-lg-8">
-		<h3>Lista Autores</h3>
+	<div class="col">
 		
-		<table class="table table-sm">
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>Código</th>
 					<th>Nombre</th>
+					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			
@@ -75,7 +59,12 @@
 				<tr class="grilla_campo">
 					<td><%=item.getCodautor() %></td>
 					<td><%=item.getNomautor() %></td>
-					
+					<td>
+						<a href="" class="btn btn-warning">MODIFICAR</a>
+					</td>
+					<td>
+						<a href="" class="btn btn-danger">ELIMINAR</a>
+					</td>
 				</tr>
 			<%
 					

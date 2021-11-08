@@ -29,10 +29,11 @@ public class MySqlDistritoDAO implements DistritoInterface  {
 			rs = pstm.executeQuery();
 			
 			while (rs.next()) {
-				Distrito di = new Distrito();
-				di.setCoddistrito(rs.getString("coddistrito"));
-		        di.setNomdistrito(rs.getString("nomdistrito"));
-		        di.setCodprovincia(rs.getString("codprovincia"));
+				Distrito di = new Distrito(
+					rs.getString("coddistrito"),
+					rs.getString("nomdistrito")
+				);
+				
 		        
 				listDistrito.add(di);
 				

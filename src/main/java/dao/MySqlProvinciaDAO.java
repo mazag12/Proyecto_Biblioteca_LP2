@@ -25,20 +25,23 @@ public class MySqlProvinciaDAO implements ProvinciaInterface {
 			
 			con = MysqlDBConexion8.getConexion();
 			
-			String sql = "Select * From provincia";
+			String sql = "Select dis.coddistrito, dis.nomdistrito, pro.codprovincia, pro.nomprovincia "
+					+ "from Provincia as pro "
+					+ "Inner Join Distrito as dis "
+					+ "on dis.codprovincia = pro.codprovincia;";
 			
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			
 			while (rs.next()) {
-				Provincia pr = new Provincia();
-				pr.setCodprovincia(rs.getString("codprovincia"));
-		        pr.setNomprovincia(rs.getString("nomprovincia"));
-		        pr.setCoddepartamento(rs.getString("coddepartamento"));
+				Provincia pr = new Provincia(
+						rs.getString("coddistrito"),
+						rs.getString("nomdistrito"),
+						rs.getString("codprovincia"),
+						rs.getString("nomprovincia")
+				);
 		        
 				listProvincia.add(pr);
-				
-			
 				
 			}
 			

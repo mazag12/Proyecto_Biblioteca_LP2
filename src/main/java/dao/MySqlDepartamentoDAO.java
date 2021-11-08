@@ -24,20 +24,28 @@ public class MySqlDepartamentoDAO  implements DepartamentoInterface {
 			
 			con = MysqlDBConexion8.getConexion();
 			
-			String sql = "Select * From departamento";
+			String sql = "Select dis.coddistrito, dis.nomdistrito, pro.codprovincia, pro.nomprovincia, de.coddepartamento, de.nomdepartamento "
+					+ "from Departamento as de "
+					+ "Inner Join Provincia as pro "
+					+ "on de.coddepartamento = pro.coddepartamento "
+					+ "Inner Join Distrito as dis "
+					+ "on dis.codprovincia = pro.codprovincia;";
 			
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			
 			while (rs.next()) {
-				Departamento de = new Departamento();
-				de.setCoddepartamento(rs.getString("coddepartamento"));
-		        de.setNomdepartamento(rs.getString("nomdepartamento"));
-		        de.setCodpais(rs.getString("codpais"));
+				Departamento de = new Departamento(
+						rs.getString("coddistrito"),
+						rs.getString("nomdistrito"),
+						rs.getString("codprovincia"),
+						rs.getString("nomprovincia"),
+						rs.getString("coddepartamento"),
+						rs.getString("nomdepartamento")
+						);
 		        
 				listDepartamento.add(de);
-				
-				
+
 			}
 			
 		} catch (Exception e) {

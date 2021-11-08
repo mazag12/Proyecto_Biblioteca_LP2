@@ -1,12 +1,16 @@
 package beans;
 
-public class Provincia {
+public class Provincia extends Distrito{
 
-	
 	public String codprovincia;
 	public String nomprovincia;
 	public String coddepartamento;
 	
+	public Provincia(String coddistrito, String nomdistrito,String codprovincia,String nomprovincia) {
+		super(coddistrito, nomdistrito);
+		this.codprovincia = codprovincia;
+		this.nomprovincia = nomprovincia;		
+	}
 	
 	public String getCodprovincia() {
 		return codprovincia;
