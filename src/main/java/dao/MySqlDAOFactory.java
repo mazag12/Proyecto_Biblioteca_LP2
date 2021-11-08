@@ -5,6 +5,7 @@ import interfaces.ClienteInterface;
 import interfaces.EstudiosInterfaceDAO;
 import interfaces.FamiliaInterfaceDAO;
 import interfaces.IdiomaInterfaceDAO;
+import interfaces.LibroInterface;
 import interfaces.PersonaInterfaceDAO;
 import interfaces.FormatoInterface;
 import interfaces.PaisInterface;
@@ -68,6 +69,12 @@ public class MySqlDAOFactory extends DAOFactory{
 	public ProvinciaInterface getProvincia() {
 		// TODO Auto-generated method stub
 		return new MySqlProvinciaDAO();
+	}
+
+	@Override
+	public LibroInterface getLibro() {
+		// TODO Auto-generated method stub
+		return new MySqlLibroDAO();
 	}
 	
 }

@@ -4,6 +4,7 @@ import interfaces.ClienteInterface;
 import interfaces.EstudiosInterfaceDAO;
 import interfaces.FamiliaInterfaceDAO;
 import interfaces.IdiomaInterfaceDAO;
+import interfaces.LibroInterface;
 import interfaces.PersonaInterfaceDAO;
 import interfaces.FormatoInterface;
 import interfaces.PaisInterface;
@@ -29,6 +30,7 @@ public abstract class DAOFactory {
 	public abstract DistritoInterface getDistrito();
 	public abstract ProvinciaInterface getProvincia();
 	public abstract DepartamentoInterface getDepartamento();
+	public abstract LibroInterface getLibro();
 	
 	public static DAOFactory getFactory(int tipo) {
 		switch (tipo) {
