@@ -35,11 +35,11 @@
 			
 				<form action="AuthServlet" method="post" id="id_form">
 			
-						<input type="hidden" name="type" value="login" class="">
+						<input type="hidden" name="type" value="login">
 			
 						<div class="form-group">
 							<label>Correo</label>
-			      			<input class="form-control" type="text" name="txtCorreo" >
+			      			<input class="form-control" type="text" name="txtNombre" >
 							
 						</div>
 						

@@ -12,6 +12,7 @@ import interfaces.DistritoInterface;
 import interfaces.EmpleadoInterface;
 import interfaces.ProvinciaInterface;
 import interfaces.DepartamentoInterface;
+import interfaces.UsuarioInterface;
 public abstract class DAOFactory {
 	
 	public static final int MYSQL = 1;
@@ -33,6 +34,7 @@ public abstract class DAOFactory {
 	public abstract DepartamentoInterface getDepartamento();
 	public abstract LibroInterface getLibro();
 	public abstract EmpleadoInterface getEmpleado();
+	public abstract UsuarioInterface getUsuario();
 	
 	
 	public static DAOFactory getFactory(int tipo) {

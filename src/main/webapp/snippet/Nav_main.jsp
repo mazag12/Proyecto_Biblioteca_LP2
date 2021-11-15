@@ -6,6 +6,18 @@
     </div>
 
     <div class="collapse navbar-collapse">
+  	<%
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+		if(session.getAttribute("name") == null) {
+	%>
+	<ul class="nav navbar-nav navbar-right">
+        <li><a href="login.jsp">Iniciar Sessión</a></li>
+     </ul>
+	
+	<%
+		}else{
+	
+	%>  
       <ul class="nav navbar-nav">
         <li><a href="LibroServlet?type=lista">LIBRO</a></li>
         <li><a href="AutorServlet?type=lista">AUTOR</a></li>
@@ -17,9 +29,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Pefil</a></li>
-        <li><a href="AuthServlet?type=logout">Cerrar SesiÃ³n</a></li>
-      </ul>
+      <% String name = (String) session.getAttribute("name"); %>
+        <li><a href="#"><%=name %></a></li>
+        <li><a href="AuthServlet?type=logout">Cerrar Sesión</a></li>
+     </ul>
+      
+     <% } %> 
     </div>
   </div>
 </nav>

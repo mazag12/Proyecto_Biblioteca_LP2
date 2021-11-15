@@ -13,6 +13,7 @@ import interfaces.DepartamentoInterface;
 import interfaces.DistritoInterface;
 import interfaces.EmpleadoInterface;
 import interfaces.ProvinciaInterface;
+import interfaces.UsuarioInterface;
 
 public class MySqlDAOFactory extends DAOFactory{
 
@@ -82,6 +83,12 @@ public class MySqlDAOFactory extends DAOFactory{
 	public EmpleadoInterface getEmpleado() {
 		// TODO Auto-generated method stub
 		return new MySqlEmpleadoDAO();
+	}
+
+	@Override
+	public UsuarioInterface getUsuario() {
+		// TODO Auto-generated method stub
+		return new MySqlUsuarioDAO();
 	}
 	
 }

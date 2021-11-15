@@ -24,16 +24,33 @@ public class MySqlEmpleadoDAO implements EmpleadoInterface {
 			
 			con = MysqlDBConexion8.getConexion();
 			
-			String sql = "Select codigoemple, codperson, codcargo From Empleado";
+			String sql = "select per.CODPERSON,per.NOMBRES,per.APE_PATERNO,per.APE_MATERNO,per.TIPO_DOC,per.NUM_DOC,per.TELEFONO,per.CELULAR,per.CORREO,per.DIRECCION,per.SEXO, "
+					+ "per.NACIONALIDAD,per.EST_CIVIL,em.CODIGOEMPLE,em.CODPERSON,em.CODCARGO "
+					+ "from empleado as em "
+					+ "inner join persona as per "
+					+ "on em.CODPERSON = per.CODPERSON; ";
 			
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			
 			while (rs.next()) {
 				Empleado emp = new Empleado(
-						rs.getString("codigoemple"),
-						rs.getString("codperson"),
-						rs.getString("codcargo")
+						rs.getString("CODPERSON"),
+						rs.getString("NOMBRES"),
+						rs.getString("APE_PATERNO"),
+						rs.getString("APE_MATERNO"),
+						rs.getString("TIPO_DOC"),
+						rs.getString("NUM_DOC"),
+						rs.getInt("TELEFONO"),
+						rs.getInt("CELULAR"),
+						rs.getString("CORREO"),
+						rs.getString("DIRECCION"),
+						rs.getString("SEXO"),
+						rs.getString("NACIONALIDAD"),
+						rs.getString("EST_CIVIL"),
+						rs.getString("CODIGOEMPLE"),
+						rs.getString("CODPERSON"),
+						rs.getString("CODCARGO")
 						);
 				
 				listEmpleado.add(emp);
