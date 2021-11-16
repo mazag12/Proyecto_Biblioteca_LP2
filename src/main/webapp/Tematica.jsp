@@ -1,16 +1,14 @@
-<%@page import="beans.Cliente"%>
+<%@page import="beans.Tematica"%>
 <%@page import="java.util.List"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Cliente</title>
-
-
+<title>Tematica</title>
 <%@ include file="snippet/Header.jsp" %>
-
 </head>
 <body>
 
@@ -20,7 +18,7 @@
 	
 	<br>
 	<div class="text-center">
-			<h3>CLIENTE</h3>
+			<h3>TEMATICA</h3>
 	</div>
 	
 	<div class="col-1">
@@ -52,12 +50,8 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Código de Cliente</th>
-					<th>Código de Familia</th>
-					<th>Número</th>
-					<th>Código de trabajo</th>
-					<th>Código de estudiante</th>
-					<th>Código de personal</th>
+					<th>Código</th>
+					<th>Nombre</th>
 					<th></th>
 					<th></th>
 				</tr>
@@ -67,19 +61,15 @@
 			
 			<%
 			
-			List<Cliente> listCliente = (List<Cliente>) request.getAttribute("data");
-			if (listCliente != null) {
+			List<Tematica> listTematica = (List<Tematica>) request.getAttribute("data");
+			if (listTematica != null) {
 				
-				for(Cliente item : listCliente) {
+				for(Tematica item : listTematica) {
 					
 			%>
 				<tr class="grilla_campo">
-					<td><%=item.getCodcliente() %></td>
-					<td><%=item.getCodfamilia() %></td>
-					<td><%=item.getNumero() %></td>
-					<td><%=item.getCodtrabajo() %></td>
-					<td><%=item.getCodestudio() %></td>
-					<td><%=item.getCodperson() %></td>
+					<td><%=item.getCodTematica() %></td>
+					<td><%=item.getNomTematica() %></td>
 					<td>
 						<a href="" class="btn btn-warning">MODIFICAR</a>
 					</td>
@@ -104,6 +94,6 @@
 
 </body>
 
-<%@ include file="snippet/Footer.jsp" %>
 
+<%@ include file="snippet/Footer.jsp" %>
 </html>

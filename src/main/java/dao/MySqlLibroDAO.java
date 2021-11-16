@@ -19,7 +19,6 @@ public class MySqlLibroDAO implements LibroInterface{
 		Connection con =  null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		System.out.println("Ingreso para Lista");
 		try {
 			
 			con = MysqlDBConexion8.getConexion();
@@ -51,7 +50,6 @@ public class MySqlLibroDAO implements LibroInterface{
 				
 				listLibro.add(libro);
 			}
-			System.out.println("Ingreso Correctamente");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

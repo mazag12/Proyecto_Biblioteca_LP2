@@ -8,14 +8,13 @@ import java.util.List;
 
 import db.MysqlDBConexion;
 import beans.Idioma;
-import interfaces.IdiomaInterfaceDAO;
+import interfaces.IdiomaInterface;
 
-public class MySqlIdiomaDAO implements IdiomaInterfaceDAO{
+public class MySqlIdiomaDAO implements IdiomaInterface{
 
 	@Override
-	public List<Idioma> getListIdiomas() {
-		
-		List<Idioma> listidioma = new ArrayList<Idioma>();
+	public List<Idioma> getListIdioma() {
+List<Idioma> listidioma = new ArrayList<Idioma>();
 		
 		Connection cn =  null;
 		PreparedStatement psm = null;
@@ -58,6 +57,30 @@ public class MySqlIdiomaDAO implements IdiomaInterfaceDAO{
 		}
 		
 		return listidioma;
+	}
+
+	@Override
+	public int createIdioma(Idioma idio) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Idioma Idioma(String cod) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int editIdioma(Idioma tem) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int removeIdioma(String idio) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -4,15 +4,17 @@ import interfaces.AutorInterface;
 import interfaces.ClienteInterface;
 import interfaces.EstudiosInterfaceDAO;
 import interfaces.FamiliaInterfaceDAO;
-import interfaces.IdiomaInterfaceDAO;
+import interfaces.IdiomaInterface;
 import interfaces.LibroInterface;
 import interfaces.PersonaInterfaceDAO;
 import interfaces.FormatoInterface;
 import interfaces.PaisInterface;
 import interfaces.DepartamentoInterface;
 import interfaces.DistritoInterface;
+import interfaces.EditorialInterface;
 import interfaces.EmpleadoInterface;
 import interfaces.ProvinciaInterface;
+import interfaces.TematicaInterface;
 import interfaces.UsuarioInterface;
 
 public class MySqlDAOFactory extends DAOFactory{
@@ -32,7 +34,7 @@ public class MySqlDAOFactory extends DAOFactory{
 		// TODO Auto-generated method stub
 		return new MySqlFamiliaDAO();
 	}
-	public IdiomaInterfaceDAO getIdioma() {
+	public IdiomaInterface getIdioma() {
 		// TODO Auto-generated method stub
 		return new MySqlIdiomaDAO();
 	}
@@ -89,6 +91,18 @@ public class MySqlDAOFactory extends DAOFactory{
 	public UsuarioInterface getUsuario() {
 		// TODO Auto-generated method stub
 		return new MySqlUsuarioDAO();
+	}
+
+	@Override
+	public EditorialInterface getEditorial() {
+		// TODO Auto-generated method stub
+		return new MySqlEditorialDAO();
+	}
+
+	@Override
+	public TematicaInterface getTematica() {
+		// TODO Auto-generated method stub
+		return new MySqlTematicaDAO();
 	}
 	
 }

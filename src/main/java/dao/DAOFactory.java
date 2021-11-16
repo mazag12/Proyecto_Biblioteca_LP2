@@ -3,14 +3,16 @@ import interfaces.AutorInterface;
 import interfaces.ClienteInterface;
 import interfaces.EstudiosInterfaceDAO;
 import interfaces.FamiliaInterfaceDAO;
-import interfaces.IdiomaInterfaceDAO;
+import interfaces.IdiomaInterface;
 import interfaces.LibroInterface;
 import interfaces.PersonaInterfaceDAO;
 import interfaces.FormatoInterface;
 import interfaces.PaisInterface;
 import interfaces.DistritoInterface;
+import interfaces.EditorialInterface;
 import interfaces.EmpleadoInterface;
 import interfaces.ProvinciaInterface;
+import interfaces.TematicaInterface;
 import interfaces.DepartamentoInterface;
 import interfaces.UsuarioInterface;
 public abstract class DAOFactory {
@@ -24,7 +26,7 @@ public abstract class DAOFactory {
 	public abstract AutorInterface getAutor();
 	public abstract EstudiosInterfaceDAO getEstudios();
 	public abstract FamiliaInterfaceDAO getFamilia();
-	public abstract IdiomaInterfaceDAO getIdioma();
+	public abstract IdiomaInterface getIdioma();
 	public abstract PersonaInterfaceDAO getPersona();
 	public abstract ClienteInterface getCliente();
 	public abstract PaisInterface getPais();
@@ -35,7 +37,8 @@ public abstract class DAOFactory {
 	public abstract LibroInterface getLibro();
 	public abstract EmpleadoInterface getEmpleado();
 	public abstract UsuarioInterface getUsuario();
-	
+	public abstract EditorialInterface getEditorial();
+	public abstract TematicaInterface getTematica();
 	
 	public static DAOFactory getFactory(int tipo) {
 		switch (tipo) {

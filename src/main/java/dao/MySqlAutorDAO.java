@@ -53,7 +53,7 @@ public class MySqlAutorDAO implements AutorInterface{
 	}
 
 	@Override
-	public int createAutor(beans.Autor au) {
+	public int createAutor(Autor au) {
 		int value = 0;
 		
 		Connection cn =  null;
@@ -88,7 +88,7 @@ public class MySqlAutorDAO implements AutorInterface{
 	}
 
 	@Override
-	public beans.Autor Autor(String cod) {
+	public Autor Autor(String cod) {
 		
 		Autor au = null;
 		
@@ -129,7 +129,7 @@ public class MySqlAutorDAO implements AutorInterface{
 	}
 
 	@Override
-	public int editAutor(beans.Autor au) {
+	public int editAutor(Autor au) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
