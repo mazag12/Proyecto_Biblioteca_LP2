@@ -18,7 +18,7 @@
 	<br>
 
 <div class="text-center">
-			<h3>ESTUDIOS</h3>
+			<h3>PERSONA</h3>
 	</div>
 	
 	<div class="col-1">
