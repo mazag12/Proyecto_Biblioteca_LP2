@@ -50,7 +50,7 @@ public class TrabajoServlet extends HttpServlet {
     	} 
     }
     
-    protected void listLibro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void listTrabajo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// TODO Auto-generated method stub
     	
     	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
