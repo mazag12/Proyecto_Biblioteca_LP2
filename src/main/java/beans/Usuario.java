@@ -2,24 +2,13 @@ package beans;
 
 public class Usuario{
 
-	
-	public int Codigo;
 	public String usernombre;
-	
-	
-	
+	public String rol;
 
-	@Override
-	public String toString() {
-		return "Usuario [Codigo=" + Codigo + ", usernombre=" + usernombre + "]";
-	}
-
-	public int getCodigo() {
-		return Codigo;
-	}
-
-	public void setCodigo(int codigo) {
-		Codigo = codigo;
+	public Usuario(String usernombre, String rol) {
+		super();
+		this.usernombre = usernombre;
+		this.rol = rol;
 	}
 
 	public String getUsernombre() {
@@ -28,6 +17,14 @@ public class Usuario{
 
 	public void setUsernombre(String usernombre) {
 		this.usernombre = usernombre;
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 	
 	

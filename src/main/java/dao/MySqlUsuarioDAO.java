@@ -13,7 +13,7 @@ import interfaces.UsuarioInterface;
 public class MySqlUsuarioDAO implements UsuarioInterface{
 
 	@Override
-	public List<beans.Usuario> getListUsuario() {
+	public List<Usuario> getListUsuario() {
 		List<Usuario> listUsuario = new ArrayList<Usuario>();
 		
 		Connection cn =  null;
@@ -24,13 +24,7 @@ public class MySqlUsuarioDAO implements UsuarioInterface{
 			
 			cn = MysqlDBConexion8.getConexion();
 			
-			String sql = "select per.CODPERSON,per.NOMBRES,per.APE_PATERNO,per.APE_MATERNO,per.TIPO_DOC,per.NUM_DOC,per.TELEFONO,per.CELULAR,per.CORREO,per.DIRECCION,per.SEXO, "
-					+ "per.NACIONALIDAD,per.EST_CIVIL,em.CODIGOEMPLE,em.CODPERSON,em.CODCARGO, us.usercodigo, us.usernombre "
-					+ "from empleado as em "
-					+ "inner join persona as per "
-					+ "on em.CODPERSON = per.CODPERSON "
-					+ "inner join usuario as us "
-					+ "on us.codempleado = em.CODIGOEMPLE";
+			String sql = "select usernombre, rol from usuario;";
 			
 			psm = cn.prepareStatement(sql);
 			rs = psm.executeQuery();
@@ -38,25 +32,8 @@ public class MySqlUsuarioDAO implements UsuarioInterface{
 			while (rs.next()) {
 				
 				Usuario usuario = new Usuario(
-						rs.getString("CODPERSON"),
-						rs.getString("NOMBRES"),
-						rs.getString("APE_PATERNO"),
-						rs.getString("APE_MATERNO"),
-						rs.getString("TIPO_DOC"),
-						rs.getString("NUM_DOC"),
-						rs.getInt("TELEFONO"),
-						rs.getInt("CELULAR"),
-						rs.getString("CORREO"),
-						rs.getString("DIRECCION"),
-						rs.getString("SEXO"),
-						rs.getString("NACIONALIDAD"),
-						rs.getString("EST_CIVIL"),
-						rs.getString("CODIGOEMPLE"),
-						rs.getString("CODPERSON"),
-						rs.getString("CODCARGO"),
-						rs.getInt("usercodigo"),
-						rs.getString("usernombre")
-				);
+						rs.getString("usernombre"), 
+						rs.getString("rol"));
 				
 				listUsuario.add(usuario);
 				
@@ -106,7 +83,8 @@ public class MySqlUsuarioDAO implements UsuarioInterface{
 	}
 
 	@Override
-	public beans.Usuario verifyAuthModel(String nombre, String password) {
+	public Usuario verifyAuthModel(String nombre, String password) {
+		
 		Usuario usuario = null;
 		
 		Connection cn = null;
@@ -117,14 +95,7 @@ public class MySqlUsuarioDAO implements UsuarioInterface{
 			
 			cn = MysqlDBConexion8.getConexion();
 			
-			String sql = "select per.CODPERSON,per.NOMBRES,per.APE_PATERNO,per.APE_MATERNO,per.TIPO_DOC,per.NUM_DOC,per.TELEFONO,per.CELULAR,per.CORREO,per.DIRECCION,per.SEXO, "
-					+ "per.NACIONALIDAD,per.EST_CIVIL,em.CODIGOEMPLE,em.CODPERSON,em.CODCARGO, us.usercodigo, us.usernombre "
-					+ "from empleado as em "
-					+ "inner join persona as per "
-					+ "on em.CODPERSON = per.CODPERSON "
-					+ "inner join usuario as us "
-					+ "on us.codempleado = em.CODIGOEMPLE "
-					+ "where us.usernombre = ? and us.usercontra=?; ";
+			String sql = "select usernombre, rol from usuario where usernombre = ? and usercontra = ?;";
 			
 			pstm = cn.prepareStatement(sql);
 			pstm.setString(1, nombre);
@@ -134,26 +105,9 @@ public class MySqlUsuarioDAO implements UsuarioInterface{
 			
 			if (rs.next()) {
 				// String nombre, String apellidos, String id, String rol, String email
-					usuario = new Usuario(
-						rs.getString("CODPERSON"),
-						rs.getString("NOMBRES"),
-						rs.getString("APE_PATERNO"),
-						rs.getString("APE_MATERNO"),
-						rs.getString("TIPO_DOC"),
-						rs.getString("NUM_DOC"),
-						rs.getInt("TELEFONO"),
-						rs.getInt("CELULAR"),
-						rs.getString("CORREO"),
-						rs.getString("DIRECCION"),
-						rs.getString("SEXO"),
-						rs.getString("NACIONALIDAD"),
-						rs.getString("EST_CIVIL"),
-						rs.getString("CODIGOEMPLE"),
-						rs.getString("CODPERSON"),
-						rs.getString("CODCARGO"),
-						rs.getInt("usercodigo"),
-						rs.getString("usernombre")
-				);
+				usuario = new Usuario(
+						rs.getString("usernombre"), 
+						rs.getString("rol"));
 			}
 			
 		} catch (Exception e) {

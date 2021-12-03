@@ -132,8 +132,37 @@ public class MySqlAutorDAO implements AutorInterface{
 
 	@Override
 	public int editAutor(Autor au) {
-		// TODO Auto-generated method stub
-		return 0;
+		int value = 0;
+		
+		Connection cn =  null;
+		PreparedStatement psm = null;
+		try {
+			
+			cn = MysqlDBConexion8.getConexion();
+			
+			String sql = "call SP_BIBLIOTECA_ACTUALIZAR_AUTOR(?,?)";
+			psm = cn.prepareCall(sql);
+			psm.setString(1, au.getCodautor());
+			psm.setString(2, au.getNomautor());
+			
+			value = psm.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {
+				
+				if(psm != null) psm.close();
+				if(cn != null) cn.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return value;
 	}
 
 	@Override

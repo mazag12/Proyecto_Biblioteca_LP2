@@ -38,13 +38,11 @@ public class AutorServlet extends HttpServlet {
     	if (type.equals("lista")) {
     		listAutor(request, response);
     	} else if (type.equals("register")) {
-    			registerAutor(request, response);
+    		registerAutor(request, response);
     	} else if (type.equals("edit")){
-    			///editAutor(request, response);
-    	} else if (type.equals("info")) {
-    		getAutor(request, response);
+    		editAutor(request, response);
     	} else if (type.equals("delete")) {
-    		//deleteAutor(request, response);
+    		deleteAutor(request, response);
     	} 
     }
     
@@ -79,10 +77,12 @@ public class AutorServlet extends HttpServlet {
     		if (value == 1) {
         		listAutor(request, response);
         	} else {
-        		//error
+        		request.setAttribute("message", "Ocurrio un problema");
+        		listAutor(request, response);
         	}
     		
     	}else {
+    		request.setAttribute("message", "Ocurrio un problema");
     		listAutor(request, response);
     	}
     	
@@ -101,6 +101,56 @@ public class AutorServlet extends HttpServlet {
     	request.setAttribute("usuarioData", autor);
     	request.setAttribute("data", listUsuario);
     	request.getRequestDispatcher("usuario.jsp").forward(request, response);
+    }
+    
+    protected void editAutor(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException  {
+    	
+    	String codigo = request.getParameter("txtcodigo");
+    	String name = request.getParameter("txtName");
+    	
+    	
+    	Autor autor = new Autor();
+    	autor.setCodautor(codigo);
+    	autor.setNomautor(name);
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	AutorInterface dao = daoFactory.getAutor();
+    	    	
+    	if(autor.getCodautor() == "SNDATA") {
+    	
+	    	int flagResponde = dao.editAutor(autor); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listAutor(request, response);
+	    	} else {
+	    		request.setAttribute("message", "Ocurrio un problema");
+	    		request.getRequestDispatcher("Autor.jsp").forward(request, response);
+	    	}
+    	}else {
+    		request.setAttribute("message", "Ocurrio un problema");
+    		request.getRequestDispatcher("Autor.jsp").forward(request, response);
+	    }
+    	
+    }
+    
+    protected void deleteAutor(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException  {
+    	
+    	String codigo = request.getParameter("id");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	AutorInterface dao = daoFactory.getAutor();
+    	
+    	int flagResponse = dao.removeAutor(codigo); // subjectModel.removeSubject(idSubject);
+    	
+    	if (flagResponse == 1) {
+    		listAutor(request, response);
+    	} else {
+    		request.setAttribute("message", "Ocurrio un problema");
+    		request.getRequestDispatcher("Autor.jsp").forward(request, response);
+    	}
+    	
     }
     
     

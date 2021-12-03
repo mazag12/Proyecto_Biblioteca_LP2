@@ -41,11 +41,8 @@ public class AuthServlet extends HttpServlet {
         	if (usuario != null) {
         		
         		HttpSession sesion = request.getSession();
-        		sesion.setAttribute("name", usuario.getNombre());
-        		sesion.setAttribute("paterno", usuario.getApePaterno());
-        		sesion.setAttribute("materno", usuario.getApeMaterno());
-        		sesion.setAttribute("email", usuario.getCorreo());
-        		sesion.setAttribute("id", usuario.getCodigo());
+        		sesion.setAttribute("name", usuario.getUsernombre());
+        		sesion.setAttribute("rol", usuario.getRol());
         		
         		response.sendRedirect("home.jsp");
         		

@@ -75,7 +75,7 @@ public class MySqlEstudiosDAO implements EstudiosInterfaceDAO {
 		
 		try {
 			
-			cn = MysqlDBConexion.getConexion();
+			cn = MysqlDBConexion8.getConexion();
 			
 			String sql = "call SP_BIBLIOTECA_INSERTAR_ESTUDIOS(?,?,?,?,?,?)";
 			psm = cn.prepareStatement(sql);
@@ -117,7 +117,7 @@ public class MySqlEstudiosDAO implements EstudiosInterfaceDAO {
 		
 		try {
 			
-			cn = MysqlDBConexion.getConexion();
+			cn = MysqlDBConexion8.getConexion();
 			
 			String sql = "SELECT * FROM estudios WHERE CODEST=?";
 			
@@ -166,7 +166,7 @@ public class MySqlEstudiosDAO implements EstudiosInterfaceDAO {
 		
 		try {
 			
-			cn = MysqlDBConexion.getConexion();
+			cn = MysqlDBConexion8.getConexion();
 			
 			String sql = "UPDATE estudios SET NOMESTUDIO=upper(?), CARRERA=upper(?), TELEFONO=?, CELULAR=?, DIRECCION=upper(?), CODPAIS=upper(?)    WHERE CODEST=?";
 			psm = cn.prepareStatement(sql);
@@ -207,7 +207,7 @@ public class MySqlEstudiosDAO implements EstudiosInterfaceDAO {
 		
 		try {
 			
-			cn = MysqlDBConexion.getConexion();
+			cn = MysqlDBConexion8.getConexion();
 			
 			String sql = "DELETE FROM estudios WHERE CODEST=?";
 			psm = cn.prepareStatement(sql);
