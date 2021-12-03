@@ -41,7 +41,7 @@
         <li><a href="ClienteServlet?type=lista">Cliente</a></li>
         <li><a href="EstudiosServlet?type=lista">Estudios</a></li>
         <li><a href="EmpleadoServlet?type=lista">Empleados</a></li>
-        
+        <li><a href="PersonaServlet?type=lista">Persona</a></li>
         
       </ul>
       

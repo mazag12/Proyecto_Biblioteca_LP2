@@ -7,25 +7,25 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import beans.Autor;
+import beans.Formato;
 import dao.DAOFactory;
-import interfaces.AutorInterface;
+import interfaces.FormatoInterface;
 
-public class TagComboboxAutor extends TagSupport{
+public class TagComboboxFormato extends TagSupport {
 
 	@Override
 	public int doStartTag() throws JspException {
 		JspWriter out = pageContext.getOut();
 		DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
-		AutorInterface dao = daoFactory.getAutor();
+		FormatoInterface dao = daoFactory.getFormato();
 		
 		try {
 			
-			List<Autor> listAutor = dao.getListAutor();
-			out.print("<select class='form-control' name='txtgenero'>");
-			for(Autor autor: listAutor) {
+			List<Formato> listFormato= dao.getListFormato();
+			out.print("<select class='form-control' name='txtformato'>");
+			for(Formato autor: listFormato) {
 				
-				out.print("<option value="+autor.getCodautor()+">"+autor.getNomautor()+"</option>");
+				out.print("<option value="+autor.getCodformato()+">"+autor.getNomformato()+"</option>");
 				
 			}
 			out.print("</select>");

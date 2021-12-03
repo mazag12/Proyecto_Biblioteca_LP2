@@ -34,7 +34,18 @@
 			        <h4 class="modal-title">Registrar Editorial</h4>
 			      </div>
 			      <div class="modal-body">
-			        <p>Some text in the modal.</p>
+			        <form action="FormatoServlet" method="post">
+		
+						<input type="hidden" name="type" value="register">
+										
+						<div class="form-group">
+							<label>Nombre de la Editorial</label>
+							<input class="form-control" type="text" name="txtName">
+						</div>
+						
+						<input type="submit" class="btn btn-primary" value="Registrar">
+			
+					</form>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

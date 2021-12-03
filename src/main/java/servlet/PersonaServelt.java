@@ -17,13 +17,13 @@ import interfaces.PersonaInterfaceDAO;
  * Servlet implementation class PersonaServlet
  */
 @WebServlet("/PersonaServlet")
-public class PersonaServlet extends HttpServlet {
+public class PersonaServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PersonaServlet() {
+    public PersonaServelt() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -156,9 +156,7 @@ public class PersonaServlet extends HttpServlet {
         		listPersona(request, response);
         	} else {
         		//error
-        	}
-    		
-    	
+        	}    	
     }
     
 	protected void listPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
