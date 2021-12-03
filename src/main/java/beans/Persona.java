@@ -116,4 +116,9 @@ public class Persona {
 		this.estadoCivil = estadoCivil;
 	}
 	
+	public Persona() {
+	
+	}
+	
+	
 }
