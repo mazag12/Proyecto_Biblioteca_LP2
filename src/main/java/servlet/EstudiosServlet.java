@@ -34,15 +34,128 @@ public class EstudiosServlet extends HttpServlet {
 	 */
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	  
-    	String type = request.getParameter("type");
+    
+	String type = request.getParameter("type");
     	if (type.equals("lista")) {
     		listEstudios(request, response);
-    	}
+    	} else if (type.equals("register")) {
+    		
+    		registerEstudios(request, response);
+ 
+    	} else if (type.equals("edit")) {
+    		editEstudios(request, response);
+    	} else if (type.equals("delete")) {
+    		deleteSubject(request, response);
+    	} 
 
     	    	
     	
     }
+	
+    protected void editEstudios(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+    	String codigo = request.getParameter("txtCodEsA");
+    	String nombre = request.getParameter("txtNombreA");
+    	String carrera = request.getParameter("txtCarreraA");
+    	String telefono = request.getParameter("txtTelefonoA");
+    	String celular = request.getParameter("txtCelularA");
+    	String direccion = request.getParameter("txtDireccionA");
+    	String codpais = request.getParameter("txtCodPaisA");
+    	
     
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);    	
+    	EstudiosInterfaceDAO dao = daoFactory.getEstudios();
+    	
+    	if(telefono == "") {
+    		telefono = "0";
+    	}
+    	if(celular == "") {
+    		celular="0";
+    	}
+    	if(direccion=="") {
+    		direccion="SN";
+    	}
+    	int tele = Integer.parseInt(telefono);
+    	int celu = Integer.parseInt(celular);
+    	
+    		Estudios estudio = new Estudios();
+    		estudio.setCodEstudiante(codigo);
+    		estudio.setNomEstudio(nombre);
+    		estudio.setCarrera(carrera);
+    		estudio.setTelefono(tele);
+    		estudio.setCelular(celu);
+    		estudio.setDireccion(direccion);
+    		estudio.setCodPais(codpais);
+    		    		
+    		int value = dao.editEstudios(estudio);
+    		
+    		if (value == 1) {
+        		listEstudios(request, response);
+        	} else {
+        		//error
+        	}
+    	
+    }
+    
+    protected void registerEstudios(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+    	String nombre = request.getParameter("txtNombre");
+    	String carrera = request.getParameter("txtCarrera");
+    	String telefono = request.getParameter("txtTelefono");
+    	String celular = request.getParameter("txtCelular");
+    	String direccion = request.getParameter("txtDireccion");
+    	String codpais = request.getParameter("txtCodPais");
+    	
+    
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);    	
+    	EstudiosInterfaceDAO dao = daoFactory.getEstudios();
+    	
+    	if(telefono == "") {
+    		telefono = "0";
+    	}
+    	if(celular == "") {
+    		celular="0";
+    	}
+    	if(direccion=="") {
+    		direccion="SN";
+    	}
+    	int tele = Integer.parseInt(telefono);
+    	int celu = Integer.parseInt(celular);
+    	
+    		Estudios estudio = new Estudios();
+    		estudio.setNomEstudio(nombre);
+    		estudio.setCarrera(carrera);
+    		estudio.setTelefono(tele);
+    		estudio.setCelular(celu);
+    		estudio.setDireccion(direccion);
+    		estudio.setCodPais(codpais);
+    		    		
+    		int value = dao.createEstudios(estudio);
+    		
+    		if (value == 1) {
+        		listEstudios(request, response);
+        	} else {
+        		//error
+        	}
+    		
+    	
+    }	
+    protected void deleteSubject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		
+		String idEstudio = request.getParameter("id");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	EstudiosInterfaceDAO dao = daoFactory.getEstudios();
+    	
+    	int flagResponse = dao.removeEstudios(idEstudio); // subjectModel.removeSubject(idSubject);
+    	
+    	if (flagResponse == 1) {
+    		listEstudios(request, response);
+    	} else {
+    		request.setAttribute("message", "Ocurrio un problema");
+    		request.getRequestDispatcher("estudios.jsp").forward(request, response);
+    	}
+		
+	}
+	
     protected void listEstudios(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
     	
     	// List<Subject> data = subjectModel.getListSubject();
