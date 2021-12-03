@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="misLibrerias" prefix="etiquetas"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +43,18 @@
 			        <h4 class="modal-title">Modal Header</h4>
 			      </div>
 			      <div class="modal-body">
-			        <p>Some text in the modal.</p>
+			        <form action="FormatoServlet" method="post">
+		
+						<input type="hidden" name="type" value="register">
+										
+						<div class="form-group">
+							<label>Nombre de la Editorial</label>
+							<input class="form-control" type="text" name="txtName">
+						</div>
+						<etiquetas:tagAutorCombobox></etiquetas:tagAutorCombobox>
+						<input type="submit" class="btn btn-primary" value="Registrar">
+			
+					</form>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

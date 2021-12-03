@@ -10,7 +10,7 @@
 	<uri>misLibrerias</uri>
 
 	<tag>
-		<name>tagSubjectTop</name>
+		<name>tagAutorCombobox</name>
 		<tagclass>tag.TagComboboxAutor</tagclass>
 		<bodycontent>false</bodycontent>
 	</tag>
