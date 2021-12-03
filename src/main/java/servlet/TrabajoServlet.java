@@ -9,22 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.Empleado;
+import beans.Libro;
+import beans.Trabajo;
 import dao.DAOFactory;
-import interfaces.EmpleadoInterface;
+import interfaces.LibroInterface;
+import interfaces.TrabajoInterface;
 
 /**
- * Servlet implementation class EmpleadoServlet
+ * Servlet implementation class TrabajoServlet
  */
-@WebServlet("/EmpleadoServlet")
-public class EmpleadoServlet extends HttpServlet {
+@WebServlet("/TrabajoServlet")
+public class TrabajoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
-     * @see HttpServlet#HttpServlet()
+     * Default constructor. 
      */
-    public EmpleadoServlet() {
-        super();
+    public TrabajoServlet() {
         // TODO Auto-generated constructor stub
     }
     
@@ -34,33 +35,33 @@ public class EmpleadoServlet extends HttpServlet {
     	String type = request.getParameter("type");
     	
     	if (type.equals("lista")) {
-    		listEmpleado(request, response);
+    		listTrabajo(request, response);
     	} else if (type.equals("register")) {
-    		String CodigoEmple = request.getParameter("CodigoEmple");
-    		if(CodigoEmple.isEmpty()) {
-    			//registerEmpelado(request, response);
+    		String codTrabajo = request.getParameter("codTrabajo");
+    		if(codTrabajo.isEmpty()) {
+    			//registerTrabajo(request, response);
     		} else {
-    			///editEmpleado(request, response);
+    			///editTrabajo(request, response);
     		}
     	} else if (type.equals("info")) {
-    		//getEmpleado(request, response);
+    		//getTrabajo(request, response);
     	} else if (type.equals("delete")) {
-    		//deleteEmpleado(request, response);
+    		//deleteTrabajo(request, response);
     	} 
     }
     
-    protected void listEmpleado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void listLibro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// TODO Auto-generated method stub
     	
     	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
-    	EmpleadoInterface dao = daoFactory.getEmpleado();
+    	TrabajoInterface dao = daoFactory.getTrabajo();
     	
-    	List<Empleado> data = dao.getListEmpleado();
+    	List<Trabajo> data = dao.getListTrabajo();
     	
     	request.setAttribute("data", data);
-    	request.getRequestDispatcher("Empleado.jsp").forward(request, response);
+    	request.getRequestDispatcher("Trabajo.jsp").forward(request, response);
     }
-
+   
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

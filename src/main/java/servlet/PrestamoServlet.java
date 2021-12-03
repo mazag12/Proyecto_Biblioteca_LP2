@@ -9,22 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.Empleado;
+import beans.Libro;
+import beans.Prestamo;
 import dao.DAOFactory;
-import interfaces.EmpleadoInterface;
+import interfaces.LibroInterface;
+import interfaces.PrestamoInterface;
 
 /**
- * Servlet implementation class EmpleadoServlet
+ * Servlet implementation class PrestamoServlet
  */
-@WebServlet("/EmpleadoServlet")
-public class EmpleadoServlet extends HttpServlet {
+@WebServlet("/PrestamoServlet")
+public class PrestamoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
-     * @see HttpServlet#HttpServlet()
+     * Default constructor. 
      */
-    public EmpleadoServlet() {
-        super();
+    public PrestamoServlet() {
         // TODO Auto-generated constructor stub
     }
     
@@ -34,31 +35,32 @@ public class EmpleadoServlet extends HttpServlet {
     	String type = request.getParameter("type");
     	
     	if (type.equals("lista")) {
-    		listEmpleado(request, response);
+    		listPrestamo(request, response);
     	} else if (type.equals("register")) {
-    		String CodigoEmple = request.getParameter("CodigoEmple");
-    		if(CodigoEmple.isEmpty()) {
-    			//registerEmpelado(request, response);
+    		String codPrestamo = request.getParameter("codPrestamo");
+    		if(codPrestamo.isEmpty()) {
+    			//registerPrestamo(request, response);
     		} else {
-    			///editEmpleado(request, response);
+    			///editPrestamo(request, response);
     		}
     	} else if (type.equals("info")) {
-    		//getEmpleado(request, response);
+    		//getPrestamo(request, response);
     	} else if (type.equals("delete")) {
-    		//deleteEmpleado(request, response);
+    		//deletePrestamo(request, response);
     	} 
     }
     
-    protected void listEmpleado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    protected void listPrestamo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// TODO Auto-generated method stub
     	
     	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
-    	EmpleadoInterface dao = daoFactory.getEmpleado();
+    	PrestamoInterface dao = daoFactory.getPrestamo();
     	
-    	List<Empleado> data = dao.getListEmpleado();
+    	List<Prestamo> data = dao.getListPrestamo();
     	
     	request.setAttribute("data", data);
-    	request.getRequestDispatcher("Empleado.jsp").forward(request, response);
+    	request.getRequestDispatcher("Prestamo.jsp").forward(request, response);
     }
 
 	/**

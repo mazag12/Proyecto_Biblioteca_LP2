@@ -28,32 +28,20 @@ public class MySqlEmpleadoDAO implements EmpleadoInterface {
 					+ "per.NACIONALIDAD,per.EST_CIVIL,em.CODIGOEMPLE,em.CODPERSON,em.CODCARGO "
 					+ "from empleado as em "
 					+ "inner join persona as per "
-					+ "on em.CODPERSON = per.CODPERSON; ";
+					+ "on em.CODPERSON = per.CODPERSON";
 			
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			
 			while (rs.next()) {
-				Empleado emp = new Empleado(
-						rs.getString("CODPERSON"),
-						rs.getString("NOMBRES"),
-						rs.getString("APE_PATERNO"),
-						rs.getString("APE_MATERNO"),
-						rs.getString("TIPO_DOC"),
-						rs.getString("NUM_DOC"),
-						rs.getInt("TELEFONO"),
-						rs.getInt("CELULAR"),
-						rs.getString("CORREO"),
-						rs.getString("DIRECCION"),
-						rs.getString("SEXO"),
-						rs.getString("NACIONALIDAD"),
-						rs.getString("EST_CIVIL"),
-						rs.getString("CODIGOEMPLE"),
-						rs.getString("CODPERSON"),
-						rs.getString("CODCARGO")
+				Empleado empleado = new Empleado(
+						rs.getString("CodigoEmple"),
+						rs.getString("CodPerson"),
+						rs.getString("CodCargo")
+							
 						);
+				listEmpleado.add(empleado);
 				
-				listEmpleado.add(emp);
 			}
 			
 		} catch (Exception e) {

@@ -1,11 +1,14 @@
 package dao;
 import interfaces.AutorInterface;
+import interfaces.CargoInterface;
+import interfaces.CarnetInterface;
 import interfaces.ClienteInterface;
 import interfaces.EstudiosInterfaceDAO;
 import interfaces.FamiliaInterfaceDAO;
 import interfaces.IdiomaInterface;
 import interfaces.LibroInterface;
 import interfaces.PersonaInterfaceDAO;
+import interfaces.PrestamoInterface;
 import interfaces.FormatoInterface;
 import interfaces.PaisInterface;
 import interfaces.DistritoInterface;
@@ -13,6 +16,7 @@ import interfaces.EditorialInterface;
 import interfaces.EmpleadoInterface;
 import interfaces.ProvinciaInterface;
 import interfaces.TematicaInterface;
+import interfaces.TrabajoInterface;
 import interfaces.DepartamentoInterface;
 import interfaces.UsuarioInterface;
 public abstract class DAOFactory {
@@ -39,6 +43,10 @@ public abstract class DAOFactory {
 	public abstract UsuarioInterface getUsuario();
 	public abstract EditorialInterface getEditorial();
 	public abstract TematicaInterface getTematica();
+	public abstract TrabajoInterface getTrabajo();
+	public abstract PrestamoInterface getPrestamo();
+	public abstract CargoInterface getCargo();
+	public abstract CarnetInterface getCarnet();
 	
 	public static DAOFactory getFactory(int tipo) {
 		switch (tipo) {

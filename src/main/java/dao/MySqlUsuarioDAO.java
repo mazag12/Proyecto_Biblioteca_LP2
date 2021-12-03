@@ -30,7 +30,7 @@ public class MySqlUsuarioDAO implements UsuarioInterface{
 					+ "inner join persona as per "
 					+ "on em.CODPERSON = per.CODPERSON "
 					+ "inner join usuario as us "
-					+ "on us.codempleado = em.CODIGOEMPLE; ";
+					+ "on us.codempleado = em.CODIGOEMPLE";
 			
 			psm = cn.prepareStatement(sql);
 			rs = psm.executeQuery();

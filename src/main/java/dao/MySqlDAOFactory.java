@@ -1,12 +1,15 @@
 package dao;
 
 import interfaces.AutorInterface;
+import interfaces.CargoInterface;
+import interfaces.CarnetInterface;
 import interfaces.ClienteInterface;
 import interfaces.EstudiosInterfaceDAO;
 import interfaces.FamiliaInterfaceDAO;
 import interfaces.IdiomaInterface;
 import interfaces.LibroInterface;
 import interfaces.PersonaInterfaceDAO;
+import interfaces.PrestamoInterface;
 import interfaces.FormatoInterface;
 import interfaces.PaisInterface;
 import interfaces.DepartamentoInterface;
@@ -15,6 +18,7 @@ import interfaces.EditorialInterface;
 import interfaces.EmpleadoInterface;
 import interfaces.ProvinciaInterface;
 import interfaces.TematicaInterface;
+import interfaces.TrabajoInterface;
 import interfaces.UsuarioInterface;
 
 public class MySqlDAOFactory extends DAOFactory{
@@ -103,6 +107,28 @@ public class MySqlDAOFactory extends DAOFactory{
 	public TematicaInterface getTematica() {
 		// TODO Auto-generated method stub
 		return new MySqlTematicaDAO();
+	}
+	
+	public TrabajoInterface getTrabajo() {
+		return new MySqlTrabajoDAO();
+	}
+
+	@Override
+	public PrestamoInterface getPrestamo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CargoInterface getCargo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CarnetInterface getCarnet() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

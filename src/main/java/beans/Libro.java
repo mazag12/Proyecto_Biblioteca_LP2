@@ -24,6 +24,7 @@ public class Libro {
 			String restrincion, int paginas, int cantidad, String fragmento, String recomendados, String codformato,
 			String codpais, String estado, String isbn) {
 		super();
+		
 		this.codlibro = codlibro;
 		this.titulo = titulo;
 		this.ano = ano;

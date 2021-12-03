@@ -28,6 +28,7 @@ public class ClienteServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
+
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	String type = request.getParameter("type");
@@ -35,8 +36,8 @@ public class ClienteServlet extends HttpServlet {
     	if (type.equals("lista")) {
     		listCliente(request, response);
     	} else if (type.equals("register")) {
-    		String codAutor = request.getParameter("codcliente");
-    		if(codAutor.isEmpty()) {
+    		String codCliente = request.getParameter("codcliente");
+    		if(codCliente.isEmpty()) {
     			registerCliente(request, response);
     		} else {
     			///editCliente(request, response);
