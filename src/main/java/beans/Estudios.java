@@ -51,5 +51,8 @@ public class Estudios {
 	public void setCodPais(String codPais) {
 		this.codPais = codPais;
 	}
+	public Estudios() {
+	
+	}
 	
 }
