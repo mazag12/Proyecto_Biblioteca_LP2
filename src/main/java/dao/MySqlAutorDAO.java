@@ -58,13 +58,12 @@ public class MySqlAutorDAO implements AutorInterface{
 		
 		Connection cn =  null;
 		PreparedStatement psm = null;
-		
 		try {
 			
 			cn = MysqlDBConexion8.getConexion();
 			
-			String sql = "INSERT INTO autor VALUES(null, ?)";
-			psm = cn.prepareStatement(sql);
+			String sql = "call SP_BIBLIOTECA_INSERTAR_AUTOR(?)";
+			psm = cn.prepareCall(sql);
 			psm.setString(1, au.getNomautor());
 			
 			value = psm.executeUpdate();
@@ -88,7 +87,7 @@ public class MySqlAutorDAO implements AutorInterface{
 	}
 
 	@Override
-	public Autor Autor(String cod) {
+	public Autor Autor(String nombre) {
 		
 		Autor au = null;
 		
@@ -100,16 +99,19 @@ public class MySqlAutorDAO implements AutorInterface{
 			
 			con = MysqlDBConexion8.getConexion();
 			
-			String sql = "Select * From autor Where CODAUTOR = ?;";
+			String sql = "Select Codautor,Nomautor From autor Where nomautor = ?;";
 			pstm = con.prepareStatement(sql);
-			pstm.setString(1, cod);
+			pstm.setString(1, nombre);
 			
 			rs = pstm.executeQuery();
-			
 			if (rs.next()) {
 				au = new Autor();
 				au.setCodautor(rs.getString("Codautor"));
 				au.setNomautor(rs.getString("Nomautor"));
+			}else {
+				au = new Autor();
+				au.setCodautor("SNDATA");
+				au.setNomautor("SNDATA");
 			}
 			
 		} catch (Exception e) {

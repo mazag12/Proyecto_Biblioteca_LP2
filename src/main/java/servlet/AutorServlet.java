@@ -38,12 +38,9 @@ public class AutorServlet extends HttpServlet {
     	if (type.equals("lista")) {
     		listAutor(request, response);
     	} else if (type.equals("register")) {
-    		String codAutor = request.getParameter("codAutor");
-    		if(codAutor.isEmpty()) {
     			registerAutor(request, response);
-    		} else {
+    	} else if (type.equals("edit")){
     			///editAutor(request, response);
-    		}
     	} else if (type.equals("info")) {
     		getAutor(request, response);
     	} else if (type.equals("delete")) {
@@ -65,21 +62,30 @@ public class AutorServlet extends HttpServlet {
     
     protected void registerAutor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// TODO Auto-generated method stub
-    	
     	String name = request.getParameter("txtName");
     	
-    	Autor au = new Autor();
-    	au.setNomautor(name);
-    	
-    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);    	
     	AutorInterface dao = daoFactory.getAutor();
+    	Autor autor = dao.Autor(name); 
     	
-    	int value = dao.createAutor(au); // subjectModel.createSubject(subject);
-    	if (value == 1) {
+    	if(autor.getCodautor() == "SNDATA") {
+    		
+    		Autor au = new Autor();
+        	au.setCodautor("SIN CODIGO");
+        	au.setNomautor(name);
+    		
+    		int value = dao.createAutor(au);
+    		
+    		if (value == 1) {
+        		listAutor(request, response);
+        	} else {
+        		//error
+        	}
+    		
+    	}else {
     		listAutor(request, response);
-    	} else {
-    		// error 
     	}
+    	
     }
     
     protected void getAutor(HttpServletRequest request, HttpServletResponse response) 

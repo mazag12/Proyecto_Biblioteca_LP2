@@ -19,14 +19,16 @@
 	
 	<br>
 	
-	<%
 	
-	Autor autorForm = (Autor) request.getAttribute("autortData");
-	
-	%>
 	<div class="text-center">
 			<h3>AUTORES</h3>
 	</div>
+	
+	<%
+	
+		Autor autorForm = (Autor) request.getAttribute("autortData");
+					
+	%> 
 	
 	<div class="col-1">
 			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">AGREGAR</button>
@@ -41,10 +43,23 @@
 			        <h4 class="modal-title">Modal Header</h4>
 			      </div>
 			      <div class="modal-body">
-			        <p>Some text in the modal.</p>
+					   
+			        <form action="AutorServlet" method="post">
+		
+						<input type="hidden" name="type" value="register">
+										
+						<div class="form-group">
+							<label>Nombre de Autor</label>
+							<input class="form-control" type="text" name="txtName">
+						</div>
+						
+						
+						<input type="submit" class="btn btn-primary" value="Enviar Datos">
+						
+					</form>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 			      </div>
 			    </div>
 			
@@ -78,10 +93,50 @@
 					<td><%=item.getCodautor() %></td>
 					<td><%=item.getNomautor() %></td>
 					<td>
-						<a href="" class="btn btn-warning">MODIFICAR</a>
+						<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#<%=item.getCodautor() %>" onclick="miFunc()">MODIFICAR</button>
+						
+						<div id="<%=item.getCodautor() %>" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+						
+						    <!-- Modal content-->
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        <h4 class="modal-title">Modificar Autor</h4>
+						      </div>
+						      <div class="modal-body">
+								   
+								   
+						        <form action="AutorServlet" method="post">
+					
+									<input type="hidden" name="type" value="register">
+									
+									<div class="form-group">
+										<label>Codido de Autor</label>
+										<input class="form-control" type="text" name="txtName" value="<%=item.getCodautor()%>" readonly>
+									</div>
+												
+									<div class="form-group">
+										<label>Nombre de Autor</label>
+										<input class="form-control" type="text" name="txtName" value="<%=item.getNomautor()%>">
+									</div>
+									
+									
+									<input type="submit" class="btn btn-primary" value="Enviar Datos">
+									
+								</form>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						      </div>
+						    </div>
+							<!--Fin del Modal-->
+						  </div>
+						</div>
+
 					</td>
 					<td>
-						<a href="" class="btn btn-danger">ELIMINAR</a>
+						<a href="SubjectServlet?type=delete&id=<%=item.getCodautor()%>" class="btn btn-danger">ELIMINAR</a>
 					</td>
 				</tr>
 			<%
@@ -99,9 +154,20 @@
 
 </div>
 
+
+
+
 </body>
 
 <%@ include file="snippet/Footer.jsp" %>
 
+
+<script type="text/javascript">
+	
+	function miFunc() {
+    	alert('Se ha dado clic al botón!');
+  	}
+	
+</script>
 
 </html>

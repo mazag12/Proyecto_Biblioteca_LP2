@@ -57,7 +57,7 @@ public class AuthServlet extends HttpServlet {
         	}
     	} else if (type.equals("logout")) {
     		request.getSession().invalidate();
-    		response.sendRedirect("index.jsp");    		
+    		response.sendRedirect("home.jsp");    		
     	}
     }
     
