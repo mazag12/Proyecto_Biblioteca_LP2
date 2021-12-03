@@ -77,12 +77,12 @@ public class AutorServlet extends HttpServlet {
     		if (value == 1) {
         		listAutor(request, response);
         	} else {
-        		request.setAttribute("message", "Ocurrio un problema");
+        		//request.setAttribute("message", "Ocurrio un problema");
         		listAutor(request, response);
         	}
     		
-    	}else {
-    		request.setAttribute("message", "Ocurrio un problema");
+    	}else{
+    		//request.setAttribute("message", "Ocurrio un problema");
     		listAutor(request, response);
     	}
     	
@@ -109,27 +109,39 @@ public class AutorServlet extends HttpServlet {
     	String codigo = request.getParameter("txtcodigo");
     	String name = request.getParameter("txtName");
     	
-    	
-    	Autor autor = new Autor();
-    	autor.setCodautor(codigo);
-    	autor.setNomautor(name);
-    	
     	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
     	AutorInterface dao = daoFactory.getAutor();
+    	Autor autor = dao.Autor(name);
     	    	
     	if(autor.getCodautor() == "SNDATA") {
-    	
-	    	int flagResponde = dao.editAutor(autor); // subjectModel.editSubject(subject);
+       		Autor au = new Autor();
+    		au.setCodautor(codigo);
+    		au.setNomautor(name);
+    		
+	    	int flagResponde = dao.editAutor(au); // subjectModel.editSubject(subject);
 	    	
 	    	if (flagResponde == 1) {
 	    		listAutor(request, response);
 	    	} else {
-	    		request.setAttribute("message", "Ocurrio un problema");
-	    		request.getRequestDispatcher("Autor.jsp").forward(request, response);
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listAutor(request, response);
 	    	}
-    	}else {
-    		request.setAttribute("message", "Ocurrio un problema");
-    		request.getRequestDispatcher("Autor.jsp").forward(request, response);
+    	}else if(autor.getCodautor() ==  codigo){
+    		Autor au = new Autor();
+    		au.setCodautor(codigo);
+    		au.setNomautor(name);
+    		
+	    	int flagResponde = dao.editAutor(au); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listAutor(request, response);
+	    	} else {
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listAutor(request, response);
+	    	}
+	    }else {
+	    	//request.setAttribute("message", "Ocurrio un problema");
+    		listAutor(request, response);
 	    }
     	
     }
@@ -147,8 +159,8 @@ public class AutorServlet extends HttpServlet {
     	if (flagResponse == 1) {
     		listAutor(request, response);
     	} else {
-    		request.setAttribute("message", "Ocurrio un problema");
-    		request.getRequestDispatcher("Autor.jsp").forward(request, response);
+    		//request.setAttribute("message", "Ocurrio un problema");
+    		listAutor(request, response);
     	}
     	
     }

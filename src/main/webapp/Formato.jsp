@@ -22,9 +22,9 @@
 	</div>
 	
 	<div class="col-1">
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">AGREGAR</button>
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalRegistrar">AGREGAR</button>
 			
-			<div id="myModal" class="modal fade" role="dialog">
+			<div id="ModalRegistrar" class="modal fade" role="dialog">
 			  <div class="modal-dialog">
 			
 			    <!-- Modal content-->
@@ -34,7 +34,18 @@
 			        <h4 class="modal-title">Modal Header</h4>
 			      </div>
 			      <div class="modal-body">
-			        <p>Some text in the modal.</p>
+			        <form action="FormatoServlet" method="post">
+		
+						<input type="hidden" name="type" value="register">
+										
+						<div class="form-group">
+							<label>Nombre de Autor</label>
+							<input class="form-control" type="text" name="txtName">
+						</div>
+						
+						<input type="submit" class="btn btn-primary" value="Registrar">
+			
+					</form>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -71,10 +82,10 @@
 					<td><%=item.getCodformato() %></td>
 					<td><%=item.getNomformato () %></td>
 					<td>
-						<a href="" class="btn btn-warning">MODIFICAR</a>
+						<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalModificar" onclick="miFunc('<%=item.getCodformato() %>','<%=item.getNomformato() %>');">MODIFICAR</button>
 					</td>
 					<td>
-						<a href="" class="btn btn-danger">ELIMINAR</a>
+						<a href="FormatoServlet?type=delete&id=<%=item.getCodformato()%>" class="btn btn-danger">ELIMINAR</a>
 					</td>
 				</tr>
 			<%
@@ -88,6 +99,45 @@
 			</tbody>
 		</table>
 		
+		<!--Formulario para editar-->
+		
+		<div id="ModalModificar" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+						
+			<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						 <button type="button" class="close" data-dismiss="modal">&times;</button>
+						    <h4 class="modal-title">Modificar Formato</h4>
+					</div>
+					<div class="modal-body">
+ 
+						<form action="FormatoServlet" method="post">
+							<input type="hidden" name="type" value="edit">
+								<div class="form-group">
+									<label>Codido de Formato</label>
+									<input class="form-control" type="text" name="txtcodigo" id="CodigoFormato" readonly>
+								</div>
+												
+								<div class="form-group">
+									<label>Nombre de Formato</label>
+									<input class="form-control" type="text" name="txtName" id="NombreFormato">
+								</div>
+
+							<input type="submit" class="btn btn-primary" value="Modificar">
+									
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+				<!--Fin del Modal-->
+			</div>
+		</div>
+		<!--Fin del Formulario para editar-->		
+		
+		
 	</div>
 
 </div>
@@ -96,4 +146,15 @@
 
 
 <%@ include file="snippet/Footer.jsp" %>
+
+<script type="text/javascript">
+	
+	function miFunc(codigo,nombre) {
+		document.getElementById("CodigoFormato").value = codigo;
+		document.getElementById("NombreFormato").value = nombre;
+		
+  	}
+	
+</script>
+
 </html>

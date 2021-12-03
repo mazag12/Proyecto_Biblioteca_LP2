@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.Formato;
 import dao.DAOFactory;
-
 import interfaces.FormatoInterface;
 /**
  * Servlet implementation class FormatoServlet
@@ -35,16 +34,11 @@ public class FormatoServlet extends HttpServlet {
     	if (type.equals("lista")) {
     		listFormato(request, response);
     	} else if (type.equals("register")) {
-    		String codformato = request.getParameter("codformato");
-    		if(codformato.isEmpty()) {
-    			registerFormato(request, response);
-    		} else {
-    			///editAutor(request, response);
-    		}
-    	} else if (type.equals("info")) {
-    		//getSubject(request, response);
+    		registerFormato(request, response);
+    	} else if (type.equals("edit")) {
+    		editarFormato(request, response);
     	} else if (type.equals("delete")) {
-    		//deleteAutor(request, response);
+    		eliminarFormato(request, response);
     	} 
     }
     
@@ -63,22 +57,92 @@ public class FormatoServlet extends HttpServlet {
     
     protected void registerFormato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// TODO Auto-generated method stub
+    	String name = request.getParameter("txtName");
     	
-    
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);    	
+    	FormatoInterface dao = daoFactory.getFormato();
+    	Formato formato = dao.Formato(name); 
+    	
+    	if(formato.getCodformato() == "SNDATA") {
+    		
+    		Formato fo = new Formato();
+    		fo.setCodformato("SIN CODIGO");
+    		fo.setNomformato(name);
+    		
+    		int value = dao.createFormato(fo);
+    		
+    		if (value == 1) {
+    			listFormato(request, response);
+        	} else {
+        		//request.setAttribute("message", "Ocurrio un problema");
+        		listFormato(request, response);
+        	}
+    		
+    	}else{
+    		//request.setAttribute("message", "Ocurrio un problema");
+    		listFormato(request, response);
+    	}
     }
     
+    protected void editarFormato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	// TODO Auto-generated method stub
+    	String codigo = request.getParameter("txtcodigo");
+    	String name = request.getParameter("txtName");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	FormatoInterface dao = daoFactory.getFormato();
+    	Formato autor = dao.Formato(name);
+    	    	
+    	if(autor.getCodformato() == "SNDATA") {
+    		Formato fo = new Formato();
+    		fo.setCodformato(codigo);
+    		fo.setNomformato(name);
+    		
+	    	int flagResponde = dao.editFomato(fo); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listFormato(request, response);
+	    	} else {
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listFormato(request, response);
+	    	}
+    	}else if(autor.getCodformato() ==  codigo){
+    		Formato fo = new Formato();
+    		fo.setCodformato(codigo);
+    		fo.setNomformato(name);
+    		
+	    	int flagResponde = dao.editFomato(fo); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listFormato(request, response);
+	    	} else {
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listFormato(request, response);
+	    	}
+	    }else {
+	    	//request.setAttribute("message", "Ocurrio un problema");
+	    	listFormato(request, response);
+	    }
+    }
     
+    protected void eliminarFormato(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	// TODO Auto-generated method stub
+    	String codigo = request.getParameter("id");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	FormatoInterface dao = daoFactory.getFormato();
+    	
+    	int flagResponse = dao.removeFormato(codigo); // subjectModel.removeSubject(idSubject);
+    	
+    	if (flagResponse == 1) {
+    		listFormato(request, response);
+    	} else {
+    		//request.setAttribute("message", "Ocurrio un problema");
+    		listFormato(request, response);
+    	}
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

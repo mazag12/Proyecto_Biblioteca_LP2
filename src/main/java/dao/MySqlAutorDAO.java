@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Autor;
+import db.MysqlDBConexion;
 import db.MysqlDBConexion8;
 import interfaces.AutorInterface;
 
@@ -167,8 +168,36 @@ public class MySqlAutorDAO implements AutorInterface{
 
 	@Override
 	public int removeAutor(String cod) {
-		// TODO Auto-generated method stub
-		return 0;
+		int salida = 0;
+		
+		Connection cn =  null;
+		PreparedStatement psm = null;
+		
+		try {
+			cn = MysqlDBConexion8.getConexion();
+			
+			String sql = "DELETE FROM autor WHERE codautor=?";
+			psm = cn.prepareStatement(sql);
+			psm.setString(1, cod);
+			
+			salida = psm.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {
+				
+				if(psm != null) psm.close();
+				if(cn != null) cn.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return salida; 
 	}
 
 }
