@@ -79,9 +79,9 @@ public class MySqlDepartamentoDAO  implements DepartamentoInterface {
 				String sql = "call SP_BIBLIOTECA_INSERTAR_DEPARTAMENTO(?,?)";
 				psm = cn.prepareStatement(sql);
 			
-				psm.setString(1, de.getCoddepartamento());
-				psm.setString(2, de.getNomdepartamento());
 			
+				psm.setString(1, de.getNomdepartamento());
+				psm.setString(2, de.getCodpais());
 
 				
 				value = psm.executeUpdate();
@@ -126,11 +126,12 @@ public class MySqlDepartamentoDAO  implements DepartamentoInterface {
 				de = new Departamento(cod, sql, cod, sql, cod, sql);
 			    de.setCoddepartamento(rs.getString("Coddepartamento"));
 			    de.setNomdepartamento(rs.getString("Nomdepartamento"));
-			
+			    de.setNomdepartamento(rs.getString("Codpais"));
 			}else {
 				de = new Departamento(cod, sql, cod, sql, cod, sql);
 				de.setCoddepartamento("sndata");
 				de.setNomdepartamento("sndata");
+				de.setCodpais("sndata");
 			}
 			
 		} catch (Exception e) {
@@ -160,12 +161,12 @@ public class MySqlDepartamentoDAO  implements DepartamentoInterface {
 			
 			cn = MysqlDBConexion8.getConexion();
 			
-			String sql = "UPDATE Departamento SET NOMDepartamento=upper(?),  WHERE CODdepartamento=?";
+			String sql = "call SP_BIBLIOTECA_ACTUALIZAR_DEPARTAMENTO(?,?)";
 			psm = cn.prepareStatement(sql);
 		
 			psm.setString(1, de.getCoddepartamento());
 			psm.setString(2, de.getNomdepartamento());
-		
+			psm.setString(3, de.getCodpais());
 			
 					
 			salida = psm.executeUpdate();

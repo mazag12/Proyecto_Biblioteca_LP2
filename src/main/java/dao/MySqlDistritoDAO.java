@@ -33,6 +33,7 @@ public class MySqlDistritoDAO implements DistritoInterface  {
 				Distrito di = new Distrito(
 					rs.getString("coddistrito"),
 					rs.getString("nomdistrito")
+					
 				);
 				
 		        
@@ -71,9 +72,9 @@ public class MySqlDistritoDAO implements DistritoInterface  {
 			String sql = "call SP_BIBLIOTECA_INSERTAR_DISTRITO(?,?)";
 			psm = cn.prepareStatement(sql);
 		
-			psm.setString(1, di.getCoddistrito());
-			psm.setString(2, di.getNomdistrito());
 		
+			psm.setString(1, di.getNomdistrito());
+			psm.setString(2, di.getCodprovincia());
 
 			
 			value = psm.executeUpdate();
@@ -109,7 +110,7 @@ public class MySqlDistritoDAO implements DistritoInterface  {
 			
 			con = MysqlDBConexion8.getConexion();
 			
-			String sql = "Select nomdistrito From distrito Where coddistrito = ?;";
+			String sql = "Select nomdistrito, codprovincia From distrito Where coddistrito = ?;";
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, cod);
 			
@@ -118,10 +119,12 @@ public class MySqlDistritoDAO implements DistritoInterface  {
 				di = new Distrito(cod, sql);
 				di.setCoddistrito(rs.getString("Coddistrito"));
 				di.setNomdistrito(rs.getString("Nomdistrito"));
+				di.setCodprovincia(rs.getString("Codprovincia"));
 			}else {
 				di = new Distrito(cod, sql);
 				di.setCoddistrito("SNDATA");
 				di.setNomdistrito("SNDATA");
+				di.setCodprovincia("SNDATA");
 			}
 			
 		} catch (Exception e) {
@@ -151,12 +154,12 @@ public class MySqlDistritoDAO implements DistritoInterface  {
 			
 			cn = MysqlDBConexion8.getConexion();
 			
-			String sql = "UPDATE DISTRITO SET NOMDISTRITO=upper(?),  WHERE CODDISTRITO=?";
+			String sql = "call SP_BIBLIOTECA_ACTUALIZAR_DISTRITO(?,?)";
 			psm = cn.prepareStatement(sql);
 		
 			psm.setString(1, di.getCoddistrito());
 			psm.setString(2, di.getNomdistrito());
-		
+			psm.setString(3, di.getCodprovincia());
 			
 					
 			salida = psm.executeUpdate();

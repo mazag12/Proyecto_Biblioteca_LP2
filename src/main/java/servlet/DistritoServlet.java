@@ -77,7 +77,8 @@ public class DistritoServlet extends HttpServlet {
     		Distrito di = new Distrito(name, name);
             di.setCoddistrito("sin codigo");
             di.setNomdistrito(name);
-       
+            di.setCoddistrito(name);
+            
     		int value = dao.createDistrito(di);
     	
     		
@@ -127,6 +128,7 @@ public class DistritoServlet extends HttpServlet {
        		Distrito di = new Distrito(codigo, name);
     	    di.setCoddistrito(codigo);
     	    di.setNomdistrito(name);
+    	    di.setCoddistrito(name);
     		
     		
 	    	int flagResponde = dao.editDistrito(di); // subjectModel.editSubject(subject);
@@ -141,6 +143,7 @@ public class DistritoServlet extends HttpServlet {
     		Distrito di = new Distrito(codigo, name);
     	    di.setCoddistrito(codigo);
     	    di.setNomdistrito(name);
+    	    di.setCoddistrito(name);
     		
 	    	int flagResponde = dao.editDistrito(di); // subjectModel.editSubject(subject);
 	    	

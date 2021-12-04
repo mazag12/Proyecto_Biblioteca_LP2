@@ -82,7 +82,7 @@ public class ProvinciaServlet extends HttpServlet {
     	    
     		pa.setCodprovincia("sin codigo");
     		pa.setNomprovincia(name);
-           
+    		pa.setCoddepartamento(name);
        
     		int value = dao.createProvincia(pa);
     	
@@ -136,6 +136,7 @@ public class ProvinciaServlet extends HttpServlet {
        		Provincia pr = new Provincia(name, name, codigo, name);
        		pr.setCodprovincia(codigo);
        		pr.setNomprovincia(name);
+       		pr.setCoddepartamento(name);
     	    
     		
     		

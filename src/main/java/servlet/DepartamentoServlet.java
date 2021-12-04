@@ -84,6 +84,7 @@ public class DepartamentoServlet extends HttpServlet {
      		
      	    de.setCoddepartamento("sin codigo");
      	    de.setNomdepartamento(name);
+     	    de.setCodpais(name);
      	
             
         
@@ -137,7 +138,7 @@ public class DepartamentoServlet extends HttpServlet {
     		Departamento de = new Departamento(name, name, name, codigo, name, name);
        		de.setCoddepartamento(codigo);
        		de.setNomdepartamento(name);
-       	
+       		de.setCodpais(name);
     	    
     		
     		
@@ -153,6 +154,7 @@ public class DepartamentoServlet extends HttpServlet {
     		Departamento de = new Departamento(name, name, name, codigo, name, name);
        		de.setCoddepartamento(codigo);
        		de.setNomdepartamento(name);
+       		de.setCodpais(name);
     		
 	    	int flagResponde = dao.editDepartamento(de); // subjectModel.editSubject(subject);
 	    	

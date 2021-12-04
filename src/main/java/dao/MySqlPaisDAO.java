@@ -78,11 +78,11 @@ public class MySqlPaisDAO implements PaisInterface{
 			
 			cn = MysqlDBConexion8.getConexion();
 			
-			String sql = "call SP_BIBLIOTECA_INSERTAR_PAIS(?,?)";
+			String sql = "call SP_BIBLIOTECA_INSERTAR_PAIS(?)";
 			psm = cn.prepareStatement(sql);
 		
-			psm.setString(1, pa.getCodpais());
-			psm.setString(2, pa.getNompais());
+			
+			psm.setString(1, pa.getNompais());
 		
 
 			
@@ -161,7 +161,7 @@ public class MySqlPaisDAO implements PaisInterface{
 			
 			cn = MysqlDBConexion8.getConexion();
 			
-			String sql = "UPDATE PAIS SET NOMPAIS=upper(?),  WHERE CODPAIS=?";
+			String sql = "call SP_BIBLIOTECA_ACTUALIZAR_PAIS(?,?)";
 			psm = cn.prepareStatement(sql);
 		
 			psm.setString(1, pa.getCodpais());

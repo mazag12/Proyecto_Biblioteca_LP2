@@ -76,9 +76,9 @@ public class MySqlProvinciaDAO implements ProvinciaInterface {
 				String sql = "call SP_BIBLIOTECA_INSERTAR_PROVINCIA(?,?)";
 				psm = cn.prepareStatement(sql);
 			
-				psm.setString(1, pr.getCodprovincia());
-				psm.setString(2, pr.getNomprovincia());
-			
+				
+				psm.setString(1, pr.getNomprovincia());
+				psm.setString(2, pr.getCoddepartamento());
 
 				
 				value = psm.executeUpdate();
@@ -114,7 +114,7 @@ public class MySqlProvinciaDAO implements ProvinciaInterface {
 			
 			con = MysqlDBConexion8.getConexion();
 			
-			String sql = "Select Nomprovincia From provincia Where codprovincia = ?;";
+			String sql = "Select NOMPROVINCIA, CODDEPARTAMENTO From PROVINCIA Where CODPROVINCIA = ?;";
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, cod);
 			
@@ -127,6 +127,7 @@ public class MySqlProvinciaDAO implements ProvinciaInterface {
 				pro = new Provincia(cod, sql, cod, sql);
 				pro.setCodprovincia("sndata");
 				pro.setNomprovincia("sndata");
+				pro.setCoddepartamento("sndata");
 			}
 			
 		} catch (Exception e) {
@@ -156,12 +157,12 @@ public class MySqlProvinciaDAO implements ProvinciaInterface {
 			
 			cn = MysqlDBConexion8.getConexion();
 			
-			String sql = "UPDATE provincia SET NOMprovincia upper(?),  WHERE CODprovincia=?";
+			String sql = " call SP_BIBLIOTECA_ACTUALIZAR_PROVINCIA(?,?)";
 			psm = cn.prepareStatement(sql);
 		
 			psm.setString(1, pr.getCodprovincia());
 			psm.setString(2, pr.getNomprovincia());
-		
+			psm.setString(3, pr.getCoddepartamento());
 			
 					
 			salida = psm.executeUpdate();
