@@ -31,23 +31,23 @@ public class MySqlPersonaDAO implements PersonaInterfaceDAO{
 			
 			while (rs.next()) {
 				
-				Persona perso = new Persona(
-					rs.getString("CODPERSON"),
-					rs.getString("NOMBRES"),
-					rs.getString("APE_PATERNO"),
-					rs.getString("APE_MATERNO"),
-					rs.getString("TIPO_DOC"),
-					rs.getString("NUM_DOC"),
-					rs.getInt("TELEFONO"),
-					rs.getInt("CELULAR"),
-					rs.getString("CORREO"),
-					rs.getString("DIRECCION"),
-					rs.getString("SEXO"),
-					rs.getString("NACIONALIDAD"),
-					rs.getString("EST_CIVIL")								
+				Persona perso = new Persona();
+					
+				perso.setCodPersona(rs.getString("CODPERSON"));
+				perso.setNombre(rs.getString("NOMBRES"));
+				perso.setApePaterno(rs.getString("APE_PATERNO"));
+				perso.setApeMaterno(rs.getString("APE_MATERNO"));
+				perso.setTipoDoc(rs.getString("TIPO_DOC"));
+				perso.setNumDoc(rs.getString("NUM_DOC"));
+				perso.setTelefono(rs.getInt("TELEFONO"));
+				perso.setCelular(rs.getInt("CELULAR"));
+				perso.setCorreo(rs.getString("CORREO"));
+				perso.setDireccion(rs.getString("DIRECCION"));
+				perso.setSexo(rs.getString("SEXO"));
+				perso.setNacionalidad(rs.getString("NACIONALIDAD"));
+				perso.setEstadoCivil(rs.getString("EST_CIVIL"));								
 						
-				);
-				
+							
 				listPersona.add(perso);
 				
 			}
