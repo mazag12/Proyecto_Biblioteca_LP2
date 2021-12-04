@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import beans.Pais;
 import dao.DAOFactory;
+
 import interfaces.PaisInterface;
 
 /**
@@ -65,10 +67,123 @@ public class PaisServlet extends HttpServlet {
     protected void registerPais(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// TODO Auto-generated method stub
     	
+	String name = request.getParameter("txtName");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);  
+    	PaisInterface dao = daoFactory.getPais();
+    
+    	Pais pais = dao.Pais(name);
+    
+   
+    	if(pais.getCodpais() == "SNDATA") {
+    		
+    		Pais pa = new Pais(name, name, name, name, name, name, name, name);
+    		pa.setCodpais("sin codigo");
+    		pa.setNompais(name);
+           
+       
+    		int value = dao.createPais(pa);
+    	
+    		
+    		if (value == 1) {
+    			listPais(request, response);
+        	} else {
+        		//request.setAttribute("message", "Ocurrio un problema");
+        		listPais(request, response);
+        	}
+    		
+    	}else{
+    		//request.setAttribute("message", "Ocurrio un problema");
+    		listPais(request, response);
+    	}
     
     	
     }
     
+    
+    protected void getPais(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException  {
+    	
+    	String codPais = request.getParameter("id");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    
+    	PaisInterface dao = daoFactory.getPais();
+        
+    	Pais pais = dao.Pais(codPais);
+    	List<Pais> listPais = dao.getListPais();
+   
+     
+    	request.setAttribute("paisData", pais);
+    	request.setAttribute("data", listPais);
+    	request.getRequestDispatcher("Pais.jsp").forward(request, response);
+    }
+    
+    protected void editPais(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException  {
+    	
+    	String codigo = request.getParameter("txtcodigopais");
+    	String name = request.getParameter("txtnamepais");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	PaisInterface dao = daoFactory.getPais();
+    	
+    	Pais pais = dao.Pais(codigo);
+    	
+    	if(pais.getCodpais() == "SNDATA") {
+       	       Pais pa = new Pais(name, name, name, name, name, name, codigo, name);
+    	   pa.setCodpais(codigo);
+    	   pa.setNompais(name);
+       	     
+    		
+    		
+	    	int flagResponde = dao.editPais(pa); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listPais(request, response);
+	    	} else {
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listPais(request, response);
+	    	}
+    	}else if(pais.getCodpais() ==  codigo){
+    		Pais pa = new Pais(name, name, name, name, name, name, codigo, name);
+    		 pa.setCodpais(codigo);
+      	   pa.setNompais(name);
+    		
+	    	int flagResponde = dao.editPais(pa); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listPais(request, response);
+	    	} else {
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listPais(request, response);
+	    	}
+	    }else {
+	    	//request.setAttribute("message", "Ocurrio un problema");
+	    	listPais(request, response);
+	    }
+    	
+    }
+    
+    protected void deletePais(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException  {
+    	
+    	String codigo = request.getParameter("id");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	PaisInterface dao = daoFactory.getPais();
+
+    	
+    	int flagResponse = dao.removePais(codigo); // subjectModel.removeSubject(idSubject);
+    	
+    	if (flagResponse == 1) {
+    		listPais(request, response);
+    	} else {
+    		//request.setAttribute("message", "Ocurrio un problema");
+    		listPais(request, response);
+    	}
+    	
+    }
     
     
 	/**

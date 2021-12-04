@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Departamento;
+
 import db.MysqlDBConexion8;
 import interfaces.DepartamentoInterface;
 
@@ -65,26 +66,161 @@ public class MySqlDepartamentoDAO  implements DepartamentoInterface {
 	}
 
 	@Override
-	public int createDepartamento(beans.Departamento de) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int createDepartamento(Departamento de) {
+		 int value = 0;
+			
+			Connection cn =  null;
+			PreparedStatement psm = null;
+			
+			try {
+				
+				cn = MysqlDBConexion8.getConexion();
+				
+				String sql = "call SP_BIBLIOTECA_INSERTAR_DEPARTAMENTO(?,?)";
+				psm = cn.prepareStatement(sql);
+			
+				psm.setString(1, de.getCoddepartamento());
+				psm.setString(2, de.getNomdepartamento());
+			
+
+				
+				value = psm.executeUpdate();
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			finally {
+				try {
+					
+					if(psm != null) psm.close();
+					if(cn != null) cn.close();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			return value;
 	}
 
 	@Override
-	public beans.Departamento Departamento(String cod) {
-		// TODO Auto-generated method stub
-		return null;
+	public Departamento Departamento(String cod) {
+    Departamento de = null;
+		
+		Connection con =  null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = MysqlDBConexion8.getConexion();
+			
+			String sql = "Select Nomdepartamento From departamento Where coddepartamento = ?;";
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, cod);
+			
+			rs = pstm.executeQuery();
+			if (rs.next()) {
+				de = new Departamento(cod, sql, cod, sql, cod, sql);
+			    de.setCoddepartamento(rs.getString("Coddepartamento"));
+			    de.setNomdepartamento(rs.getString("Nomdepartamento"));
+			
+			}else {
+				de = new Departamento(cod, sql, cod, sql, cod, sql);
+				de.setCoddepartamento("sndata");
+				de.setNomdepartamento("sndata");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstm != null) pstm.close();
+				if(con != null) con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return de;
 	}
 
 	@Override
-	public int editDepartamento(beans.Departamento de) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int editDepartamento(Departamento de) {
+     int salida = 0;
+		
+		Connection cn =  null;
+		PreparedStatement psm = null;
+		
+		try {
+			
+			cn = MysqlDBConexion8.getConexion();
+			
+			String sql = "UPDATE Departamento SET NOMDepartamento=upper(?),  WHERE CODdepartamento=?";
+			psm = cn.prepareStatement(sql);
+		
+			psm.setString(1, de.getCoddepartamento());
+			psm.setString(2, de.getNomdepartamento());
+		
+			
+					
+			salida = psm.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {
+				
+				if(psm != null) psm.close();
+				if(cn != null) cn.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return salida;
 	}
 
 	@Override
 	public int removeDepartamento(String cod) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		   int salida = 0;
+			
+			Connection cn =  null;
+			PreparedStatement psm = null;
+			
+			try {
+				
+				cn = MysqlDBConexion8.getConexion();
+				
+				String sql = "DELETE FROM departamento WHERE CODDEPARTAMENTO=?";
+				psm = cn.prepareStatement(sql);
+				psm.setString(1, cod);
+				
+				salida = psm.executeUpdate();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			finally {
+				try {
+					
+					if(psm != null) psm.close();
+					if(cn != null) cn.close();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			return salida; 
+		}
+	
 }

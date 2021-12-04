@@ -41,17 +41,70 @@
 		<h3>Registrar </h3>
 		<br>
 		<a href="" class="btn btn-success">
-				DEPARTAMENTO AGREGAR
+			   <form action="PaisServlet" method="post">
+		
+						<input type="hidden" name="type" value="register">
+										
+						<div class="form-group">
+							<label>Nombre de Pais</label>
+							<input class="form-control" type="text" name="txtnamepais">
+						</div>
+						
+						<input type="submit" class="btn btn-primary" value="Registrar">
+			
+					</form>
 		</a>	
 		<br>
 			<br>
 		<a href="" class="btn btn-success">
-				PROVINCIA AGREGAR
+				   <form action="ProvinciaServlet" method="post">
+		
+						<input type="hidden" name="type" value="register">
+										
+						<div class="form-group">
+							<label>Nombre de Provincia</label>
+							<input class="form-control" type="text" name="txtnameprovincia">
+						</div>
+						
+						<input type="submit" class="btn btn-primary" value="Registrar">
+			
+					</form>
 		</a>
 		<br>
 		<br>
 		<a href="" class="btn btn-success">
-				DISTRITO AGREGAR
+				   <form action="DistritoServlet" method="post">
+		
+						<input type="hidden" name="type" value="register">
+										
+						<div class="form-group">
+							<label>Nombre de Distrito</label>
+							<input class="form-control" type="text" name="txtnamedistrito">
+						</div>
+						
+						<input type="submit" class="btn btn-primary" value="Registrar">
+			
+					</form>
+				
+				
+		</a>
+			<br>
+			<br>
+			<a href="" class="btn btn-success">
+				   <form action="DepartamentoServlet" method="post">
+		
+						<input type="hidden" name="type" value="register">
+										
+						<div class="form-group">
+							<label>Nombre de Departamento</label>
+							<input class="form-control" type="text" name="txtnamedepartamento">
+						</div>
+						
+						<input type="submit" class="btn btn-primary" value="Registrar">
+			
+					</form>
+				
+				
 		</a>
 	</div>
 	

@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import beans.Provincia;
 import dao.DAOFactory;
+
 import interfaces.ProvinciaInterface;
 
 /**
@@ -65,9 +67,125 @@ public class ProvinciaServlet extends HttpServlet {
     protected void registerProvincia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// TODO Auto-generated method stub
     	
+       String name = request.getParameter("txtName");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);  
+    	ProvinciaInterface dao = daoFactory.getProvincia();
+    
+        Provincia provincia = dao.Provincia(name);
+    
+    
+   
+    	if(provincia.getCodprovincia() == "SNDATA") {
+    		
+    		Provincia pa = new Provincia(name, name, name, name);
+    	    
+    		pa.setCodprovincia("sin codigo");
+    		pa.setNomprovincia(name);
+           
+       
+    		int value = dao.createProvincia(pa);
+    	
+    		
+    		if (value == 1) {
+    			listProvincia(request, response);
+        	} else {
+        		//request.setAttribute("message", "Ocurrio un problema");
+        		listProvincia(request, response);
+        	}
+    		
+    	}else{
+    		//request.setAttribute("message", "Ocurrio un problema");
+    		listProvincia(request, response);
+    	}
     
     	
     }
+    
+    
+    protected void getProvincia(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException  {
+    	
+    	String codProvincia = request.getParameter("id");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	ProvinciaInterface dao = daoFactory.getProvincia();
+    	
+    	Provincia provincia = dao.Provincia(codProvincia);
+        List<Provincia> listProvincia = dao.getListProvincia();
+      
+     
+    	request.setAttribute("provinciaData", provincia);
+    	request.setAttribute("data", listProvincia);
+    	request.getRequestDispatcher("Pais.jsp").forward(request, response);
+    }
+    
+    protected void editProvincia(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException  {
+    	
+    	String codigo = request.getParameter("txtcodigoprovincia");
+    	String name = request.getParameter("txtnameprovincia");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	ProvinciaInterface dao = daoFactory.getProvincia();
+    	
+    	Provincia provincia = dao.Provincia(codigo);
+    
+    	
+    	if(provincia.getCodprovincia() == "SNDATA") {
+       		Provincia pr = new Provincia(name, name, codigo, name);
+       		pr.setCodprovincia(codigo);
+       		pr.setNomprovincia(name);
+    	    
+    		
+    		
+	    	int flagResponde = dao.editProvincia(pr); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listProvincia(request, response);
+	    	} else {
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listProvincia(request, response);
+	    	}
+    	}else if(provincia.getCodprovincia() ==  codigo){
+    		Provincia pr = new Provincia(name, name, codigo, name);
+    		pr.setCodprovincia(codigo);
+       		pr.setNomprovincia(name);
+    		
+	    	int flagResponde = dao.editProvincia(pr); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listProvincia(request, response);
+	    	} else {
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listProvincia(request, response);
+	    	}
+	    }else {
+	    	//request.setAttribute("message", "Ocurrio un problema");
+	    	listProvincia(request, response);
+	    }
+    	
+    }
+    
+    protected void deleteProvincia(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException  {
+    	
+    	String codigo = request.getParameter("id");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	ProvinciaInterface dao = daoFactory.getProvincia();
+    	
+    	int flagResponse = dao.removeProvincia(codigo); // subjectModel.removeSubject(idSubject);
+    	
+    	if (flagResponse == 1) {
+    		listProvincia(request, response);
+    	} else {
+    		//request.setAttribute("message", "Ocurrio un problema");
+    		listProvincia(request, response);
+    	}
+    	
+    }
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

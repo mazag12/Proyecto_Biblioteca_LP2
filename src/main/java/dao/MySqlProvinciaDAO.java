@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import beans.Provincia;
 import db.MysqlDBConexion8;
 import interfaces.ProvinciaInterface;
@@ -63,26 +64,160 @@ public class MySqlProvinciaDAO implements ProvinciaInterface {
 
 	@Override
 	public int createProvincia(Provincia pr) {
-		// TODO Auto-generated method stub
-		return 0;
+		  int value = 0;
+			
+			Connection cn =  null;
+			PreparedStatement psm = null;
+			
+			try {
+				
+				cn = MysqlDBConexion8.getConexion();
+				
+				String sql = "call SP_BIBLIOTECA_INSERTAR_PROVINCIA(?,?)";
+				psm = cn.prepareStatement(sql);
+			
+				psm.setString(1, pr.getCodprovincia());
+				psm.setString(2, pr.getNomprovincia());
+			
+
+				
+				value = psm.executeUpdate();
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			finally {
+				try {
+					
+					if(psm != null) psm.close();
+					if(cn != null) cn.close();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			return value;
 	}
 
 	@Override
-	public Provincia Departamento(String cod) {
-		// TODO Auto-generated method stub
-		return null;
+	public Provincia Provincia(String cod) {
+      Provincia pro = null;
+		
+		Connection con =  null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = MysqlDBConexion8.getConexion();
+			
+			String sql = "Select Nomprovincia From provincia Where codprovincia = ?;";
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, cod);
+			
+			rs = pstm.executeQuery();
+			if (rs.next()) {
+				pro = new Provincia(cod, sql, cod, sql);
+				pro.setCodprovincia(rs.getString("Codprovincia"));
+				pro.setNomprovincia(rs.getString("Nomprovincia"));
+			}else {
+				pro = new Provincia(cod, sql, cod, sql);
+				pro.setCodprovincia("sndata");
+				pro.setNomprovincia("sndata");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstm != null) pstm.close();
+				if(con != null) con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return pro;
 	}
 
 	@Override
 	public int editProvincia(Provincia pr) {
-		// TODO Auto-generated method stub
-		return 0;
+      int salida = 0;
+		
+		Connection cn =  null;
+		PreparedStatement psm = null;
+		
+		try {
+			
+			cn = MysqlDBConexion8.getConexion();
+			
+			String sql = "UPDATE provincia SET NOMprovincia upper(?),  WHERE CODprovincia=?";
+			psm = cn.prepareStatement(sql);
+		
+			psm.setString(1, pr.getCodprovincia());
+			psm.setString(2, pr.getNomprovincia());
+		
+			
+					
+			salida = psm.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {
+				
+				if(psm != null) psm.close();
+				if(cn != null) cn.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return salida;
 	}
 
 	@Override
 	public int removeProvincia(String cod) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		   int salida = 0;
+			
+			Connection cn =  null;
+			PreparedStatement psm = null;
+			
+			try {
+				
+				cn = MysqlDBConexion8.getConexion();
+				
+				String sql = "DELETE FROM provincia WHERE CODPROVINCIA=?";
+				psm = cn.prepareStatement(sql);
+				psm.setString(1, cod);
+				
+				salida = psm.executeUpdate();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			finally {
+				try {
+					
+					if(psm != null) psm.close();
+					if(cn != null) cn.close();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			return salida; 
+		}
+	
 
 }
