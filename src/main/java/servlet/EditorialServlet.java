@@ -36,16 +36,11 @@ public class EditorialServlet extends HttpServlet {
     	if (type.equals("lista")) {
     		listEditorial(request, response);
     	} else if (type.equals("register")) {
-    		String codprovincia = request.getParameter("codprovincia");
-    		if(codprovincia.isEmpty()) {
-    			registerEditorial(request, response);
-    		} else {
-    			///editAutor(request, response);
-    		}
-    	} else if (type.equals("info")) {
-    		//getSubject(request, response);
+    		registerEditorial(request, response);
+    	} else if (type.equals("edit")) {
+    		editarEditorial(request, response);
     	} else if (type.equals("delete")) {
-    		//deleteAutor(request, response);
+    		eliminarEditorial(request, response);
     	} 
     }
     
@@ -64,9 +59,83 @@ public class EditorialServlet extends HttpServlet {
     
     protected void registerEditorial(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// TODO Auto-generated method stub
+    	String name = request.getParameter("txtName");
     	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);    	
+    	EditorialInterface dao = daoFactory.getEditorial();
+    	Editorial editorial = dao.Editorial(name); 
+    	
+    	if(editorial.getCodEditorial() == "SNDATA") {
+    		
+    		Editorial ed = new Editorial("SIN CODIGO",name);
+    		
+    		int value = dao.createEditorial(ed);
+    		
+    		if (value == 1) {
+    			listEditorial(request, response);
+        	} else {
+        		//request.setAttribute("message", "Ocurrio un problema");
+        		listEditorial(request, response);
+        	}
+    		
+    	}else{
+    		//request.setAttribute("message", "Ocurrio un problema");
+    		listEditorial(request, response);
+    	}
+    }
     
+    protected void editarEditorial(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	// TODO Auto-generated method stub
+    	String codigo = request.getParameter("txtcodigo");
+    	String name = request.getParameter("txtName");
     	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	EditorialInterface dao = daoFactory.getEditorial();
+    	Editorial editorial = dao.Editorial(name);
+    	    	
+    	if(editorial.getCodEditorial() == "SNDATA") {
+    		Editorial ed = new Editorial(codigo,name);
+    		
+	    	int flagResponde = dao.editEditorial(ed); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listEditorial(request, response);
+	    	} else {
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listEditorial(request, response);
+	    	}
+    	}else if(editorial.getCodEditorial() ==  codigo){
+    		Editorial fo = new Editorial(codigo,name);
+    		
+	    	int flagResponde = dao.editEditorial(fo); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listEditorial(request, response);
+	    	} else {
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listEditorial(request, response);
+	    	}
+	    }else {
+	    	//request.setAttribute("message", "Ocurrio un problema");
+	    	listEditorial(request, response);
+	    }
+    }
+    
+    protected void eliminarEditorial(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	// TODO Auto-generated method stub
+    	String codigo = request.getParameter("id");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	EditorialInterface dao = daoFactory.getEditorial();
+    	
+    	int flagResponse = dao.removeEditorial(codigo); // subjectModel.removeSubject(idSubject);
+    	
+    	if (flagResponse == 1) {
+    		listEditorial(request, response);
+    	} else {
+    		//request.setAttribute("message", "Ocurrio un problema");
+    		listEditorial(request, response);
+    	}
     }
     
 	/**

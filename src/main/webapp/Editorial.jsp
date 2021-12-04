@@ -24,6 +24,7 @@
 	<div class="col-1">
 			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">AGREGAR</button>
 			
+			<!--Formulario para registrar-->
 			<div id="myModal" class="modal fade" role="dialog">
 			  <div class="modal-dialog">
 			
@@ -34,12 +35,13 @@
 			        <h4 class="modal-title">Registrar Editorial</h4>
 			      </div>
 			      <div class="modal-body">
-			        <form action="FormatoServlet" method="post">
+					   
+			        <form action="EditorialServlet" method="post">
 		
 						<input type="hidden" name="type" value="register">
 										
 						<div class="form-group">
-							<label>Nombre de la Editorial</label>
+							<label>Nombre de Editorial</label>
 							<input class="form-control" type="text" name="txtName">
 						</div>
 						
@@ -48,12 +50,13 @@
 					</form>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 			      </div>
 			    </div>
 			
 			  </div>
-			</div>		
+			</div>
+			<!--Fin del Formulario para registrar-->		
 	</div>
 	
 	<div class="col">
@@ -82,10 +85,10 @@
 					<td><%=item.getCodEditorial() %></td>
 					<td><%=item.getNomEditorial() %></td>
 					<td>
-						<a href="" class="btn btn-warning">MODIFICAR</a>
+						<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalModificar" onclick="miFunc('<%=item.getCodEditorial() %>','<%=item.getNomEditorial() %>');">MODIFICAR</button>
 					</td>
 					<td>
-						<a href="" class="btn btn-danger">ELIMINAR</a>
+						<a href="EditorialServlet?type=delete&id=<%=item.getCodEditorial()%>" class="btn btn-danger">ELIMINAR</a>
 					</td>
 				</tr>
 			<%
@@ -99,6 +102,45 @@
 			</tbody>
 		</table>
 		
+		<!--Formulario para editar-->
+		
+		<div id="ModalModificar" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+						
+			<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						 <button type="button" class="close" data-dismiss="modal">&times;</button>
+						    <h4 class="modal-title">Modificar Editorial</h4>
+					</div>
+					<div class="modal-body">
+ 
+						<form action="EditorialServlet" method="post">
+							<input type="hidden" name="type" value="edit">
+								<div class="form-group">
+									<label>Codido de Editorial</label>
+									<input class="form-control" type="text" name="txtcodigo" id="CodigoEditorial" readonly>
+								</div>
+												
+								<div class="form-group">
+									<label>Nombre de Editorial</label>
+									<input class="form-control" type="text" name="txtName" id="NombreEditorial">
+								</div>
+
+							<input type="submit" class="btn btn-primary" value="Modificar">
+									
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+				<!--Fin del Modal-->
+			</div>
+		</div>
+		<!--Fin del Formulario para editar-->
+		
+		
 	</div>
 
 </div>
@@ -107,4 +149,15 @@
 
 
 <%@ include file="snippet/Footer.jsp" %>
+
+<script type="text/javascript">
+	
+	function miFunc(codigo,nombre) {
+		document.getElementById("CodigoEditorial").value = codigo;
+		document.getElementById("NombreEditorial").value = nombre;
+		
+  	}
+	
+</script>
+
 </html>

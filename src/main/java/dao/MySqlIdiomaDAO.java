@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import db.MysqlDBConexion;
+import db.MysqlDBConexion8;
 import beans.Idioma;
 import interfaces.IdiomaInterface;
 
@@ -22,7 +22,7 @@ List<Idioma> listidioma = new ArrayList<Idioma>();
 		
 		try {
 			
-			cn = MysqlDBConexion.getConexion();
+			cn = MysqlDBConexion8.getConexion();
 			
 			String sql = "select * from idioma";
 			

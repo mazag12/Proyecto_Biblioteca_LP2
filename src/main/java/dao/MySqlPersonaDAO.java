@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import db.MysqlDBConexion;
+import db.MysqlDBConexion8;
 import beans.Persona;
 import interfaces.PersonaInterfaceDAO;
 
@@ -22,7 +22,7 @@ public class MySqlPersonaDAO implements PersonaInterfaceDAO{
 		
 		try {
 			
-			cn = MysqlDBConexion.getConexion();
+			cn = MysqlDBConexion8.getConexion();
 			
 			String sql = "select * from persona";
 			
@@ -80,7 +80,7 @@ public class MySqlPersonaDAO implements PersonaInterfaceDAO{
 		
 		try {
 			
-			cn = MysqlDBConexion.getConexion();
+			cn = MysqlDBConexion8.getConexion();
 			
 			String sql = "call SP_BIBLIOTECA_INSERTAR_PERSONA(?,?,?,?,?,?,?,?,?,?,?,?)";
 			psm = cn.prepareStatement(sql);
@@ -129,7 +129,7 @@ public class MySqlPersonaDAO implements PersonaInterfaceDAO{
 		
 		try {
 			
-			cn = MysqlDBConexion.getConexion();
+			cn = MysqlDBConexion8.getConexion();
 			
 			String sql = "SELECT * FROM persona WHERE CODPERSON=?";
 			
@@ -185,7 +185,7 @@ public class MySqlPersonaDAO implements PersonaInterfaceDAO{
 		
 		try {
 			
-			cn = MysqlDBConexion.getConexion();
+			cn = MysqlDBConexion8.getConexion();
 			
 			String sql = "UPDATE persona SET NOMBRES=upper(?), APE_PATERNO=upper(?),APE_MATERNO=upper(?),TIPO_DOC=UPPER(?),"
 					+ "NUM_DOC=?,TELEFONO=?,CELULAR=?,CORREO=?, DIRECCION=upper(?),SEXO=UPPER(?),NACIONALIDAD=UPPER(?),EST_CIVIL=?   WHERE CODPERSON=?";
@@ -233,7 +233,7 @@ public class MySqlPersonaDAO implements PersonaInterfaceDAO{
 		
 		try {
 			
-			cn = MysqlDBConexion.getConexion();
+			cn = MysqlDBConexion8.getConexion();
 			
 			String sql = "DELETE FROM persona WHERE CODPERSON=?";
 			psm = cn.prepareStatement(sql);
