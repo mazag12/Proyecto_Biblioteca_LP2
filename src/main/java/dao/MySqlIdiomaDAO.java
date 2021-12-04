@@ -71,7 +71,7 @@ public class MySqlIdiomaDAO implements IdiomaInterface{
 			
 			cn = MysqlDBConexion.getConexion();
 			
-			String sql = "call 	SP_BIBLIOTECA_INSERTAR_IDIOMA(?)";
+			String sql = "call SP_BIBLIOTECA_INSERTAR_IDIOMA(?)";
 			psm = cn.prepareStatement(sql);
 			psm.setString(1, idio.getNomIdioma());
 
