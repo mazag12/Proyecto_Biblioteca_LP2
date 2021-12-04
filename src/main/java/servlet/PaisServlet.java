@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.Pais;
 import dao.DAOFactory;
-import interfaces.DepartamentoInterface;
+
 import interfaces.PaisInterface;
 
 /**
@@ -79,7 +79,7 @@ public class PaisServlet extends HttpServlet {
    
     	if(pais.getCodpais() == "SNDATA") {
     		
-    		Pais pa = new Pais(name, name, name, name, name, name, name, name);
+    		Pais pa = new Pais();
     		pa.setCodpais("sin codigo");
     		pa.setNompais(name);
            
@@ -133,7 +133,7 @@ public class PaisServlet extends HttpServlet {
     	Pais pais = dao.Pais(codigo);
     	
     	if(pais.getCodpais() == "SNDATA") {
-       	       Pais pa = new Pais(name, name, name, name, name, name, codigo, name);
+       	       Pais pa = new Pais();
     	   pa.setCodpais(codigo);
     	   pa.setNompais(name);
        	     

@@ -80,7 +80,7 @@ public class DepartamentoServlet extends HttpServlet {
     
      	if(departamento.getCoddepartamento() == "SNDATA") {
      		
-     		Departamento de = new Departamento(name, name, name, name, name, name);
+     		Departamento de = new Departamento();
      		
      	    de.setCoddepartamento("sin codigo");
      	    de.setNomdepartamento(name);
@@ -135,7 +135,7 @@ public class DepartamentoServlet extends HttpServlet {
     
     	
     	if(departamento.getCoddepartamento() == "SNDATA") {
-    		Departamento de = new Departamento(name, name, name, codigo, name, name);
+    		Departamento de = new Departamento();
        		de.setCoddepartamento(codigo);
        		de.setNomdepartamento(name);
        		de.setCodpais(name);

@@ -78,7 +78,7 @@ public class ProvinciaServlet extends HttpServlet {
    
     	if(provincia.getCodprovincia() == "SNDATA") {
     		
-    		Provincia pa = new Provincia(name, name, name, name);
+    		Provincia pa = new Provincia();
     	    
     		pa.setCodprovincia("sin codigo");
     		pa.setNomprovincia(name);
@@ -133,7 +133,7 @@ public class ProvinciaServlet extends HttpServlet {
     
     	
     	if(provincia.getCodprovincia() == "SNDATA") {
-       		Provincia pr = new Provincia(name, name, codigo, name);
+       		Provincia pr = new Provincia();
        		pr.setCodprovincia(codigo);
        		pr.setNomprovincia(name);
        		pr.setCoddepartamento(name);

@@ -74,7 +74,7 @@ public class DistritoServlet extends HttpServlet {
    
     	if(distrito.getCoddistrito() == "SNDATA") {
     		
-    		Distrito di = new Distrito(name, name);
+    		Distrito di = new Distrito();
             di.setCoddistrito("sin codigo");
             di.setNomdistrito(name);
             di.setCoddistrito(name);
@@ -125,7 +125,7 @@ public class DistritoServlet extends HttpServlet {
     	Distrito distrito = dao.Distrito(codigo);
     	
     	if(distrito.getCoddistrito() == "SNDATA") {
-       		Distrito di = new Distrito(codigo, name);
+       		Distrito di = new Distrito();
     	    di.setCoddistrito(codigo);
     	    di.setNomdistrito(name);
     	    di.setCoddistrito(name);
