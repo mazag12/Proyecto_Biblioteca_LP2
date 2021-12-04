@@ -37,7 +37,7 @@
 	
 	<%
 	
-		Cliente autorForm = (Cliente) request.getAttribute("clientetData");
+		Cliente clienteForm = (Cliente) request.getAttribute("clientetData");
 					
 	%> 
 	
