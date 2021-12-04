@@ -64,9 +64,83 @@ public class TematicaServlet extends HttpServlet {
     
     protected void registerTematica(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// TODO Auto-generated method stub
+    	String name = request.getParameter("txtName");
     	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);    	
+    	TematicaInterface dao = daoFactory.getTematica();
+    	Tematica editorial = dao.Tematica(name); 
+    	
+    	if(editorial.getCodTematica() == "SNDATA") {
+    		
+    		Tematica te = new Tematica("SIN CODIGO",name);
+    		
+    		int value = dao.createTematica(te);
+    		
+    		if (value == 1) {
+    			listTematica(request, response);
+        	} else {
+        		//request.setAttribute("message", "Ocurrio un problema");
+        		listTematica(request, response);
+        	}
+    		
+    	}else{
+    		//request.setAttribute("message", "Ocurrio un problema");
+    		listTematica(request, response);
+    	}
+    }
     
+    protected void editarTematica(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	// TODO Auto-generated method stub
+    	String codigo = request.getParameter("txtcodigo");
+    	String name = request.getParameter("txtName");
     	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	TematicaInterface dao = daoFactory.getTematica();
+    	Tematica editorial = dao.Tematica(name);
+    	    	
+    	if(editorial.getCodTematica() == "SNDATA") {
+    		Tematica te = new Tematica(codigo,name);
+    		
+	    	int flagResponde = dao.editTematica(te); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listTematica(request, response);
+	    	} else {
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listTematica(request, response);
+	    	}
+    	}else if(editorial.getCodTematica() ==  codigo){
+    		Tematica te = new Tematica(codigo,name);
+    		
+	    	int flagResponde = dao.editTematica(te); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listTematica(request, response);
+	    	} else {
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listTematica(request, response);
+	    	}
+	    }else {
+	    	//request.setAttribute("message", "Ocurrio un problema");
+	    	listTematica(request, response);
+	    }
+    }
+    
+    protected void eliminarTematica(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	// TODO Auto-generated method stub
+    	String codigo = request.getParameter("id");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	TematicaInterface dao = daoFactory.getTematica();
+    	
+    	int flagResponse = dao.removeTematica(codigo); // subjectModel.removeSubject(idSubject);
+    	
+    	if (flagResponse == 1) {
+    		listTematica(request, response);
+    	} else {
+    		//request.setAttribute("message", "Ocurrio un problema");
+    		listTematica(request, response);
+    	}
     }
     
 	/**
