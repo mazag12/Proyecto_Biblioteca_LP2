@@ -36,4 +36,10 @@
 		<bodycontent>false</bodycontent>
 	</tag>
 	
+	<tag>
+		<name>tagPaisCombobox</name>
+		<tagclass>tag.TagComboboxPais</tagclass>
+		<bodycontent>false</bodycontent>
+	</tag>
+	
 </taglib>

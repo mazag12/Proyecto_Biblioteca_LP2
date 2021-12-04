@@ -40,7 +40,7 @@
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal">&times;</button>
-			        <h4 class="modal-title">Modal Header</h4>
+			        <h4 class="modal-title">Registrar Libro</h4>
 			      </div>
 			      <div class="modal-body">
 			        <form action="FormatoServlet" method="post">
@@ -48,10 +48,43 @@
 						<input type="hidden" name="type" value="register">
 										
 						<div class="form-group">
-							<label>Nombre de la Editorial</label>
+							<label>TITULO</label>
 							<input class="form-control" type="text" name="txtName">
 						</div>
-						<etiquetas:tagAutorCombobox></etiquetas:tagAutorCombobox>
+						
+						<div class="form-group">
+							<label>AÑO</label>
+							<input class="form-control" type="text" name="txtAno">
+						</div>
+						
+						<div class="form-group">
+							<label>IDIOMA</label>
+							<etiquetas:tagIdiomaCombobox></etiquetas:tagIdiomaCombobox>
+						</div>
+						<div class="form-group">
+							<label>TEMATICA</label>
+							<etiquetas:tagTematicaCombobox></etiquetas:tagTematicaCombobox>
+						</div>
+						<div class="form-group">
+							<label>EDITORAIL</label>
+							<etiquetas:tagEditorialCombobox></etiquetas:tagEditorialCombobox>
+						</div>
+						<div class="form-group">
+							<label>RESTRINCIÓN</label>
+							<select class='form-control' name='txtrestrincion'>
+								<option value="NO">NO</option>
+								<option value="SI">SI</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>PAGINAS</label>
+							<input class="form-control" type="text" name="txtpagina">
+						</div>
+						<div class="form-group">
+							<label>AUTOR</label>
+							<etiquetas:tagAutorCombobox></etiquetas:tagAutorCombobox>
+						</div>
+						
 						<input type="submit" class="btn btn-primary" value="Registrar">
 			
 					</form>
@@ -129,5 +162,14 @@
 
 <%@ include file="snippet/Footer.jsp" %>
 
+<script type="text/javascript">
+	
+	function miFunc(codigo,nombre) {
+		document.getElementById("CodigoLibro").value = codigo;
+		document.getElementById("NombreLibro").value = nombre;
+		
+  	}
+	
+</script>
 
 </html>
