@@ -7,6 +7,7 @@ import interfaces.EstudiosInterfaceDAO;
 import interfaces.FamiliaInterfaceDAO;
 import interfaces.IdiomaInterface;
 import interfaces.LibroInterface;
+import interfaces.LogSessionInterfaceDAO;
 import interfaces.PersonaInterfaceDAO;
 import interfaces.PrestamoInterface;
 import interfaces.FormatoInterface;
@@ -47,6 +48,7 @@ public abstract class DAOFactory {
 	public abstract PrestamoInterface getPrestamo();
 	public abstract CargoInterface getCargo();
 	public abstract CarnetInterface getCarnet();
+    public abstract LogSessionInterfaceDAO getSession();
 	
 	public static DAOFactory getFactory(int tipo) {
 		switch (tipo) {

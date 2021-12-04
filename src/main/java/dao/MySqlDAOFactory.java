@@ -1,5 +1,6 @@
 package dao;
 
+import interfaces.LogSessionInterfaceDAO;
 import interfaces.AutorInterface;
 import interfaces.CargoInterface;
 import interfaces.CarnetInterface;
@@ -8,6 +9,7 @@ import interfaces.EstudiosInterfaceDAO;
 import interfaces.FamiliaInterfaceDAO;
 import interfaces.IdiomaInterface;
 import interfaces.LibroInterface;
+
 import interfaces.PersonaInterfaceDAO;
 import interfaces.PrestamoInterface;
 import interfaces.FormatoInterface;
@@ -129,6 +131,10 @@ public class MySqlDAOFactory extends DAOFactory{
 	public CarnetInterface getCarnet() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public LogSessionInterfaceDAO getSession() {
+		return new MySqlSessionDAO();
 	}
 	
 }
