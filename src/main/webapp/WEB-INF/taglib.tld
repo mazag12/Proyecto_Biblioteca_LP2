@@ -14,6 +14,20 @@
 		<tagclass>tag.TagComboboxAutor</tagclass>
 		<bodycontent>false</bodycontent>
 	</tag>
-	
+	<tag>
+		<name>tagEditorialCombobox</name>
+		<tagclass>tag.TagComboboxEditorial</tagclass>
+		<bodycontent>false</bodycontent>
+	</tag>
+	<tag>
+		<name>tagFormatoCombobox</name>
+		<tagclass>tag.TagComboboxFormato</tagclass>
+		<bodycontent>false</bodycontent>
+	</tag>
+	<tag>
+		<name>tagIdiomaCombobox</name>
+		<tagclass>tag.TagComboboxIdioma</tagclass>
+		<bodycontent>false</bodycontent>
+	</tag>
 	
 </taglib>
