@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.Autor;
 import beans.Trabajo;
 import db.MysqlDBConexion8;
 import interfaces.TrabajoInterface;
@@ -42,8 +43,6 @@ public List<Trabajo> getListTrabajo(){
 				
 			}
 			
-			System.out.println("Lista completada");
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,26 +62,159 @@ public List<Trabajo> getListTrabajo(){
 
 	@Override
 	public int createTrabajo(Trabajo tr) {
-		// TODO Auto-generated method stub
-		return 0;
+		int value = 0;
+		
+		Connection con =  null;
+		PreparedStatement pstm = null;
+		
+		try {
+			
+			con = MysqlDBConexion8.getConexion();
+			
+			String sql = "call sp_insert_job(?,?,?,)";
+			pstm = con.prepareCall(sql);
+			pstm.setString(1, tr.getNombre());
+			pstm.setString(2, tr.getOcupacion());
+			pstm.setString(3, tr.getTelefono());
+			
+			value = pstm.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				
+				if(pstm != null) pstm.close();
+				if(con != null) con.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return value;
+		
 	}
 
 	@Override
 	public Trabajo getTrabajo(String cod) {
-		// TODO Auto-generated method stub
-		return null;
+		Trabajo t = null;
+		
+		Connection con =  null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = MysqlDBConexion8.getConexion();
+			
+			String sql = "Select * from trabajo where nombre=?";
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, cod);
+			
+			rs = pstm.executeQuery();
+			if(rs.next()) {
+				t = new Trabajo();
+				t.setCodtrabajo(rs.getString("CodTrabajo"));
+				t.setNombre(rs.getString("Nombre"));
+				t.setOcupacion(rs.getString("Ocupacion"));
+				t.setTelefono(rs.getString("Telefono"));
+			}else {
+				t = new Trabajo();
+				t.setCodtrabajo("CodTrabajo");
+				t.setNombre("Nombre");
+				t.setOcupacion("Ocupacion");
+				t.setTelefono("Telefono");
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstm != null) pstm.close();
+				if(con != null) con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return t;
+		
 	}
 
 	@Override
 	public int editTrabajo(Trabajo tr) {
-		// TODO Auto-generated method stub
-		return 0;
+		int value = 0;
+		
+		Connection con =  null;
+		PreparedStatement pstm = null;
+		try {
+			
+			con = MysqlDBConexion8.getConexion();
+			
+			String sql = "call sp_update_trabajo(?,?,?,?)";
+			pstm = con.prepareCall(sql);
+			pstm.setString(1, tr.getCodtrabajo());
+			pstm.setString(2, tr.getNombre());
+			pstm.setString(3, tr.getOcupacion());
+			pstm.setString(4, tr.getTelefono());
+			
+			value = pstm.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {
+				
+				if(pstm != null) pstm.close();
+				if(con != null) con.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return value;
 	}
 
 	@Override
 	public int removeTrabajo(String cod) {
-		// TODO Auto-generated method stub
-		return 0;
+		int salida = 0;
+		
+		Connection con =  null;
+		PreparedStatement pstm = null;
+		
+		try {
+			
+			con = MysqlDBConexion8.getConexion();
+			
+			String sql = "delete from trabajo where codtrabajo=?";
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, cod);
+			
+			salida = pstm.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				
+				if(pstm != null) pstm.close();
+				if(con != null) con.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return salida; 
+		
 	}
 
 }
