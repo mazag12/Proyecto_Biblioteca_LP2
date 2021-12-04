@@ -23,24 +23,19 @@ public class MySqlEmpleadoDAO implements EmpleadoInterface {
 		try {
 			
 			con = MysqlDBConexion8.getConexion();
-			
-			String sql = "select per.CODPERSON,per.NOMBRES,per.APE_PATERNO,per.APE_MATERNO,per.TIPO_DOC,per.NUM_DOC,per.TELEFONO,per.CELULAR,per.CORREO,per.DIRECCION,per.SEXO, "
-					+ "per.NACIONALIDAD,per.EST_CIVIL,em.CODIGOEMPLE,em.CODPERSON,em.CODCARGO "
-					+ "from empleado as em "
-					+ "inner join persona as per "
-					+ "on em.CODPERSON = per.CODPERSON";
+		
+			String sql = "select * from empleado";
 			
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
 			
 			while (rs.next()) {
-				Empleado empleado = new Empleado(
-						rs.getString("CodigoEmple"),
-						rs.getString("CodPerson"),
-						rs.getString("CodCargo")
+				Empleado j = new Empleado();
+						j.setCodigoemple(rs.getString("CodigoEmple"));
+						j.setCodperson(rs.getString("CodPerson"));
+						j.setCodcargo(rs.getString("CodCargo"));
 							
-						);
-				listEmpleado.add(empleado);
+						listEmpleado.add(j);
 				
 			}
 			
@@ -62,26 +57,153 @@ public class MySqlEmpleadoDAO implements EmpleadoInterface {
 
 	@Override
 	public int createEmpleado(Empleado di) {
-		// TODO Auto-generated method stub
-		return 0;
+		int value = 0;
+		
+		Connection con = null;
+		PreparedStatement pstm = null;
+		
+		try {
+			
+			 con = MysqlDBConexion8.getConexion();
+			 
+			 String sql = "call sp_insert_empleado(?,?)";
+			 pstm = con.prepareCall(sql);
+			 pstm.setString(1, di.getCodperson());
+			 pstm.setString(2, di.getCodcargo());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		finally {
+			try {
+				
+				if(pstm != null) pstm.close();
+				if(con != null) con.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return value;
+		
 	}
 
 	@Override
 	public Empleado getEmpleado(String cod) {
-		// TODO Auto-generated method stub
-		return null;
+		 Empleado j = null;
+		 
+		 Connection con =  null;
+			PreparedStatement pstm = null;
+			ResultSet rs = null;
+			
+			try {
+				
+				con = MysqlDBConexion8.getConexion();
+				
+				String sql = "select * from empleado where codigoemple=?";
+				pstm = con.prepareStatement(sql);
+				pstm.setString(1, cod);
+				
+				rs = pstm.executeQuery();
+				if(rs.next()) {
+					j = new Empleado();
+					j.setCodigoemple(rs.getString("Codigoemple"));
+					j.setCodperson(rs.getString("CodPerson"));
+					j.setCodcargo(rs.getString("CodCargo"));
+				}else {
+					j = new Empleado();
+					j.setCodigoemple("No hay datos");
+					j.setCodperson("No hay datos");
+					j.setCodcargo("No hay datos");
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			finally {
+				try {
+					if(rs != null) rs.close();
+					if(pstm != null) pstm.close();
+					if(con != null) con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return j;
 	}
 
 	@Override
-	public int editDepartamento(Empleado di) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int editEmpleado(Empleado di) {
+			int value = 0;
+			
+	
+			Connection con =  null;
+			PreparedStatement pstm = null;
+			try {
+				
+				con = MysqlDBConexion8.getConexion();
+				
+				String sql = "call sp_update_empleado(?,?,?)";
+				pstm = con.prepareCall(sql);
+				pstm.setString(1, di.getCodigoemple());
+				pstm.setString(2, di.getCodperson());
+				pstm.setString(3, di.getCodcargo());
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			finally {
+				try {
+					
+					if(pstm != null) pstm.close();
+					if(con != null) con.close();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			return value;
+		
+	
 	}
 
 	@Override
 	public int removeEmpleado(String cod) {
-		// TODO Auto-generated method stub
-		return 0;
+		int salida = 0;
+		
+
+		Connection con =  null;
+		PreparedStatement pstm = null;
+		try {
+			
+			con = MysqlDBConexion8.getConexion();
+			
+			String sql = "delete from empleado where codigoemple=?";
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, cod);
+			
+			salida = pstm.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				
+				if(pstm != null) pstm.close();
+				if(con != null) con.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return salida; 
+		
 	}
 
 }
