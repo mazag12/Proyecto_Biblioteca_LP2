@@ -23,8 +23,12 @@ public class MySqlLibroDAO implements LibroInterface{
 			
 			con = MysqlDBConexion8.getConexion();
 			
-			String sql = "Select codlibro,titulo,año,codidioma,codtematica,codeditorial,restrinccion,paginas,cantidad,fragmento,recomendados,codformato,codpais,estado,isbn "
-					+ "From libro";
+			String sql = "Select li.codlibro,li.titulo,li.año,li.codidioma,li.codtematica,li.codeditorial,li.restrinccion,li.paginas, "
+					+ "li.cantidad,li.fragmento,li.recomendados,li.codformato,li.codpais,li.estado,li.isbn,au.CODAUTOR,au.NOMAUTOR "
+					+ "From libro li inner join autor_libro auli "
+					+ "on li.CODLIBRO = auli.CODLIBRO "
+					+ "inner join autor au "
+					+ "on auli.CODAUTOR = au.CODAUTOR;";
 			
 			pstm = con.prepareStatement(sql);
 			rs = pstm.executeQuery();
@@ -45,7 +49,9 @@ public class MySqlLibroDAO implements LibroInterface{
 				rs.getString("codformato"),
 				rs.getString("codpais"),
 				rs.getString("estado"),
-				rs.getString("isbn")
+				rs.getString("isbn"),
+				rs.getString("CODAUTOR"),
+				rs.getString("NOMAUTOR")
 				);
 				
 				listLibro.add(libro);

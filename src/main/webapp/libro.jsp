@@ -146,6 +146,7 @@
 					<th>Restrincion</th>
 					<th>Cantidad</th>
 					<th>Fragmento</th>
+					<th>AUTOR</th>
 					<th></th>
 					<th></th>
 				</tr>
@@ -170,8 +171,11 @@
 					<td><%=item.getRestrincion() %></td>
 					<td><%=item.getCantidad() %></td>
 					<td><%=item.getFragmento() %></td>
+					<td><%=item.getNomautor() %></td>
 					<td>
-						<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalModificar" onclick="miFunc('<%=item.getCodlibro() %>','<%=item.getTitulo() %>','<%=item.get() %>');">
+						<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalModificar"
+						 onclick="miFunc('<%=item.getCodlibro() %>','<%=item.getTitulo() %>','<%=item.getAno() %>','<%=item.getCodidioma() %>','<%=item.getCodtematica() %>',
+						 '<%=item.getRestrincion() %>','<%=item.getCantidad() %>','<%=item.getFragmento() %>','<%=item.getCodautor()%>';">
 						MODIFICAR
 						</button>
 					</td>
@@ -301,7 +305,7 @@
 
 <script type="text/javascript">
 	
-	function miFunc(codigo,nombre,autor,ano,idioma,tematica,editorial,restrincion,formato,pais,isbn) {
+	function miFunc(codigo,nombre,autor,ano,idioma,tematica,editorial,restrincion,formato,pais,isbn,autor) {
 		document.getElementById("codigo").value = codigo;
 		document.getElementById("name").value = nombre;
 		document.getElementById("autor").value = autor;
@@ -313,7 +317,7 @@
 		document.getElementById("formato").value = formato;
 		document.getElementById("pais").value = pais;
 		document.getElementById("isbn").value = isbn;
-		
+		document.getElementById("autor").value = autor;
   	}
 	
 </script>

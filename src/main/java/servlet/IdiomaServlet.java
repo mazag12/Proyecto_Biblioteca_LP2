@@ -63,9 +63,9 @@ public class IdiomaServlet extends HttpServlet {
     	
     	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);    	
     	IdiomaInterface dao = daoFactory.getIdioma();
-    	Idioma editorial = dao.getIdioma(name); 
+    	Idioma idioma = dao.getIdioma(name); 
     	
-    	if(editorial.getCodIdioma() == "SNDATA") {
+    	if(idioma.getCodIdioma() == "SNDATA") {
     		
     		Idioma idio = new Idioma();
     		idio.setCodIdioma("SIN CODIGO");
@@ -93,9 +93,9 @@ public class IdiomaServlet extends HttpServlet {
     	
     	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
     	IdiomaInterface dao = daoFactory.getIdioma();
-    	Idioma editorial = dao.getIdioma(name);
+    	Idioma idioma = dao.getIdioma(name);
     	    	
-    	if(editorial.getCodIdioma() == "SNDATA") {
+    	if(idioma.getCodIdioma() == "SNDATA") {
     		Idioma idio = new Idioma();
     		idio.setCodIdioma(codigo);
     		idio.setNomIdioma(name);
@@ -107,7 +107,7 @@ public class IdiomaServlet extends HttpServlet {
 	    		//request.setAttribute("message", "Ocurrio un problema");
 	    		listIdioma(request, response);
 	    	}
-    	}else if(editorial.getCodIdioma() ==  codigo){
+    	}else if(idioma.getCodIdioma() ==  codigo){
     		Idioma idio = new Idioma();
     		idio.setCodIdioma(codigo);
     		idio.setNomIdioma(name);

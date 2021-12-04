@@ -204,4 +204,47 @@ public class MySqlIdiomaDAO implements IdiomaInterface{
 		
 		return salida; 
 	}
+
+	@Override
+	public Idioma getdatosIdioma(String id) {
+		Idioma idio = null;
+		
+		Connection con =  null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = MysqlDBConexion8.getConexion();
+			
+			String sql = "Select CODIDIOMA,NOMIDIOMA From idioma Where CODIDIOMA = ?;";
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, id);
+			
+			rs = pstm.executeQuery();
+			if (rs.next()) {
+				idio = new Idioma();
+				idio.setCodIdioma(rs.getString("CODIDIOMA"));
+				idio.setNomIdioma(rs.getString("NOMIDIOMA"));
+			}else {
+				idio = new Idioma();
+				idio.setCodIdioma("SNDATA");
+				idio.setNomIdioma("SNDATA");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstm != null) pstm.close();
+				if(con != null) con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return idio;
+	}
 }

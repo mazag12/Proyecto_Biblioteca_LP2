@@ -42,4 +42,10 @@
 		<bodycontent>false</bodycontent>
 	</tag>
 	
+	<tag>
+		<name>tagNombreIdioma</name>
+		<tagclass>tag.TagNombreIdioma</tagclass>
+		<bodycontent>false</bodycontent>
+	</tag>
+	
 </taglib>

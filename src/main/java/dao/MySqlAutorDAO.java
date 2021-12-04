@@ -30,9 +30,9 @@ public class MySqlAutorDAO implements AutorInterface{
 			rs = pstm.executeQuery();
 			
 			while (rs.next()) {
-				Autor au = new Autor();
-				au.setCodautor(rs.getString("Codautor"));
-				au.setNomautor(rs.getString("Nomautor"));
+				Autor au = new Autor(
+				rs.getString("Codautor"),
+				rs.getString("Nomautor"));
 				
 				listAutor.add(au);
 			}
@@ -106,13 +106,11 @@ public class MySqlAutorDAO implements AutorInterface{
 			
 			rs = pstm.executeQuery();
 			if (rs.next()) {
-				au = new Autor();
-				au.setCodautor(rs.getString("Codautor"));
-				au.setNomautor(rs.getString("Nomautor"));
+				au = new Autor(
+				rs.getString("Codautor"),
+				rs.getString("Nomautor"));
 			}else {
-				au = new Autor();
-				au.setCodautor("SNDATA");
-				au.setNomautor("SNDATA");
+				au = new Autor("SNDATA","SNDATA");
 			}
 			
 		} catch (Exception e) {

@@ -2,8 +2,15 @@ package beans;
 /*@marco antonio*/
 public class Autor {
 
+	
 	public String Codautor;
 	public String Nomautor;
+	
+	public Autor(String codautor, String nomautor) {
+		super();
+		Codautor = codautor;
+		Nomautor = nomautor;
+	}
 	
 	public String getCodautor() {
 		return Codautor;
