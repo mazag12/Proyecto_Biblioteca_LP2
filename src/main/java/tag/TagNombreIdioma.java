@@ -13,22 +13,31 @@ import interfaces.IdiomaInterface;
 
 public class TagNombreIdioma extends TagSupport{
 	
-	private String codidioma;
+	private String idioma;
 	
 	@Override
 	public int doStartTag() throws JspException {
 		JspWriter out = pageContext.getOut();
 		DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
-		
 		try {
 			IdiomaInterface dao = daoFactory.getIdioma();
-			Idioma idioma = dao.getdatosIdioma(codidioma);
-			out.print("<td>"+idioma.getNomIdioma()+"</td>");
+			Idioma idio = dao.getdatosIdioma("marco");
+			
+			out.print("<td>"+idio.getNomIdioma()+"</td>");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		return super.doStartTag();
 	}
+
+	public String getIdioma() {
+		return idioma;
+	}
+
+	public void setIdioma(String idioma) {
+		this.idioma = idioma;
+	}
+	
 	
 }

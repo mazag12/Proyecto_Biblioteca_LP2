@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.Autor;
 import beans.Cargo;
 import beans.Libro;
 import dao.DAOFactory;
+import interfaces.AutorInterface;
 import interfaces.CargoInterface;
 import interfaces.LibroInterface;
 
@@ -61,6 +63,115 @@ public class CargoServlet extends HttpServlet {
     	
     	request.setAttribute("data", data);
     	request.getRequestDispatcher("cargo.jsp").forward(request, response);
+    }
+    
+    protected void registerCargo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	// TODO Auto-generated method stub
+    	String name = request.getParameter("txtName");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);    	
+    	CargoInterface dao = daoFactory.getCargo();
+    	Cargo car = dao.gerCargo(name); 
+    	
+    	if(car.getCodcargo() == "SNDATA") {
+    		
+    		Cargo au = new Cargo();
+        	au.setCodcargo("Sin ID");
+        	au.setDescripcion(name);
+    		
+    		int value = dao.createCargo(au);
+    		
+    		if (value == 1) {
+        		listCargo(request, response);
+        	} else {
+        		//request.setAttribute("message", "Ocurrio un problema");
+        		listCargo(request, response);
+        	}
+    		
+    	}else{
+    		//request.setAttribute("message", "Ocurrio un problema");
+    		listCargo(request, response);
+    	}
+    	
+    }
+    
+    protected void getCargo(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException  {
+    	
+    	String codCar = request.getParameter("id");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);    	
+    	CargoInterface dao = daoFactory.getCargo();
+    	
+    	
+    	Cargo car = dao.gerCargo(codCar); 
+    	List<Cargo> listUsuario = dao.getListCargo(); 
+    	request.setAttribute("usuarioData", car);
+    	request.setAttribute("data", listUsuario);
+    	request.getRequestDispatcher("Cargo.jsp").forward(request, response);
+    }
+    
+    protected void editCargo(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException  {
+    	
+    	String codigo = request.getParameter("txtcodigo");
+    	String name = request.getParameter("txtDescripcion");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);    	
+    	CargoInterface dao = daoFactory.getCargo();
+    	Cargo car = dao.gerCargo(name); 
+    	    	
+    	if(car.getCodcargo() == "SNDATA") {
+       		Cargo au = new Cargo();
+    		au.setCodcargo(codigo);
+    		au.setDescripcion(name);
+    		
+	    	int flagResponde = dao.editCargo(au); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listCargo(request, response);
+	    	} else {
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listCargo(request, response);
+	    	}
+    	}else if(car.getCodcargo() ==  codigo){
+    		Cargo au = new Cargo();
+    		au.setCodcargo(codigo);
+    		au.setDescripcion(name);
+    		
+	    	int flagResponde = dao.editCargo(au); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listCargo(request, response);
+	    	} else {
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listCargo(request, response);
+	    	}
+	    }else {
+	    	//request.setAttribute("message", "Ocurrio un problema");
+	    	listCargo(request, response);
+	    }
+    	
+    }
+    
+    protected void deleteCargo(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException  {
+    	
+    	String codigo = request.getParameter("id");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);    	
+    	CargoInterface dao = daoFactory.getCargo();
+    	
+    	
+    	int flagResponse = dao.removeCargo(codigo); // subjectModel.removeSubject(idSubject);
+    	
+    	if (flagResponse == 1) {
+    		listCargo(request, response);
+    	} else {
+    		//request.setAttribute("message", "Ocurrio un problema");
+    		listCargo(request, response);
+    	}
+    	
     }
 
 	/**

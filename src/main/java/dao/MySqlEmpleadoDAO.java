@@ -30,10 +30,10 @@ public class MySqlEmpleadoDAO implements EmpleadoInterface {
 			rs = pstm.executeQuery();
 			
 			while (rs.next()) {
-				Empleado j = new Empleado();
-						j.setCodigoemple(rs.getString("CodigoEmple"));
-						j.setCodperson(rs.getString("CodPerson"));
-						j.setCodcargo(rs.getString("CodCargo"));
+				Empleado j = new Empleado(
+						rs.getString("CodigoEmple"),
+						rs.getString("CodPerson"),
+						rs.getString("CodCargo"));
 							
 						listEmpleado.add(j);
 				
@@ -107,15 +107,15 @@ public class MySqlEmpleadoDAO implements EmpleadoInterface {
 				
 				rs = pstm.executeQuery();
 				if(rs.next()) {
-					j = new Empleado();
-					j.setCodigoemple(rs.getString("Codigoemple"));
-					j.setCodperson(rs.getString("CodPerson"));
-					j.setCodcargo(rs.getString("CodCargo"));
+					j = new Empleado(
+					rs.getString("Codigoemple"),
+					rs.getString("CodPerson"),
+					rs.getString("CodCargo"));
 				}else {
-					j = new Empleado();
-					j.setCodigoemple("No hay datos");
-					j.setCodperson("No hay datos");
-					j.setCodcargo("No hay datos");
+					j = new Empleado(
+					"No hay datos",
+					"No hay datos",
+					"No hay datos");
 				}
 				
 			} catch (Exception e) {
@@ -134,7 +134,7 @@ public class MySqlEmpleadoDAO implements EmpleadoInterface {
 	}
 
 	@Override
-	public int editEmpleado(Empleado di) {
+	public int editDepartamento(Empleado di) {
 			int value = 0;
 			
 	

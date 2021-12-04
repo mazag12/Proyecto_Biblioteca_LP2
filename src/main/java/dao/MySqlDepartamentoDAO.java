@@ -107,7 +107,7 @@ public class MySqlDepartamentoDAO  implements DepartamentoInterface {
 
 	@Override
 	public Departamento Departamento(String cod) {
-    Departamento de = null;
+		Departamento de = null;
 		
 		Connection con =  null;
 		PreparedStatement pstm = null;
@@ -122,16 +122,25 @@ public class MySqlDepartamentoDAO  implements DepartamentoInterface {
 			pstm.setString(1, cod);
 			
 			rs = pstm.executeQuery();
+			
 			if (rs.next()) {
-				de = new Departamento(cod, sql, cod, sql, cod, sql);
-			    de.setCoddepartamento(rs.getString("Coddepartamento"));
-			    de.setNomdepartamento(rs.getString("Nomdepartamento"));
-			    de.setNomdepartamento(rs.getString("Codpais"));
+				de = new Departamento(
+						rs.getString("coddistrito"),
+						rs.getString("nomdistrito"),
+						rs.getString("codprovincia"),
+						rs.getString("nomprovincia"),
+						rs.getString("coddepartamento"),
+						rs.getString("nomdepartamento")
+						);
 			}else {
-				de = new Departamento(cod, sql, cod, sql, cod, sql);
-				de.setCoddepartamento("sndata");
-				de.setNomdepartamento("sndata");
-				de.setCodpais("sndata");
+				 de = new Departamento(
+						"SIN DATO",
+						"SIN DATO",
+						"SIN DATO",
+						"SIN DATO",
+						"SIN DATO",
+						 "SIN DATO"
+						);
 			}
 			
 		} catch (Exception e) {
@@ -223,5 +232,64 @@ public class MySqlDepartamentoDAO  implements DepartamentoInterface {
 			
 			return salida; 
 		}
+
+	@Override
+	public Departamento getDepartamento(String pais) {
+		Departamento de = null;
+		
+		Connection con =  null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = MysqlDBConexion8.getConexion();
+			
+			String sql = "Select dis.coddistrito, dis.nomdistrito, pro.codprovincia, pro.nomprovincia, de.coddepartamento, de.nomdepartamento "
+					+ "from Departamento as de "
+					+ "Inner Join Provincia as pro "
+					+ "on de.coddepartamento = pro.coddepartamento "
+					+ "Inner Join Distrito as dis "
+					+ "on dis.codprovincia = pro.codprovincia "
+					+ "where de.codpais = ?;";
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, pais);
+			
+			rs = pstm.executeQuery();
+			if (rs.next()) {
+				de = new Departamento(
+						rs.getString("coddistrito"),
+						rs.getString("nomdistrito"),
+						rs.getString("codprovincia"),
+						rs.getString("nomprovincia"),
+						rs.getString("coddepartamento"),
+						rs.getString("nomdepartamento")
+						);
+			}else {
+				 de = new Departamento(
+							"SIN DATO",
+							"SIN DATO",
+							"SIN DATO",
+							"SIN DATO",
+							"SIN DATO",
+							 "SIN DATO"
+							);			
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstm != null) pstm.close();
+				if(con != null) con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return de;
+	}
 	
 }
