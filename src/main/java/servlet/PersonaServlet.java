@@ -9,27 +9,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.DAOFactory;
 import beans.Persona;
+import dao.DAOFactory;
 import interfaces.PersonaInterfaceDAO;
 
 /**
  * Servlet implementation class PersonaServlet
  */
 @WebServlet("/PersonaServlet")
-public class PersonaServelt extends HttpServlet {
+public class PersonaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PersonaServelt() {
+    public PersonaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
     
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-  	  
+    	  
     	String type = request.getParameter("type");
     	if (type.equals("lista")) {
     		listPersona(request, response);
