@@ -61,22 +61,19 @@ public class MySqlIdiomaDAO implements IdiomaInterface{
 
 	@Override
 	public int createIdioma(Idioma idio) {
-		
 		int value = 0;
 		
 		Connection cn =  null;
 		PreparedStatement psm = null;
-		
 		try {
 			
-			cn = MysqlDBConexion.getConexion();
+			cn = MysqlDBConexion8.getConexion();
 			
 			String sql = "call SP_BIBLIOTECA_INSERTAR_IDIOMA(?)";
-			psm = cn.prepareStatement(sql);
+			psm = cn.prepareCall(sql);
 			psm.setString(1, idio.getNomIdioma());
-
-			value = psm.executeUpdate();
 			
+			value = psm.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -97,29 +94,30 @@ public class MySqlIdiomaDAO implements IdiomaInterface{
 	}
 
 	@Override
-	public Idioma getIdioma(String id) {
-		Idioma idioma = null;
+	public Idioma getIdioma(String cod) {
+		Idioma idio = null;
 		
-		Connection cn =  null;
-		PreparedStatement psm = null;
+		Connection con =  null;
+		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		
 		try {
 			
-			cn = MysqlDBConexion.getConexion();
+			con = MysqlDBConexion8.getConexion();
 			
-			String sql = "SELECT * FROM idioma WHERE CODIDIOMA=?";
+			String sql = "Select CODIDIOMA,NOMIDIOMA From idioma Where NOMIDIOMA = ?;";
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, cod);
 			
-			psm = cn.prepareStatement(sql);
-			psm.setString(1, id);
-			
-			rs = psm.executeQuery();
-			
-			if(rs.next()) {
-				
-				idioma = new Idioma();
-				idioma.setCodIdioma(rs.getString("CODIDIOMA"));
-
+			rs = pstm.executeQuery();
+			if (rs.next()) {
+				idio = new Idioma();
+				idio.setCodIdioma(rs.getString("CODIDIOMA"));
+				idio.setNomIdioma(rs.getString("NOMIDIOMA"));
+			}else {
+				idio = new Idioma();
+				idio.setCodIdioma("SNDATA");
+				idio.setNomIdioma("SNDATA");
 			}
 			
 		} catch (Exception e) {
@@ -128,37 +126,32 @@ public class MySqlIdiomaDAO implements IdiomaInterface{
 		
 		finally {
 			try {
-				
 				if(rs != null) rs.close();
-				if(psm != null) psm.close();
-				if(cn != null) cn.close();
-				
+				if(pstm != null) pstm.close();
+				if(con != null) con.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
-		return idioma;
+		return idio;
 	}
 
 	@Override
 	public int editIdioma(Idioma idio) {
-
-		int salida = 0;
+		int value = 0;
 		
 		Connection cn =  null;
 		PreparedStatement psm = null;
-		
 		try {
 			
-			cn = MysqlDBConexion.getConexion();
+			cn = MysqlDBConexion8.getConexion();
 			
-			String sql = "update idioma set NOMIDIOMA = ? where CODIDIOMA=?";
-			psm = cn.prepareStatement(sql);
-			psm.setString(1, idio.getNomIdioma());
-			psm.setString(2, idio.getCodIdioma());
-
-			salida = psm.executeUpdate();
+			String sql = "call SP_BIBLIOTECA_ACTUALIZAR_IDIOMA(?,?)";
+			psm = cn.prepareCall(sql);
+			psm.setString(1, idio.getCodIdioma());
+			psm.setString(2, idio.getNomIdioma());
+			
+			value = psm.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -175,23 +168,22 @@ public class MySqlIdiomaDAO implements IdiomaInterface{
 			}
 		}
 		
-		return salida;
+		return value;
 	}
 
 	@Override
-	public int removeEstudios(String id) {
+	public int removeIdioma(String idio) {
 		int salida = 0;
 		
 		Connection cn =  null;
 		PreparedStatement psm = null;
 		
 		try {
-			
-			cn = MysqlDBConexion.getConexion();
+			cn = MysqlDBConexion8.getConexion();
 			
 			String sql = "DELETE FROM idioma WHERE CODIDIOMA=?";
 			psm = cn.prepareStatement(sql);
-			psm.setString(1, id);
+			psm.setString(1, idio);
 			
 			salida = psm.executeUpdate();
 			
@@ -212,5 +204,4 @@ public class MySqlIdiomaDAO implements IdiomaInterface{
 		
 		return salida; 
 	}
-
 }

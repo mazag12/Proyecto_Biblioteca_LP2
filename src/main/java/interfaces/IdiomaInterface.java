@@ -9,5 +9,5 @@ public interface IdiomaInterface {
 	public int createIdioma(Idioma idio);
 	public Idioma getIdioma(String id);
 	public int editIdioma(Idioma idio);
-	public int removeEstudios(String id);
+	public int removeIdioma(String id);
 }

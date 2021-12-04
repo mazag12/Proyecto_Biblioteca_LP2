@@ -37,88 +37,111 @@ public class IdiomaServlet extends HttpServlet {
     		listIdioma(request, response);
     	} else if (type.equals("register")) {
     		registerIdioma(request, response);
-    		
     	} else if (type.equals("edit")) {
-    		editIdioma(request, response);
+    		editarIdioma(request, response);
     	} else if (type.equals("delete")) {
-    		deleteIdioma(request, response);
+    		eliminarIdioma(request, response);
     	} 
     }
     
-	protected void editIdioma(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
-    	String codigo = request.getParameter("txtCodigoA");
-    	String nombre = request.getParameter("txtNombreA");
-   	
     
-    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);    	
-    	IdiomaInterfaceDAO dao = daoFactory.getIdioma();
-    	
-
-    		Idioma idio = new Idioma();
-    		idio.setCodIdioma(codigo);
-    		idio.setNomIdioma(nombre);
-
-    		    		
-    		int value = dao.editIdioma(idio);
-    		
-    		if (value == 1) {
-        		listIdioma(request, response);
-        	} else {
-        		//error
-        	}
-    	
-    }
-    
-	 protected void registerIdioma(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
-    	String nombre = request.getParameter("txtNombre");
-  
-    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);    	
-    	IdiomaInterfaceDAO dao = daoFactory.getIdioma();
-    	
-
-    		Idioma idio = new Idioma();
-    		idio.setNomIdioma(nombre);
-
-    		int value = dao.createIdioma(idio);
-    		
-    		if (value == 1) {
-        		listIdioma(request, response);
-        	} else {
-        		//error
-        	}
-    		
-    	
-    }
-
-	
-  protected void listIdioma(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void listIdioma(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// TODO Auto-generated method stub
     	
     	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
-    	IdiomaInterfaceDAO dao = daoFactory.getIdioma();    	
-    	List<Idioma> data = dao.getListIdiomas();
+    	IdiomaInterface dao = daoFactory.getIdioma();
+    	    	
+    	List<Idioma> data = dao.getListIdioma();
     	
     	request.setAttribute("data", data);
     	request.getRequestDispatcher("Idioma.jsp").forward(request, response);
     }
     
-  	 protected void deleteIdioma(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
-		
-		String idIdioma = request.getParameter("id");
-
-    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
-    	IdiomaInterfaceDAO dao = daoFactory.getIdioma();
+    protected void registerIdioma(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	// TODO Auto-generated method stub
+    	String name = request.getParameter("txtName");
     	
-    	int flagResponse = dao.removeEstudios(idIdioma); // subjectModel.removeSubject(idSubject);
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);    	
+    	IdiomaInterface dao = daoFactory.getIdioma();
+    	Idioma editorial = dao.getIdioma(name); 
+    	
+    	if(editorial.getCodIdioma() == "SNDATA") {
+    		
+    		Idioma idio = new Idioma();
+    		idio.setCodIdioma("SIN CODIGO");
+    		idio.setNomIdioma(name);
+    		
+    		int value = dao.createIdioma(idio);
+    		
+    		if (value == 1) {
+    			listIdioma(request, response);
+        	} else {
+        		//request.setAttribute("message", "Ocurrio un problema");
+        		listIdioma(request, response);
+        	}
+    		
+    	}else{
+    		//request.setAttribute("message", "Ocurrio un problema");
+    		listIdioma(request, response);
+    	}
+    }
+    
+    protected void editarIdioma(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	// TODO Auto-generated method stub
+    	String codigo = request.getParameter("txtcodigo");
+    	String name = request.getParameter("txtName");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	IdiomaInterface dao = daoFactory.getIdioma();
+    	Idioma editorial = dao.getIdioma(name);
+    	    	
+    	if(editorial.getCodIdioma() == "SNDATA") {
+    		Idioma idio = new Idioma();
+    		idio.setCodIdioma(codigo);
+    		idio.setNomIdioma(name);
+	    	int flagResponde = dao.editIdioma(idio); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listIdioma(request, response);
+	    	} else {
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listIdioma(request, response);
+	    	}
+    	}else if(editorial.getCodIdioma() ==  codigo){
+    		Idioma idio = new Idioma();
+    		idio.setCodIdioma(codigo);
+    		idio.setNomIdioma(name);
+    		
+	    	int flagResponde = dao.editIdioma(idio); // subjectModel.editSubject(subject);
+	    	
+	    	if (flagResponde == 1) {
+	    		listIdioma(request, response);
+	    	} else {
+	    		//request.setAttribute("message", "Ocurrio un problema");
+	    		listIdioma(request, response);
+	    	}
+	    }else {
+	    	//request.setAttribute("message", "Ocurrio un problema");
+	    	listIdioma(request, response);
+	    }
+    }
+    
+    protected void eliminarIdioma(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	// TODO Auto-generated method stub
+    	String codigo = request.getParameter("id");
+    	
+    	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
+    	IdiomaInterface dao = daoFactory.getIdioma();
+    	
+    	int flagResponse = dao.removeIdioma(codigo); // subjectModel.removeSubject(idSubject);
     	
     	if (flagResponse == 1) {
     		listIdioma(request, response);
     	} else {
-    		request.setAttribute("message", "Ocurrio un problema");
-    		request.getRequestDispatcher("Idioma.jsp").forward(request, response);
+    		//request.setAttribute("message", "Ocurrio un problema");
+    		listIdioma(request, response);
     	}
-		
-	}
+    }
     
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
