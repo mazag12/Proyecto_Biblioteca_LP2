@@ -22,7 +22,7 @@ public class TagComboboxAutor extends TagSupport{
 		try {
 			
 			List<Autor> listAutor = dao.getListAutor();
-			out.print("<select class='form-control' name='txtautor'>");
+			out.print("<select class='form-control' name='txtautor' id='autor'>");
 			for(Autor autor: listAutor) {
 				
 				out.print("<option value="+autor.getCodautor()+">"+autor.getNomautor()+"</option>");

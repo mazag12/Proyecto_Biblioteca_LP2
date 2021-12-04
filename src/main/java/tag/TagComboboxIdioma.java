@@ -22,7 +22,7 @@ public class TagComboboxIdioma extends TagSupport {
 		try {
 			
 			List<Idioma> listIdioma= dao.getListIdioma();
-			out.print("<select class='form-control' name='txtidioma'>");
+			out.print("<select class='form-control' name='txtidioma' id='idioma'>");
 			for(Idioma autor: listIdioma) {
 				
 				out.print("<option value="+autor.getCodIdioma()+">"+autor.getNomIdioma()+"</option>");

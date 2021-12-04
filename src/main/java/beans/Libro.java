@@ -1,30 +1,13 @@
 package beans;
 
 //@marco
-public class Libro {
+public class Libro extends Autor{
 
-	
-	private String codlibro;
-	private String titulo;
-	private String ano;
-	private String codidioma;
-	private String codtematica;
-	private String codeditorial;
-	private String restrincion;
-	private int paginas;
-	private int cantidad;
-	private String fragmento;
-	private String recomendados;
-	private String codformato;
-	private String codpais;
-	private String estado;
-	private String isbn;
 	
 	public Libro(String codlibro, String titulo, String ano, String codidioma, String codtematica, String codeditorial,
 			String restrincion, int paginas, int cantidad, String fragmento, String recomendados, String codformato,
 			String codpais, String estado, String isbn) {
 		super();
-		
 		this.codlibro = codlibro;
 		this.titulo = titulo;
 		this.ano = ano;
@@ -41,6 +24,23 @@ public class Libro {
 		this.estado = estado;
 		this.isbn = isbn;
 	}
+	private String codlibro;
+	private String titulo;
+	private String ano;
+	private String codidioma;
+	private String codtematica;
+	private String codeditorial;
+	private String restrincion;
+	private int paginas;
+	private int cantidad;
+	private String fragmento;
+	private String recomendados;
+	private String codformato;
+	private String codpais;
+	private String estado;
+	private String isbn;
+	
+	
 	
 	public String getCodlibro() {
 		return codlibro;

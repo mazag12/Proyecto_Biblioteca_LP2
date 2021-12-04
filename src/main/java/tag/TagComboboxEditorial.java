@@ -22,7 +22,7 @@ public class TagComboboxEditorial extends TagSupport{
 		try {
 			
 			List<Editorial> listEditorial= dao.getListEditorial();
-			out.print("<select class='form-control' name='txteditorial'>");
+			out.print("<select class='form-control' name='txteditorial' id='editorial'>");
 			for(Editorial autor: listEditorial) {
 				
 				out.print("<option value="+autor.getCodEditorial()+">"+autor.getNomEditorial()+"</option>");

@@ -22,7 +22,7 @@ public class TagComboboxFormato extends TagSupport {
 		try {
 			
 			List<Formato> listFormato= dao.getListFormato();
-			out.print("<select class='form-control' name='txtformato'>");
+			out.print("<select class='form-control' name='txtformato' id='formato'>");
 			for(Formato autor: listFormato) {
 				
 				out.print("<option value="+autor.getCodformato()+">"+autor.getNomformato()+"</option>");

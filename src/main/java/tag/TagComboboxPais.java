@@ -22,7 +22,7 @@ public class TagComboboxPais extends TagSupport {
 		try {
 			
 			List<Pais> listPais= dao.getListPais();
-			out.print("<select class='form-control' name='txtpais'>");
+			out.print("<select class='form-control' name='txtpais' id='pais'>");
 			for(Pais pais: listPais) {
 				
 				out.print("<option value="+pais.getCodpais()+">"+pais.getNompais()+"</option>");

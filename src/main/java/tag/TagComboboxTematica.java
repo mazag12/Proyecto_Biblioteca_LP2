@@ -21,7 +21,7 @@ public class TagComboboxTematica extends TagSupport{
 		try {
 			
 			List<Tematica> listTematica= dao.getListTematica();
-			out.print("<select class='form-control' name='txttematica'>");
+			out.print("<select class='form-control' name='txttematica' id='tematica'>");
 			for(Tematica autor: listTematica) {
 				
 				out.print("<option value="+autor.getCodTematica()+">"+autor.getNomTematica()+"</option>");
