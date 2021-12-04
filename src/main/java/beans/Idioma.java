@@ -17,5 +17,7 @@ public class Idioma {
 	public void setNomIdioma(String nomIdioma) {
 		this.nomIdioma = nomIdioma;
 	}
+	public Idioma() {
 		
+	}	
 }
