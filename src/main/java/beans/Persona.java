@@ -16,27 +16,6 @@ public class Persona {
 	private String sexo;
 	private String nacionalidad;
 	private String estadoCivil;
-	
-	public Persona(String codPersona, String nombre, String apePaterno, String apeMaterno, String tipoDoc,
-			String numDoc, int telefono, int celular, String correo, String direccion, String sexo, String nacionalidad,
-			String estadoCivil) {
-		super();
-		this.codPersona = codPersona;
-		this.nombre = nombre;
-		this.apePaterno = apePaterno;
-		this.apeMaterno = apeMaterno;
-		this.tipoDoc = tipoDoc;
-		NumDoc = numDoc;
-		this.telefono = telefono;
-		this.celular = celular;
-		this.correo = correo;
-		this.direccion = direccion;
-		this.sexo = sexo;
-		this.nacionalidad = nacionalidad;
-		this.estadoCivil = estadoCivil;
-	}
-	
-	
 	public String getCodPersona() {
 		return codPersona;
 	}
