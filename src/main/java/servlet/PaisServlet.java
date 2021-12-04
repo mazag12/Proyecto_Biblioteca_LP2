@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.Pais;
 import dao.DAOFactory;
-
+import interfaces.DepartamentoInterface;
 import interfaces.PaisInterface;
 
 /**
@@ -48,7 +48,9 @@ public class PaisServlet extends HttpServlet {
     		//getSubject(request, response);
     	} else if (type.equals("delete")) {
     		//deleteAutor(request, response);
-    	} 
+    	} else if(type.equals("departamento")) {
+    		
+    	}
     }
     
     

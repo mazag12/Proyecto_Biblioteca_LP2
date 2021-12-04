@@ -1,7 +1,9 @@
+<%@page import="interfaces.DepartamentoInterface"%>
 <%@page import="beans.Pais"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="misLibrerias" prefix="etiquetas"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,93 +25,254 @@
 	
 	<div class="col">
 	
-		<form action="AutorServlet" method="post" class="form-inline">
-		<input type="hidden" name="type" value="register">
-		<input type="hidden" name="idSubject">
-		  <div class="form-group mb-2">
-		    <label for="staticEmail2" class="sr-only">PAIS: </label>
-		    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="PAIS: ">
-		  </div>
-		  <div class="form-group mx-sm-3 mb-2">
-		    <label for="inputPassword2" class="sr-only">Password</label>
-		    <input type="text" class="form-control" id="inputPassword2" placeholder="Nombre del Pais">
-		  </div>
-		  <button type="submit" class="btn btn-primary mb-2">Enviar Datos</button>
-	</div>
-	
-	<div class="col-lg-4">
-		<h3>Registrar </h3>
-		<br>
-		<a href="" class="btn btn-success">
-			   <form action="PaisServlet" method="post">
+		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myagregar">AGREGAR PAIS</button>
+		
+			<!--Formulario para registrar-->
+			<div id="myagregar" class="modal fade" role="dialog">
+			  <div class="modal-dialog">
+			
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Registrar Pais</h4>
+			      </div>
+			      <div class="modal-body">
+					   
+			        <form action="PaisServlet" method="post">
 		
 						<input type="hidden" name="type" value="register">
 										
 						<div class="form-group">
 							<label>Nombre de Pais</label>
-							<input class="form-control" type="text" name="txtnamepais">
+							<input class="form-control" type="text" name="txtName">
 						</div>
 						
 						<input type="submit" class="btn btn-primary" value="Registrar">
 			
 					</form>
-		</a>	
-		<br>
-			<br>
-		<a href="" class="btn btn-success">
-				   <form action="ProvinciaServlet" method="post">
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			      </div>
+			    </div>
+			
+			  </div>
+			</div>
+			<!--Fin del Formulario para registrar-->
+			
+			<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myactualizar">ACTUALIZAR PAIS</button>
+		
+			<!--Formulario para actualizar-->
+			<div id="myactualizar" class="modal fade" role="dialog">
+			  <div class="modal-dialog">
+			
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Actualizar Pais</h4>
+			      </div>
+			      <div class="modal-body">
+					   
+			        <form action="PaisServlet" method="post">
 		
 						<input type="hidden" name="type" value="register">
-										
+						
 						<div class="form-group">
-							<label>Nombre de Provincia</label>
-							<input class="form-control" type="text" name="txtnameprovincia">
+							<label>Selecciona el Pais</label>
+							<etiquetas:tagPaisCombobox></etiquetas:tagPaisCombobox>
+						</div>				
+						<div class="form-group">
+							<label>Nuevo Nombre del Pais</label>
+							<input class="form-control" type="text" name="txtName">
 						</div>
 						
 						<input type="submit" class="btn btn-primary" value="Registrar">
 			
 					</form>
-		</a>
-		<br>
-		<br>
-		<a href="" class="btn btn-success">
-				   <form action="DistritoServlet" method="post">
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			      </div>
+			    </div>
+			
+			  </div>
+			</div>
+			<!--Fin del Formulario para registrar-->
+			
+			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myEliminar">ELIMINAR PAIS</button>
+		
+			<!--Formulario para eliminar-->
+			<div id="myEliminar" class="modal fade" role="dialog">
+			  <div class="modal-dialog">
+			
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Eliminar Pais</h4>
+			      </div>
+			      <div class="modal-body">
+					   
+			        <form action="PaisServlet" method="post">
 		
 						<input type="hidden" name="type" value="register">
-										
-						<div class="form-group">
-							<label>Nombre de Distrito</label>
-							<input class="form-control" type="text" name="txtnamedistrito">
-						</div>
 						
-						<input type="submit" class="btn btn-primary" value="Registrar">
+						<div class="form-group">
+							<label>Selecciona el Pais</label>
+							<etiquetas:tagPaisCombobox></etiquetas:tagPaisCombobox>
+						</div>				
+
+						<input type="submit" class="btn btn-primary" value="Eliminar">
 			
 					</form>
-				
-				
-		</a>
-			<br>
-			<br>
-			<a href="" class="btn btn-success">
-				   <form action="DepartamentoServlet" method="post">
-		
-						<input type="hidden" name="type" value="register">
-										
-						<div class="form-group">
-							<label>Nombre de Departamento</label>
-							<input class="form-control" type="text" name="txtnamedepartamento">
-						</div>
-						
-						<input type="submit" class="btn btn-primary" value="Registrar">
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			      </div>
+			    </div>
 			
-					</form>
-				
-				
-		</a>
+			  </div>
+			</div>
+			<!--Fin del Formulario para eliminar-->
+			
 	</div>
 	
-	<div class="col-lg-8">
-		<h3>Lista Pais </h3>
+	<div class="col-lg-3">
+		<br>
+			<br>
+		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#agregarDepartamento">AGREGAR DEPARTAMENTO</button>
+		
+			<!--Formulario para agregar departamento-->
+			<div id="agregarDepartamento" class="modal fade" role="dialog">
+			  <div class="modal-dialog">
+			
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Agregar Departamento</h4>
+			      </div>
+			      <div class="modal-body">
+					   
+			        <form action="PaisServlet" method="post">
+		
+						<input type="hidden" name="type" value="register">
+						
+						<div class="form-group">
+							<label>Selecciona el Pais</label>
+							<etiquetas:tagPaisCombobox></etiquetas:tagPaisCombobox>
+						</div>				
+						<div class="form-group">
+							<label>Nombre del Departamento</label>
+							<input class="form-control" type="text" name="txtName">
+						</div>
+						<input type="submit" class="btn btn-primary" value="Agregar">
+							
+					</form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			      </div>
+			    </div>
+			
+			  </div>
+			</div>
+			<!--Fin del Formulario para agregar departamento-->
+			<br>
+			<br>
+			
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#agregarProvincia">AGREGAR PROVINCIA</button>
+		
+			<!--Formulario para agregar Provincia-->
+			<div id="agregarProvincia" class="modal fade" role="dialog">
+			  <div class="modal-dialog">
+			
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Agregar Provincia</h4>
+			      </div>
+			      <div class="modal-body">
+					   
+			        <form action="PaisServlet" method="post">
+		
+						<input type="hidden" name="type" value="register">
+						
+						<div class="form-group">
+							<label>Selecciona el Pais</label>
+							<etiquetas:tagPaisCombobox></etiquetas:tagPaisCombobox>
+						</div>
+						<div class="form-group">
+							<label>Selecciona el Departamento</label>
+						</div>				
+						<div class="form-group">
+							<label>Nombre del Provincia</label>
+							<input class="form-control" type="text" name="txtName">
+						</div>
+						<input type="submit" class="btn btn-primary" value="Agregar">
+			
+					</form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			      </div>
+			    </div>
+			
+			  </div>
+			</div>
+			<!--Fin del Formulario para agregar Provincia-->
+			<br>
+			<br>
+			
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#agregarDistrito">AGREGAR DISTRITO</button>
+		
+			<!--Formulario para agregar Distrito-->
+			<div id="agregarDistrito" class="modal fade" role="dialog">
+			  <div class="modal-dialog">
+			
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Agregar Distrito</h4>
+			      </div>
+			      <div class="modal-body">
+					   
+			        <form action="PaisServlet" method="post">
+		
+						<input type="hidden" name="type" value="register">
+						
+						<div class="form-group">
+							<label>Selecciona el Pais</label>
+							<etiquetas:tagPaisCombobox></etiquetas:tagPaisCombobox>
+						</div>
+						<div class="form-group">
+							<label>Selecciona el Departamento</label>
+						</div>				
+						<div class="form-group">
+							<label>Nombre del Provincia</label>
+							<input class="form-control" type="text" name="txtName">
+						</div>
+						<input type="submit" class="btn btn-primary" value="Agregar">
+			
+					</form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			      </div>
+			    </div>
+			
+			  </div>
+			</div>
+			<!--Fin del Formulario para agregar Distrito-->
+			
+	</div>
+	
+	<div class="col-lg-9">
+		<h3 class="text-center">Lista Pais </h3>
 		
 		<table class="table table-sm">
 			<thead>
@@ -119,6 +282,9 @@
 					<th>Departamento</th>
 					<th>Provincia</th>
 					<th>Distrito</th>
+					<th></th>
+					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			
@@ -138,6 +304,15 @@
 					<td><%=item.getNomdepartamento() %></td>
 					<td><%=item.getNomprovincia() %></td>
 					<td><%=item.getNomdistrito() %></td>
+					<td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalModificarDepartamento" onclick="departamento('<%=item.getCoddepartamento() %>','<%=item.getNomdepartamento() %>');">MODIFICAR DEPARTAMENTO</button>
+					<a href="PaisServlet?type=deletedepartamento&id=<%=item.getCoddepartamento()%>" class="btn btn-danger">ELIMINAR DEPARTAMENTO</a>
+					</td>
+					<td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalModificarProvincia" onclick="provincia'<%=item.getCodprovincia() %>','<%=item.getNomprovincia() %>');">MODIFICAR PROVINCIA</button>
+					<a href="PaisServlet?type=deleteprovincia&id=<%=item.getCodprovincia()%>" class="btn btn-danger">ELIMINAR PROVINCIA</a>
+					</td>
+					<td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalModificarDistrito" onclick="distrito'<%=item.getCoddistrito() %>','<%=item.getNomdistrito() %>');">MODIFICAR DISTRITO</button>
+					<a href="PaisServlet?type=deletedistrito&id=<%=item.getCoddistrito()%>" class="btn btn-danger">ELIMINAR DISTRITO</a>
+					</td>
 				</tr>
 			<%
 					
@@ -150,12 +325,151 @@
 			</tbody>
 		</table>
 		
+		<!--Formulario para editar-->
+		
+		<div id="ModalModificarDepartamento" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+						
+			<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						 <button type="button" class="close" data-dismiss="modal">&times;</button>
+						    <h4 class="modal-title">Modificar Departamento</h4>
+					</div>
+					<div class="modal-body">
+ 
+						<form action="AutorServlet" method="post">
+							<input type="hidden" name="type" value="editdepartamento">
+								<div class="form-group">
+									<label>Codido de Departamento</label>
+									<input class="form-control" type="text" name="txtcodigodepartamento" id="Codigodepartamento" readonly>
+								</div>
+												
+								<div class="form-group">
+									<label>Nombre de Departamento</label>
+									<input class="form-control" type="text" name="txtNamedepartamento" id="Nombredepartamento">
+								</div>
+
+							<input type="submit" class="btn btn-primary" value="Modificar">
+									
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+				<!--Fin del Modal-->
+			</div>
+		</div>
+		<!--Fin del Formulario para editar-->
+		
+		
+		<!--Formulario para editar-->
+		
+		<div id="ModalModificarProvincia" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+						
+			<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						 <button type="button" class="close" data-dismiss="modal">&times;</button>
+						    <h4 class="modal-title">Modificar Provincia</h4>
+					</div>
+					<div class="modal-body">
+ 
+						<form action="PaisrServlet" method="post">
+							<input type="hidden" name="type" value="editprovincia">
+								<div class="form-group">
+									<label>Codido de Provincia</label>
+									<input class="form-control" type="text" name="txtcodigo" id="Codigoprovincia" readonly>
+								</div>
+												
+								<div class="form-group">
+									<label>Nombre de Provincia</label>
+									<input class="form-control" type="text" name="txtName" id="Nombreprovincia">
+								</div>
+
+							<input type="submit" class="btn btn-primary" value="Modificar">
+									
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+				<!--Fin del Modal-->
+			</div>
+		</div>
+		<!--Fin del Formulario para editar-->
+		
+		
+		<!--Formulario para editar-->
+		
+		<div id="ModalModificarDistrito" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+						
+			<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						 <button type="button" class="close" data-dismiss="modal">&times;</button>
+						    <h4 class="modal-title">Modificar Departamento</h4>
+					</div>
+					<div class="modal-body">
+ 
+						<form action="AutorServlet" method="post">
+							<input type="hidden" name="type" value="editdistrito">
+								<div class="form-group">
+									<label>Codido de Departamento</label>
+									<input class="form-control" type="text" name="txtcodigo" id="Codigodistrito" readonly>
+								</div>
+												
+								<div class="form-group">
+									<label>Nombre de Departamento</label>
+									<input class="form-control" type="text" name="txtName" id="Nombredistrito">
+								</div>
+
+							<input type="submit" class="btn btn-primary" value="Modificar">
+									
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+				<!--Fin del Modal-->
+			</div>
+		</div>
+		<!--Fin del Formulario para editar-->
+		
 	</div>
 
 </div>
 
 
-
 </body>
 <%@ include file="snippet/Footer.jsp" %>
+
+<script type="text/javascript">
+	
+	function departamento(codigo,nombre) {
+		document.getElementById("Codigodepartamento").value = codigo;
+		document.getElementById("Nombredepartamento").value = nombre;
+		
+  	}
+	
+	function provincia(codigo,nombre) {
+		document.getElementById("Codigoprovincia").value = codigo;
+		document.getElementById("Nombreprovincia").value = nombre;
+		
+  	}
+	
+	function distrito(codigo,nombre) {
+		document.getElementById("Codigodistrito").value = codigo;
+		document.getElementById("Nombredistrito").value = nombre;
+		
+  	}
+	
+</script>
+
+
 </html>

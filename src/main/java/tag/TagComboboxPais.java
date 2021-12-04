@@ -23,10 +23,13 @@ public class TagComboboxPais extends TagSupport {
 			
 			List<Pais> listPais= dao.getListPais();
 			out.print("<select class='form-control' name='txtpais' id='pais'>");
+			String codigo = "";
 			for(Pais pais: listPais) {
-				
-				out.print("<option value="+pais.getCodpais()+">"+pais.getNompais()+"</option>");
-				
+				if(codigo.equals(pais.getCodpais())) {	
+				}else {
+					out.print("<option value="+pais.getCodpais()+">"+pais.getNompais()+"</option>");
+					codigo = pais.getCodpais();
+				}
 			}
 			out.print("</select>");
 			

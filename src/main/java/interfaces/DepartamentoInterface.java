@@ -10,4 +10,5 @@ public interface DepartamentoInterface {
 	public Departamento Departamento(String cod);
 	public int editDepartamento(Departamento de);
 	public int removeDepartamento(String cod);
+	public Departamento getDepartamento(String pais);
 }

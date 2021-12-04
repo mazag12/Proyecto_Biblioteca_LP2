@@ -46,6 +46,10 @@
 		<name>tagNombreIdioma</name>
 		<tagclass>tag.TagNombreIdioma</tagclass>
 		<bodycontent>false</bodycontent>
+		<attribute>
+			<name>idioma</name>
+			<required>true</required>
+		</attribute>
 	</tag>
 	
 </taglib>
