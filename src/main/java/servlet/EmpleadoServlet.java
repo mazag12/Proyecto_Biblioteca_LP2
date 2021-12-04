@@ -73,10 +73,10 @@ public class EmpleadoServlet extends HttpServlet {
     	
     	if(emp.getCodigoemple() == "SNDATA") {
     		
-    		Empleado au = new Empleado();
-        	au.setCodigoemple("Sin ID");
-        	au.setCodperson(name);
-        	au.setCodcargo("Sin ID");
+    		Empleado au = new Empleado(
+        	"Sin ID",
+        	name,
+        	"Sin ID");
     		
     		int value = dao.createEmpleado(au);
     		
@@ -122,12 +122,12 @@ public class EmpleadoServlet extends HttpServlet {
     	Empleado emp = dao.getEmpleado(codp); 
     	    	
     	if(emp.getCodigoemple() == "SNDATA") {
-    		Empleado au = new Empleado();
-        	au.setCodigoemple("Sin ID");
-        	au.setCodperson(codp);
-        	au.setCodcargo("Sin ID");
+    		Empleado au = new Empleado(
+        	"Sin ID",
+        	codp,
+        	"Sin ID");
     		
-	    	int flagResponde = dao.editEmpleado(au); // subjectModel.editSubject(subject);
+	    	int flagResponde = dao.editDepartamento(au); // subjectModel.editSubject(subject);
 	    	
 	    	if (flagResponde == 1) {
 	    		listEmpleado(request, response);
@@ -136,12 +136,12 @@ public class EmpleadoServlet extends HttpServlet {
 	    		listEmpleado(request, response);
 	    	}
     	}else if(emp.getCodigoemple() ==  codemp){
-    		Empleado au = new Empleado();
-        	au.setCodigoemple("Sin ID");
-        	au.setCodperson(codp);
-        	au.setCodcargo("Sin ID");
+    		Empleado au = new Empleado(
+        	"Sin ID",
+        	codp,
+        	"Sin ID");
     		
-	    	int flagResponde = dao.editEmpleado(au); // subjectModel.editSubject(subject);
+	    	int flagResponde = dao.editDepartamento(au); // subjectModel.editSubject(subject);
 	    	
 	    	if (flagResponde == 1) {
 	    		listEmpleado(request, response);

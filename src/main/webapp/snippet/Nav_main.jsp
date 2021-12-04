@@ -42,7 +42,7 @@
         <li><a href="EstudiosServlet?type=lista">Estudios</a></li>
         <li><a href="EmpleadoServlet?type=lista">Empleados</a></li>
         <li><a href="PersonaServlet?type=lista">Persona</a></li>
-        
+        <li><a href="PrestamoServlet?type=lista">Prestamo</a></li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
