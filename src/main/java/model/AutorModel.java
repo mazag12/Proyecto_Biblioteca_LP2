@@ -30,9 +30,9 @@ public List<Autor> getListAutor() {
 			rs = pstm.executeQuery();
 			
 			while (rs.next()) {
-				Autor au = new Autor();
-				au.setCodautor(rs.getString("Codautor"));
-				au.setNomautor(rs.getString("Nomautor"));
+				Autor au = new Autor(
+			rs.getString("Codautor"),
+			rs.getString("Nomautor"));
 				
 				listAutor.add(au);
 			}

@@ -3,27 +3,6 @@ package beans;
 //@marco
 public class Libro extends Autor{
 
-	
-	public Libro(String codlibro, String titulo, String ano, String codidioma, String codtematica, String codeditorial,
-			String restrincion, int paginas, int cantidad, String fragmento, String recomendados, String codformato,
-			String codpais, String estado, String isbn) {
-		super();
-		this.codlibro = codlibro;
-		this.titulo = titulo;
-		this.ano = ano;
-		this.codidioma = codidioma;
-		this.codtematica = codtematica;
-		this.codeditorial = codeditorial;
-		this.restrincion = restrincion;
-		this.paginas = paginas;
-		this.cantidad = cantidad;
-		this.fragmento = fragmento;
-		this.recomendados = recomendados;
-		this.codformato = codformato;
-		this.codpais = codpais;
-		this.estado = estado;
-		this.isbn = isbn;
-	}
 	private String codlibro;
 	private String titulo;
 	private String ano;
@@ -40,7 +19,26 @@ public class Libro extends Autor{
 	private String estado;
 	private String isbn;
 	
-	
+	public Libro(String codlibro, String titulo, String ano, String codidioma,
+			String codtematica, String codeditorial, String restrincion, int paginas, int cantidad, String fragmento,
+			String recomendados, String codformato, String codpais, String estado, String isbn,String codautor, String nomautor) {
+		super(codautor, nomautor);
+		this.codlibro = codlibro;
+		this.titulo = titulo;
+		this.ano = ano;
+		this.codidioma = codidioma;
+		this.codtematica = codtematica;
+		this.codeditorial = codeditorial;
+		this.restrincion = restrincion;
+		this.paginas = paginas;
+		this.cantidad = cantidad;
+		this.fragmento = fragmento;
+		this.recomendados = recomendados;
+		this.codformato = codformato;
+		this.codpais = codpais;
+		this.estado = estado;
+		this.isbn = isbn;
+	}
 	
 	public String getCodlibro() {
 		return codlibro;

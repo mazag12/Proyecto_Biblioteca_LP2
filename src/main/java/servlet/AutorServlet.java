@@ -68,9 +68,7 @@ public class AutorServlet extends HttpServlet {
     	
     	if(autor.getCodautor() == "SNDATA") {
     		
-    		Autor au = new Autor();
-        	au.setCodautor("SIN CODIGO");
-        	au.setNomautor(name);
+    		Autor au = new Autor("SIN CODIGO",name);
     		
     		int value = dao.createAutor(au);
     		
@@ -114,9 +112,7 @@ public class AutorServlet extends HttpServlet {
     	Autor autor = dao.Autor(name);
     	    	
     	if(autor.getCodautor() == "SNDATA") {
-       		Autor au = new Autor();
-    		au.setCodautor(codigo);
-    		au.setNomautor(name);
+       		Autor au = new Autor(codigo,name);
     		
 	    	int flagResponde = dao.editAutor(au); // subjectModel.editSubject(subject);
 	    	
@@ -127,9 +123,7 @@ public class AutorServlet extends HttpServlet {
 	    		listAutor(request, response);
 	    	}
     	}else if(autor.getCodautor() ==  codigo){
-    		Autor au = new Autor();
-    		au.setCodautor(codigo);
-    		au.setNomautor(name);
+    		Autor au = new Autor(codigo,name);
     		
 	    	int flagResponde = dao.editAutor(au); // subjectModel.editSubject(subject);
 	    	
