@@ -30,4 +30,10 @@
 		<bodycontent>false</bodycontent>
 	</tag>
 	
+	<tag>
+		<name>tagTematicaCombobox</name>
+		<tagclass>tag.TagComboboxTematica</tagclass>
+		<bodycontent>false</bodycontent>
+	</tag>
+	
 </taglib>
