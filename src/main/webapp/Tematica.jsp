@@ -9,6 +9,7 @@
 <meta charset="ISO-8859-1">
 <title>Tematica</title>
 <%@ include file="snippet/Header.jsp" %>
+
 </head>
 <body>
 
@@ -21,7 +22,7 @@
 			<h3>TEMATICA</h3>
 	</div>
 	
-	<div class="col-1">
+	<div class="col">
 			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">AGREGAR</button>
 			
 			<!--Formulario para registrar-->
@@ -60,47 +61,54 @@
 	</div>
 	
 	<div class="col">
-		
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Código</th>
-					<th>Nombre</th>
-					<th></th>
-					<th></th>
-				</tr>
-			</thead>
+		<br>
+		<br>
+		<table id=tabledatos class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+				<th>Código</th>
+				<th>Nombre</th>
+				<th></th>
+				<th></th>
+			</tr>
+        </thead>
+        <tbody>
+        	<%
 			
-			<tbody>
-			
-			<%
-			
-			List<Tematica> listTematica = (List<Tematica>) request.getAttribute("data");
-			if (listTematica != null) {
+				List<Tematica> listTematica = (List<Tematica>) request.getAttribute("data");
+				if (listTematica != null) {
 				
 				for(Tematica item : listTematica) {
 					
 			%>
-				<tr class="grilla_campo">
-					<td><%=item.getCodTematica() %></td>
-					<td><%=item.getNomTematica() %></td>
-					<td>
-						<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalModificar" onclick="miFunc('<%=item.getCodTematica() %>','<%=item.getNomTematica() %>');">MODIFICAR</button>
-					</td>
-					<td>
-						<a href="TematicaServlet?type=delete&id=<%=item.getCodTematica()%>" class="btn btn-danger">ELIMINAR</a>
-					</td>
-				</tr>
-			<%
+        
+            <tr>
+                <td><%=item.getCodTematica() %></td>
+				<td><%=item.getNomTematica() %></td>
+				<td>
+					<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModalModificar" onclick="miFunc('<%=item.getCodTematica() %>','<%=item.getNomTematica() %>');">MODIFICAR</button>
+				</td>
+				<td>
+					<a href="TematicaServlet?type=delete&id=<%=item.getCodTematica()%>" class="btn btn-danger">ELIMINAR</a>
+				</td>
+            </tr>
+            <%
 					
 				}
 				
 			}
 			
 			%>
-			
-			</tbody>
-		</table>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Código</th>
+				<th>Nombre</th>
+				<th></th>
+				<th></th>
+            </tr>
+        </tfoot>
+    </table>
 		
 		<!--Formulario para editar-->
 		
@@ -150,6 +158,10 @@
 <%@ include file="snippet/Footer.jsp" %>
 
 <script type="text/javascript">
+
+	$(document).ready( function () {
+	    $('#tabledatos').DataTable();
+	} );
 	
 	function miFunc(codigo,nombre) {
 		document.getElementById("CodigoTematica").value = codigo;

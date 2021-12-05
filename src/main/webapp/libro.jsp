@@ -134,15 +134,16 @@
 	</div>
 	
 	<div class="col">
-		
-		<table class="table table-striped">
+		<br>
+		<br>
+		<table id=tabledatos class="table table-striped table-bordered" style="width:100%">
 			<thead>
 				<tr>
 					<th>Código</th>
 					<th>Titulo</th>
 					<th>Año</th>
 					<th>Idioma</th>
-					<th>Matematica</th>
+					<th>tematica</th>
 					<th>Restrincion</th>
 					<th>Cantidad</th>
 					<th>Fragmento</th>
@@ -166,8 +167,8 @@
 					<td><%=item.getCodlibro() %></td>
 					<td><%=item.getTitulo() %></td>
 					<td><%=item.getAno() %></td>
-					<td><%=item.getCodidioma() %></td>
-					<td><%=item.getCodtematica() %></td>
+					<etiquetas:tagNombreIdioma idioma="<%=item.getCodidioma() %>"></etiquetas:tagNombreIdioma>
+					<etiquetas:tagNombreTematica tematica="<%=item.getCodtematica() %>"></etiquetas:tagNombreTematica>
 					<td><%=item.getRestrincion() %></td>
 					<td><%=item.getCantidad() %></td>
 					<td><%=item.getFragmento() %></td>
@@ -192,7 +193,22 @@
 			%>
 			
 			</tbody>
-		</table>
+			<tfoot>
+	            <tr>
+	                <th>Código</th>
+					<th>Titulo</th>
+					<th>Año</th>
+					<th>Idioma</th>
+					<th>tematica</th>
+					<th>Restrincion</th>
+					<th>Cantidad</th>
+					<th>Fragmento</th>
+					<th>AUTOR</th>
+					<th></th>
+					<th></th>
+	            </tr>
+        	</tfoot>
+		</table>s
 		<!--Formulario para editar-->
 		<div id="myModal" class="modal fade" role="dialog">
 			  <div class="modal-dialog">

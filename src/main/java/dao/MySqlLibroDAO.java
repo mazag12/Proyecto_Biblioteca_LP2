@@ -74,8 +74,46 @@ public class MySqlLibroDAO implements LibroInterface{
 
 	@Override
 	public int createLibro(Libro pa) {
-		// TODO Auto-generated method stub
-		return 0;
+		int value = 0;
+		
+		Connection cn =  null;
+		PreparedStatement psm = null;
+		try {
+			
+			cn = MysqlDBConexion8.getConexion();
+			
+			String sql = "call SP_BIBLIOTECA_INSERTAR_LIBRO(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			psm = cn.prepareCall(sql);
+			psm.setString(1, pa.getTitulo());
+			psm.setString(2, pa.getAno());
+			psm.setString(3, pa.getCodidioma());
+			psm.setString(4, pa.getCodtematica());
+			psm.setString(5, pa.getCodeditorial());
+			psm.setString(6, pa.getRestrincion());
+			psm.setInt(7, pa.getPaginas());
+			psm.setString(8, pa.getNomautor());
+			psm.setString(9, pa.getNomautor());
+			psm.setString(10, pa.getNomautor());
+			psm.setString(11, pa.getNomautor());
+			
+			value = psm.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {
+				
+				if(psm != null) psm.close();
+				if(cn != null) cn.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return value;
 	}
 
 	@Override

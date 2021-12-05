@@ -107,8 +107,8 @@ public class MySqlTematicaDAO implements TematicaInterface{
 			rs = pstm.executeQuery();
 			if (rs.next()) {
 				te = new Tematica(
-				rs.getString("Codautor"),
-				rs.getString("Nomautor"));
+				rs.getString("CODTEMATICA"),
+				rs.getString("NOMTEMATICA"));
 			}else {
 				te = new Tematica("SNDATA","SNDATA");
 			}
@@ -196,6 +196,47 @@ public class MySqlTematicaDAO implements TematicaInterface{
 		}
 		
 		return salida; 
+	}
+
+	@Override
+	public Tematica getdatosTematica(String codigo) {
+		Tematica te = null;
+		
+		Connection con =  null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = MysqlDBConexion8.getConexion();
+			
+			String sql = "Select CODTEMATICA,NOMTEMATICA From tematica Where CODTEMATICA = ?;";
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, codigo);
+			
+			rs = pstm.executeQuery();
+			if (rs.next()) {
+				te = new Tematica(
+				rs.getString("CODTEMATICA"),
+				rs.getString("NOMTEMATICA"));
+			}else {
+				te = new Tematica("SNDATA","SNDATA");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstm != null) pstm.close();
+				if(con != null) con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return te;
 	}
 
 }

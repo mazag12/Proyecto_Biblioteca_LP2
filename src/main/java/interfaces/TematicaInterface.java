@@ -10,4 +10,5 @@ public interface TematicaInterface {
 	public Tematica Tematica(String cod);
 	public int editTematica(Tematica tem);
 	public int removeTematica(String cod);
+	public Tematica getdatosTematica(String codigo);
 }

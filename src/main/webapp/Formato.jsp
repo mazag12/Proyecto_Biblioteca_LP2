@@ -57,8 +57,9 @@
 	</div>
 	
 	<div class="col">
-		
-		<table class="table table-striped">
+		<br>
+		<br>
+		<table id=tabledatos class="table table-striped table-bordered" style="width:100%">
 			<thead>
 				<tr>
 					<th>Código</th>
@@ -97,6 +98,14 @@
 			%>
 			
 			</tbody>
+			<tfoot>
+	            <tr>
+	                <th>Código</th>
+					<th>Nombre</th>
+					<th></th>
+					<th></th>
+	            </tr>
+        	</tfoot>
 		</table>
 		
 		<!--Formulario para editar-->

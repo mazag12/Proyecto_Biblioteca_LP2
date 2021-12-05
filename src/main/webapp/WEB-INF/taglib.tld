@@ -48,7 +48,18 @@
 		<bodycontent>false</bodycontent>
 		<attribute>
 			<name>idioma</name>
-			<required>true</required>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue> 
+		</attribute>
+	</tag>
+	<tag>
+		<name>tagNombreTematica</name>
+		<tagclass>tag.TagNombreTematica</tagclass>
+		<bodycontent>false</bodycontent>
+		<attribute>
+			<name>tematica</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue> 
 		</attribute>
 	</tag>
 	

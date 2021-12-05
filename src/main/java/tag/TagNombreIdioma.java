@@ -21,7 +21,7 @@ public class TagNombreIdioma extends TagSupport{
 		DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);
 		try {
 			IdiomaInterface dao = daoFactory.getIdioma();
-			Idioma idio = dao.getdatosIdioma("marco");
+			Idioma idio = dao.getdatosIdioma(idioma);
 			
 			out.print("<td>"+idio.getNomIdioma()+"</td>");
 		} catch (IOException e) {
