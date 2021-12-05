@@ -133,12 +133,19 @@ public class PaisServlet extends HttpServlet {
     	Pais pais = dao.Pais(codigo);
     	
     	if(pais.getCodpais() == "SNDATA") {
+<<<<<<< Updated upstream
        	       Pais pa = new Pais();
     	   pa.setCodpais(codigo);
     	   pa.setNompais(name);
        	     
     		
     		
+=======
+       	       Pais pa = new Pais(name, name, name, name, name, name, codigo, name);
+       	       pa.setCodpais(codigo);
+       	       pa.setNompais(name);
+
+>>>>>>> Stashed changes
 	    	int flagResponde = dao.editPais(pa); // subjectModel.editSubject(subject);
 	    	
 	    	if (flagResponde == 1) {
@@ -149,8 +156,8 @@ public class PaisServlet extends HttpServlet {
 	    	}
     	}else if(pais.getCodpais() ==  codigo){
     		Pais pa = new Pais(name, name, name, name, name, name, codigo, name);
-    		 pa.setCodpais(codigo);
-      	   pa.setNompais(name);
+    		pa.setCodpais(codigo);
+      	   	pa.setNompais(name);
     		
 	    	int flagResponde = dao.editPais(pa); // subjectModel.editSubject(subject);
 	    	
