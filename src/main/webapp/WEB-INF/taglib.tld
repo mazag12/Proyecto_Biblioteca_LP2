@@ -62,5 +62,24 @@
 			<rtexprvalue>true</rtexprvalue> 
 		</attribute>
 	</tag>
-	
+	<tag>
+		<name>tagPaisComboboxCodigo</name>
+		<tagclass>tag.TagComboboxPaisAgregar</tagclass>
+		<bodycontent>false</bodycontent>
+		<attribute>
+			<name>pais</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue> 
+		</attribute>
+	</tag>
+	<tag>
+		<name>tagPaisComboboxDepartamentoAgregar</name>
+		<tagclass>tag.TagComboboxDepartamentoAgregar</tagclass>
+		<bodycontent>false</bodycontent>
+		<attribute>
+			<name>pais</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue> 
+		</attribute>
+	</tag>
 </taglib>

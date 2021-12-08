@@ -234,8 +234,8 @@ public class MySqlDepartamentoDAO  implements DepartamentoInterface {
 		}
 
 	@Override
-	public Departamento getDepartamento(String pais) {
-		Departamento de = null;
+	public List<Departamento> getDepartamento(String pais) {
+		List<Departamento> listDepartamento = new ArrayList<Departamento>();
 		
 		Connection con =  null;
 		PreparedStatement pstm = null;
@@ -245,35 +245,24 @@ public class MySqlDepartamentoDAO  implements DepartamentoInterface {
 			
 			con = MysqlDBConexion8.getConexion();
 			
-			String sql = "Select dis.coddistrito, dis.nomdistrito, pro.codprovincia, pro.nomprovincia, de.coddepartamento, de.nomdepartamento "
-					+ "from Departamento as de "
-					+ "Inner Join Provincia as pro "
-					+ "on de.coddepartamento = pro.coddepartamento "
-					+ "Inner Join Distrito as dis "
-					+ "on dis.codprovincia = pro.codprovincia "
-					+ "where de.codpais = ?;";
+			String sql = "select CODDEPARTAMENTO,NOMDEPARTAMENTO from departamento where CODPAIS = ?;";
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, pais);
 			
 			rs = pstm.executeQuery();
-			if (rs.next()) {
-				de = new Departamento(
-						rs.getString("coddistrito"),
-						rs.getString("nomdistrito"),
-						rs.getString("codprovincia"),
-						rs.getString("nomprovincia"),
-						rs.getString("coddepartamento"),
-						rs.getString("nomdepartamento")
+			
+			while (rs.next()) {
+				Departamento de = new Departamento(
+						"SIN DATO",
+						"SIN DATO",
+						"SIN DATO",
+						"SIN DATO",
+						rs.getString("CODDEPARTAMENTO"),
+						rs.getString("NOMDEPARTAMENTO")
 						);
-			}else {
-				 de = new Departamento(
-							"SIN DATO",
-							"SIN DATO",
-							"SIN DATO",
-							"SIN DATO",
-							"SIN DATO",
-							 "SIN DATO"
-							);			
+		        
+				listDepartamento.add(de);
+
 			}
 			
 		} catch (Exception e) {
@@ -289,7 +278,7 @@ public class MySqlDepartamentoDAO  implements DepartamentoInterface {
 				e.printStackTrace();
 			}
 		}
-		return de;
+		return listDepartamento;
 	}
 	
 }

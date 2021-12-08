@@ -38,18 +38,11 @@ public class PaisServlet extends HttpServlet {
     	if (type.equals("lista")) {
     		listPais(request, response);
     	} else if (type.equals("register")) {
-    		String codpais = request.getParameter("codpais");
-    		if(codpais.isEmpty()) {
     			registerPais(request, response);
-    		} else {
-    			///editAutor(request, response);
-    		}
-    	} else if (type.equals("info")) {
+    	} else if (type.equals("edit")) {
     		//getSubject(request, response);
     	} else if (type.equals("delete")) {
     		//deleteAutor(request, response);
-    	} else if(type.equals("departamento")) {
-    		
     	}
     }
     
@@ -69,24 +62,19 @@ public class PaisServlet extends HttpServlet {
     protected void registerPais(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// TODO Auto-generated method stub
     	
-	String name = request.getParameter("txtName");
+    	String name = request.getParameter("txtName");
     	
     	DAOFactory daoFactory = DAOFactory.getFactory(DAOFactory.MYSQL);  
     	PaisInterface dao = daoFactory.getPais();
     
     	Pais pais = dao.Pais(name);
     
-   
-    	if(pais.getCodpais() == "SNDATA") {
+    	if(pais.getCodpais() == "sndata") {
     		
-    		Pais pa = new Pais();
-    		pa.setCodpais("sin codigo");
-    		pa.setNompais(name);
-           
+    		Pais pa = new Pais("sin codigo","sin codigo","sin codigo","sin codigo","sin codigo","sin codigo","sin codigo",name);
        
     		int value = dao.createPais(pa);
-    	
-    		
+        		
     		if (value == 1) {
     			listPais(request, response);
         	} else {
@@ -132,20 +120,9 @@ public class PaisServlet extends HttpServlet {
     	
     	Pais pais = dao.Pais(codigo);
     	
-    	if(pais.getCodpais() == "SNDATA") {
-<<<<<<< Updated upstream
-       	       Pais pa = new Pais();
-    	   pa.setCodpais(codigo);
-    	   pa.setNompais(name);
-       	     
-    		
-    		
-=======
-       	       Pais pa = new Pais(name, name, name, name, name, name, codigo, name);
-       	       pa.setCodpais(codigo);
-       	       pa.setNompais(name);
-
->>>>>>> Stashed changes
+    	if(pais.getCodpais() == "sndata") {
+    		Pais pa = new Pais("sin codigo","sin codigo","sin codigo","sin codigo","sin codigo","sin codigo",codigo,name);
+       	       
 	    	int flagResponde = dao.editPais(pa); // subjectModel.editSubject(subject);
 	    	
 	    	if (flagResponde == 1) {
@@ -155,9 +132,7 @@ public class PaisServlet extends HttpServlet {
 	    		listPais(request, response);
 	    	}
     	}else if(pais.getCodpais() ==  codigo){
-    		Pais pa = new Pais(name, name, name, name, name, name, codigo, name);
-    		pa.setCodpais(codigo);
-      	   	pa.setNompais(name);
+    		Pais pa = new Pais("sin codigo","sin codigo","sin codigo","sin codigo","sin codigo","sin codigo",codigo,name);
     		
 	    	int flagResponde = dao.editPais(pa); // subjectModel.editSubject(subject);
 	    	

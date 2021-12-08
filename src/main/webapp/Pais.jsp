@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>PAIS</title>
 <%@ include file="snippet/Header.jsp" %>
 </head>
 <body>
@@ -208,6 +208,7 @@
 						</div>
 						<div class="form-group">
 							<label>Selecciona el Departamento</label>
+							<etiquetas:tagPaisComboboxDepartamentoAgregar pais="P001"></etiquetas:tagPaisComboboxDepartamentoAgregar>
 						</div>				
 						<div class="form-group">
 							<label>Nombre del Provincia</label>

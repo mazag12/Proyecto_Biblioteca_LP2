@@ -21,8 +21,8 @@ public class TagComboboxPais extends TagSupport {
 		
 		try {
 			
-			List<Pais> listPais= dao.getListPais();
-			out.print("<select class='form-control' name='txtpais' id='pais'>");
+			List<Pais> listPais= dao.getListPaisCombo();
+			out.print("<select class='form-control' name='txtpais' id='paisnombre'>");
 			String codigo = "";
 			for(Pais pais: listPais) {
 				if(codigo.equals(pais.getCodpais())) {	

@@ -11,4 +11,6 @@ public interface PaisInterface {
 	public Pais Pais(String cod);
 	public int editPais(Pais pa);
 	public int removePais(String cod);
+	public List<Pais> getListPaisCombo(String codigo);
+	public List<Pais> getListPaisCombo();
 }

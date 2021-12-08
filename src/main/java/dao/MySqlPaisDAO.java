@@ -30,7 +30,7 @@ public class MySqlPaisDAO implements PaisInterface{
 					+ "On pa.codpais = de.codpais "
 					+ "Inner Join Provincia as pro "
 					+ "on de.coddepartamento = pro.coddepartamento "
-					+ "Inner Join Distrito as dis\r\n"
+					+ "Inner Join Distrito as dis "
 					+ "on dis.codprovincia = pro.codprovincia;";
 			
 			pstm = con.prepareStatement(sql);
@@ -75,17 +75,12 @@ public class MySqlPaisDAO implements PaisInterface{
 		PreparedStatement psm = null;
 		
 		try {
-			
 			cn = MysqlDBConexion8.getConexion();
 			
 			String sql = "call SP_BIBLIOTECA_INSERTAR_PAIS(?)";
 			psm = cn.prepareStatement(sql);
-		
-			
 			psm.setString(1, pa.getNompais());
-		
 
-			
 			value = psm.executeUpdate();
 			
 			
@@ -109,7 +104,7 @@ public class MySqlPaisDAO implements PaisInterface{
 
 	@Override
 	public Pais Pais(String cod) {
-	Pais pa = null;
+		Pais pa = null;
 		
 		Connection con =  null;
 		PreparedStatement pstm = null;
@@ -119,19 +114,15 @@ public class MySqlPaisDAO implements PaisInterface{
 			
 			con = MysqlDBConexion8.getConexion();
 			
-			String sql = "Select Nompais From pais Where codpais = ?;";
+			String sql = "Select CodPais,Nompais From pais Where Nompais = ?;";
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, cod);
 			
 			rs = pstm.executeQuery();
 			if (rs.next()) {
-				pa = new Pais(cod, sql, cod, sql, cod, sql, cod, sql);
-				pa.setCodpais(rs.getString("CodPais"));
-				pa.setNompais(rs.getString("Nompais"));
+				pa = new Pais("sndata", "sndata", "sndata", "sndata", "sndata", "sndata", rs.getString("CodPais"), rs.getString("Nompais"));
 			}else {
-				pa = new Pais(cod, sql, cod, sql, cod, sql, cod, sql);
-				pa.setCodpais("sndata");
-				pa.setNompais("sndata");
+				pa = new Pais("sndata", "sndata", "sndata", "sndata", "sndata", "sndata", "sndata", "sndata");
 			}
 			
 		} catch (Exception e) {
@@ -222,6 +213,85 @@ public class MySqlPaisDAO implements PaisInterface{
 		}
 		
 		return salida; 
+	}
+
+	@Override
+	public List<Pais> getListPaisCombo(String codigo) {
+		List<Pais> listPais = new ArrayList<Pais>();
+		
+		Connection con =  null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = MysqlDBConexion8.getConexion();
+			
+			String sql = "Select codpais, nompais from Pais where codpais = ?";
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, codigo);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+				Pais pa = new Pais(	"sndata","sndata","sndata","sndata","sndata","sndata",rs.getString("codpais"),rs.getString("nompais"));
+				
+				listPais.add(pa);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstm != null) pstm.close();
+				if(con != null) con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return listPais;
+	}
+
+	@Override
+	public List<beans.Pais> getListPaisCombo() {
+List<Pais> listPais = new ArrayList<Pais>();
+		
+		Connection con =  null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = MysqlDBConexion8.getConexion();
+			
+			String sql = "Select codpais, nompais from Pais";
+			pstm = con.prepareStatement(sql);
+			
+			rs = pstm.executeQuery();
+			
+			while (rs.next()) {
+				Pais pa = new Pais(	"sndata","sndata","sndata","sndata","sndata","sndata",rs.getString("codpais"),rs.getString("nompais"));
+				
+				listPais.add(pa);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstm != null) pstm.close();
+				if(con != null) con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return listPais;
 	}
 	
 }
